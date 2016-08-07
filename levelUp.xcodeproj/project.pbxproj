@@ -13,10 +13,21 @@
 		19534DF81D49957D00309D28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19534DF71D49957D00309D28 /* Images.xcassets */; };
 		19534DFB1D49957D00309D28 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19534DF91D49957D00309D28 /* LaunchScreen.xib */; };
 		19534E071D49957D00309D28 /* levelUpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19534E061D49957D00309D28 /* levelUpTests.m */; };
+		199AA7491D57725B001E3F4A /* NewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AA7481D57725B001E3F4A /* NewPostViewController.m */; };
+		199AA74D1D5778AD001E3F4A /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AA74C1D5778AD001E3F4A /* EditProfileViewController.m */; };
 		19A9E94E1D4E472600588822 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19A9E94D1D4E472600588822 /* Login.storyboard */; };
 		19A9E95B1D4E48DB00588822 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A9E95A1D4E48DB00588822 /* LoginViewController.m */; };
 		19A9E95E1D4E48E900588822 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A9E95D1D4E48E900588822 /* SignUpViewController.m */; };
 		19A9E9601D4E504B00588822 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19A9E95F1D4E504B00588822 /* Home.storyboard */; };
+		19EE370A1D529529009BA896 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE37091D529529009BA896 /* TimelineViewController.m */; };
+		19EE37121D529591009BA896 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE37111D529591009BA896 /* TimelineTableViewCell.m */; };
+		19EE37161D52995E009BA896 /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE37151D52995E009BA896 /* PostTableViewCell.m */; };
+		19EE371F1D529AFD009BA896 /* FollowingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE371B1D529AFD009BA896 /* FollowingTableViewCell.m */; };
+		19EE37201D529AFD009BA896 /* FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE371D1D529AFD009BA896 /* FollowingViewController.m */; };
+		19EE37241D529B45009BA896 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EE37231D529B45009BA896 /* Profile.storyboard */; };
+		19EE37271D529C45009BA896 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE37261D529C45009BA896 /* ProfileViewController.m */; };
+		19EE37291D52A6A8009BA896 /* profileImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19EE37281D52A6A8009BA896 /* profileImage.jpg */; };
+		19EE372B1D52A88E009BA896 /* postImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19EE372A1D52A88E009BA896 /* postImage.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,12 +52,31 @@
 		19534E001D49957D00309D28 /* levelUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = levelUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19534E051D49957D00309D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19534E061D49957D00309D28 /* levelUpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = levelUpTests.m; sourceTree = "<group>"; };
+		199AA7471D57725B001E3F4A /* NewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostViewController.h; sourceTree = "<group>"; };
+		199AA7481D57725B001E3F4A /* NewPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPostViewController.m; sourceTree = "<group>"; };
+		199AA74B1D5778AD001E3F4A /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		199AA74C1D5778AD001E3F4A /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		19A9E94D1D4E472600588822 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		19A9E9591D4E48DB00588822 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		19A9E95A1D4E48DB00588822 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		19A9E95C1D4E48E900588822 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		19A9E95D1D4E48E900588822 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		19A9E95F1D4E504B00588822 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		19EE37081D529529009BA896 /* TimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
+		19EE37091D529529009BA896 /* TimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		19EE37101D529591009BA896 /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewCell.h; sourceTree = "<group>"; };
+		19EE37111D529591009BA896 /* TimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableViewCell.m; sourceTree = "<group>"; };
+		19EE37141D52995E009BA896 /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
+		19EE37151D52995E009BA896 /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
+		19EE371A1D529AFD009BA896 /* FollowingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingTableViewCell.h; sourceTree = "<group>"; };
+		19EE371B1D529AFD009BA896 /* FollowingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingTableViewCell.m; sourceTree = "<group>"; };
+		19EE371C1D529AFD009BA896 /* FollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingViewController.h; sourceTree = "<group>"; };
+		19EE371D1D529AFD009BA896 /* FollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingViewController.m; sourceTree = "<group>"; };
+		19EE37231D529B45009BA896 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		19EE37251D529C45009BA896 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		19EE37261D529C45009BA896 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		19EE37281D52A6A8009BA896 /* profileImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profileImage.jpg; sourceTree = "<group>"; };
+		19EE372A1D52A88E009BA896 /* postImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = postImage.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +118,8 @@
 		19534DE91D49957D00309D28 /* levelUp */ = {
 			isa = PBXGroup;
 			children = (
+				19EE372A1D52A88E009BA896 /* postImage.jpg */,
+				19EE37281D52A6A8009BA896 /* profileImage.jpg */,
 				19A9E9511D4E48BD00588822 /* Classes */,
 				19534DEE1D49957D00309D28 /* AppDelegate.h */,
 				19534DEF1D49957D00309D28 /* AppDelegate.m */,
@@ -95,6 +127,7 @@
 				19534DF41D49957D00309D28 /* Main.storyboard */,
 				19A9E94D1D4E472600588822 /* Login.storyboard */,
 				19A9E95F1D4E504B00588822 /* Home.storyboard */,
+				19EE37231D529B45009BA896 /* Profile.storyboard */,
 				19534DF91D49957D00309D28 /* LaunchScreen.xib */,
 				19534DEA1D49957D00309D28 /* Supporting Files */,
 			);
@@ -125,6 +158,24 @@
 				19534E051D49957D00309D28 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		199AA7461D577245001E3F4A /* NewPostViewController */ = {
+			isa = PBXGroup;
+			children = (
+				199AA7471D57725B001E3F4A /* NewPostViewController.h */,
+				199AA7481D57725B001E3F4A /* NewPostViewController.m */,
+			);
+			path = NewPostViewController;
+			sourceTree = "<group>";
+		};
+		199AA74A1D577894001E3F4A /* EditProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				199AA74B1D5778AD001E3F4A /* EditProfileViewController.h */,
+				199AA74C1D5778AD001E3F4A /* EditProfileViewController.m */,
+			);
+			path = EditProfileViewController;
 			sourceTree = "<group>";
 		};
 		19A9E9511D4E48BD00588822 /* Classes */ = {
@@ -162,6 +213,8 @@
 		19A9E9551D4E48BD00588822 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				19EE37171D529AFD009BA896 /* Profile */,
+				19EE37021D52950A009BA896 /* Home */,
 				19A9E9561D4E48BD00588822 /* Login */,
 			);
 			path = ViewController;
@@ -192,6 +245,82 @@
 				19A9E95D1D4E48E900588822 /* SignUpViewController.m */,
 			);
 			path = SignUpViewController;
+			sourceTree = "<group>";
+		};
+		19EE37021D52950A009BA896 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				199AA7461D577245001E3F4A /* NewPostViewController */,
+				19EE37041D52950A009BA896 /* TimelineViewController */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		19EE37041D52950A009BA896 /* TimelineViewController */ = {
+			isa = PBXGroup;
+			children = (
+				19EE37131D529949009BA896 /* PostTableViewCell */,
+				19EE370C1D529560009BA896 /* TimelineTableViewCell */,
+				19EE37081D529529009BA896 /* TimelineViewController.h */,
+				19EE37091D529529009BA896 /* TimelineViewController.m */,
+			);
+			path = TimelineViewController;
+			sourceTree = "<group>";
+		};
+		19EE370C1D529560009BA896 /* TimelineTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				19EE37101D529591009BA896 /* TimelineTableViewCell.h */,
+				19EE37111D529591009BA896 /* TimelineTableViewCell.m */,
+			);
+			path = TimelineTableViewCell;
+			sourceTree = "<group>";
+		};
+		19EE37131D529949009BA896 /* PostTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				19EE37141D52995E009BA896 /* PostTableViewCell.h */,
+				19EE37151D52995E009BA896 /* PostTableViewCell.m */,
+			);
+			path = PostTableViewCell;
+			sourceTree = "<group>";
+		};
+		19EE37171D529AFD009BA896 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				199AA74A1D577894001E3F4A /* EditProfileViewController */,
+				19EE37181D529AFD009BA896 /* FollowingViewController */,
+				19EE371E1D529AFD009BA896 /* ProfileViewController */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		19EE37181D529AFD009BA896 /* FollowingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				19EE37191D529AFD009BA896 /* FollowingTableViewCell */,
+				19EE371C1D529AFD009BA896 /* FollowingViewController.h */,
+				19EE371D1D529AFD009BA896 /* FollowingViewController.m */,
+			);
+			path = FollowingViewController;
+			sourceTree = "<group>";
+		};
+		19EE37191D529AFD009BA896 /* FollowingTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				19EE371A1D529AFD009BA896 /* FollowingTableViewCell.h */,
+				19EE371B1D529AFD009BA896 /* FollowingTableViewCell.m */,
+			);
+			path = FollowingTableViewCell;
+			sourceTree = "<group>";
+		};
+		19EE371E1D529AFD009BA896 /* ProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				19EE37251D529C45009BA896 /* ProfileViewController.h */,
+				19EE37261D529C45009BA896 /* ProfileViewController.m */,
+			);
+			path = ProfileViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,9 +403,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19EE37241D529B45009BA896 /* Profile.storyboard in Resources */,
 				19A9E94E1D4E472600588822 /* Login.storyboard in Resources */,
+				19EE37291D52A6A8009BA896 /* profileImage.jpg in Resources */,
 				19A9E9601D4E504B00588822 /* Home.storyboard in Resources */,
 				19534DF61D49957D00309D28 /* Main.storyboard in Resources */,
+				19EE372B1D52A88E009BA896 /* postImage.jpg in Resources */,
 				19534DFB1D49957D00309D28 /* LaunchScreen.xib in Resources */,
 				19534DF81D49957D00309D28 /* Images.xcassets in Resources */,
 			);
@@ -297,9 +429,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				19534DF01D49957D00309D28 /* AppDelegate.m in Sources */,
+				19EE37201D529AFD009BA896 /* FollowingViewController.m in Sources */,
+				19EE37161D52995E009BA896 /* PostTableViewCell.m in Sources */,
 				19534DED1D49957D00309D28 /* main.m in Sources */,
+				19EE37271D529C45009BA896 /* ProfileViewController.m in Sources */,
+				19EE37121D529591009BA896 /* TimelineTableViewCell.m in Sources */,
+				199AA7491D57725B001E3F4A /* NewPostViewController.m in Sources */,
 				19A9E95E1D4E48E900588822 /* SignUpViewController.m in Sources */,
+				199AA74D1D5778AD001E3F4A /* EditProfileViewController.m in Sources */,
 				19A9E95B1D4E48DB00588822 /* LoginViewController.m in Sources */,
+				19EE370A1D529529009BA896 /* TimelineViewController.m in Sources */,
+				19EE371F1D529AFD009BA896 /* FollowingTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
+#import "TimelineViewController.h"
 
 @interface LoginViewController ()
 
@@ -38,6 +39,9 @@
 */
 
 - (IBAction)loginButtonTouched:(id)sender {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    TimelineViewController *vc = [sb instantiateViewControllerWithIdentifier:@"timeline"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)signUpButtonTouched:(id)sender {
