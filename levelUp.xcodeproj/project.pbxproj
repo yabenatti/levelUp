@@ -13,6 +13,8 @@
 		19534DF81D49957D00309D28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19534DF71D49957D00309D28 /* Images.xcassets */; };
 		19534DFB1D49957D00309D28 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19534DF91D49957D00309D28 /* LaunchScreen.xib */; };
 		19534E071D49957D00309D28 /* levelUpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19534E061D49957D00309D28 /* levelUpTests.m */; };
+		1974B8911D59365300777CF3 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1974B8901D59365300777CF3 /* AppUtils.m */; };
+		1974B8951D593E8E00777CF3 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1974B8941D593E8E00777CF3 /* RegistrationViewController.m */; };
 		199AA7491D57725B001E3F4A /* NewPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AA7481D57725B001E3F4A /* NewPostViewController.m */; };
 		199AA74D1D5778AD001E3F4A /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199AA74C1D5778AD001E3F4A /* EditProfileViewController.m */; };
 		19A9E94E1D4E472600588822 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19A9E94D1D4E472600588822 /* Login.storyboard */; };
@@ -52,6 +54,10 @@
 		19534E001D49957D00309D28 /* levelUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = levelUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19534E051D49957D00309D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19534E061D49957D00309D28 /* levelUpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = levelUpTests.m; sourceTree = "<group>"; };
+		1974B88F1D59365300777CF3 /* AppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUtils.h; sourceTree = "<group>"; };
+		1974B8901D59365300777CF3 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppUtils.m; sourceTree = "<group>"; };
+		1974B8931D593E8E00777CF3 /* RegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
+		1974B8941D593E8E00777CF3 /* RegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
 		199AA7471D57725B001E3F4A /* NewPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPostViewController.h; sourceTree = "<group>"; };
 		199AA7481D57725B001E3F4A /* NewPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPostViewController.m; sourceTree = "<group>"; };
 		199AA74B1D5778AD001E3F4A /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
@@ -160,6 +166,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1974B8921D593E7400777CF3 /* RegistrationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1974B8931D593E8E00777CF3 /* RegistrationViewController.h */,
+				1974B8941D593E8E00777CF3 /* RegistrationViewController.m */,
+			);
+			path = RegistrationViewController;
+			sourceTree = "<group>";
+		};
 		199AA7461D577245001E3F4A /* NewPostViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +207,8 @@
 		19A9E9521D4E48BD00588822 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				1974B88F1D59365300777CF3 /* AppUtils.h */,
+				1974B8901D59365300777CF3 /* AppUtils.m */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -223,6 +240,7 @@
 		19A9E9561D4E48BD00588822 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1974B8921D593E7400777CF3 /* RegistrationViewController */,
 				19A9E9571D4E48BD00588822 /* LoginViewController */,
 				19A9E9581D4E48BD00588822 /* SignUpViewController */,
 			);
@@ -430,6 +448,7 @@
 			files = (
 				19534DF01D49957D00309D28 /* AppDelegate.m in Sources */,
 				19EE37201D529AFD009BA896 /* FollowingViewController.m in Sources */,
+				1974B8911D59365300777CF3 /* AppUtils.m in Sources */,
 				19EE37161D52995E009BA896 /* PostTableViewCell.m in Sources */,
 				19534DED1D49957D00309D28 /* main.m in Sources */,
 				19EE37271D529C45009BA896 /* ProfileViewController.m in Sources */,
@@ -440,6 +459,7 @@
 				19A9E95B1D4E48DB00588822 /* LoginViewController.m in Sources */,
 				19EE370A1D529529009BA896 /* TimelineViewController.m in Sources */,
 				19EE371F1D529AFD009BA896 /* FollowingTableViewCell.m in Sources */,
+				1974B8951D593E8E00777CF3 /* RegistrationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
