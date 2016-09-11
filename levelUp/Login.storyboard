@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wQi-AD-EvP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wQi-AD-EvP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -126,7 +126,7 @@
                         <outlet property="loginButton" destination="m51-1f-Plb" id="Lge-4J-sUX"/>
                         <outlet property="userPasswordTextField" destination="CB8-BQ-LKE" id="cCe-vv-D8D"/>
                         <outlet property="usernameTextField" destination="JIr-4z-iCa" id="8ut-HD-sxv"/>
-                        <segue destination="2hi-Gv-bEE" kind="show" id="KRY-5h-Lg3"/>
+                        <segue destination="2hi-Gv-bEE" kind="show" identifier="signUpSegue" id="KRY-5h-Lg3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBr-yc-IFM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -310,7 +310,7 @@
                         <outlet property="userEmailTextField" destination="CME-uT-ju1" id="wwQ-iy-1sT"/>
                         <outlet property="userPasswordTextField" destination="lS0-T0-DRp" id="hv2-Ob-f08"/>
                         <outlet property="userPictureButton" destination="fZD-Gj-jTF" id="b9F-q0-iFS"/>
-                        <segue destination="fy6-0N-xMa" kind="show" id="MAu-Hl-ee5"/>
+                        <segue destination="fy6-0N-xMa" kind="show" identifier="formSegue" id="MAu-Hl-ee5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6V0-5E-W26" userLabel="First Responder" sceneMemberID="firstResponder"/>

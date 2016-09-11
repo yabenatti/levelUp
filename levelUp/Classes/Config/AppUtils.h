@@ -10,4 +10,8 @@
 
 @interface AppUtils : NSObject
 
++ (void) saveToUserDefault:(NSObject*) objectToSave withKey:(NSString*) key;
++ (NSObject*) retrieveFromUserDefaultWithKey:(NSString*) key;
++(void) clearUserDefault;
+
 @end

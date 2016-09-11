@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
 #import "TimelineViewController.h"
+#import "LoginManager.h"
 
 @interface LoginViewController ()
 
@@ -39,9 +40,19 @@
 */
 
 - (IBAction)loginButtonTouched:(id)sender {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
-    TimelineViewController *vc = [sb instantiateViewControllerWithIdentifier:@"timeline"];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSDictionary *parameters = @{@"email" : self.usernameTextField.text,
+                                 @"password" : self.userPasswordTextField.text};
+    
+    [[LoginManager sharedInstance]authenticateWithLogin:parameters andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *theError) {
+        if(isSuccess) {
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+            TimelineViewController *vc = [sb instantiateViewControllerWithIdentifier:@"timeline"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            
+        }
+    }];
+    
 }
 
 - (IBAction)signUpButtonTouched:(id)sender {
