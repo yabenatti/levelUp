@@ -11,6 +11,10 @@
 @implementation Post
 
 - (Post *)parseToPost:(NSDictionary *)postToParse {
+    
+    self.postId = [[postToParse objectForKey:@"id"] intValue];
+    self.postDescription = [postToParse objectForKey:@"description"];
+    
     return self;
 }
 

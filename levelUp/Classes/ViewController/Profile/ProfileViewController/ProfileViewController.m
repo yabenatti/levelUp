@@ -28,6 +28,9 @@
     
     [self.profileImageView.layer setCornerRadius:self.profileImageView.frame.size.width/2];
     [self.profileImageView.layer setMasksToBounds:YES];
+    
+    //Inicializacoes
+    self.myPosts = [NSArray new];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

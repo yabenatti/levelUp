@@ -30,13 +30,16 @@ static PostManager *sharedInstance = nil;
     [self conectWithParameters:nil atPath:URL_ALL_POSTS(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
             NSArray *posts = (NSArray *)[response objectForKey:@"data"];
+            NSMutableArray *postsArray = [NSMutableArray new];
             
             for (NSDictionary *postDictionary in posts) {
                 Post *post = [Post new];
                 post = [post parseToPost:postDictionary];
+                
+                [postsArray addObject:post];
             }
             
-            completion(YES, posts, nil,nil);
+            completion(YES, postsArray, nil,nil);
         } else {
             completion(NO, nil, message, error);
         }
