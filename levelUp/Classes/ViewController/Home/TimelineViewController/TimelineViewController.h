@@ -11,6 +11,6 @@
 @interface TimelineViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *postsTableView;
-
+@property (weak, nonatomic) IBOutlet UIView *emptyView;
 
 @end

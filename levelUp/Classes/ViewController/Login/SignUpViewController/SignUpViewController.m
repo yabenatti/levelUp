@@ -7,6 +7,8 @@
 //
 
 #import "SignUpViewController.h"
+#import "RegistrationViewController.h"
+#import "SignUpManager.h"
 
 @interface SignUpViewController ()
 
@@ -39,7 +41,11 @@
     [self.confirmCornerView.layer setBorderWidth:1.0];
     [self.confirmCornerView.layer setBorderColor:[COLOR_GRAY_LIGHT CGColor]];
     self.confirmLabel.textColor = [UIColor colorWithCGColor:[COLOR_GRAY_LIGHT CGColor]];
-
+    
+    self.userEmailTextField.text = @"user4@example.com";
+    self.userPasswordTextField.text = @"123456";
+    self.userConfirmPasswordTextField.text = @"123456";
+ 
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,17 +94,27 @@
     label.textColor = [UIColor colorWithCGColor:labelColor];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if([segue.identifier isEqualToString:@"registrationSegue"]) {
+        RegistrationViewController *vc = [segue destinationViewController];
+        vc.parameters = [NSMutableDictionary new];
+        vc.parameters = sender;
+    }
 }
-*/
+
 
 - (IBAction)signUpButtonTouched:(id)sender {
+    NSDictionary *parameters = @{@"email" : self.userEmailTextField.text,
+                                 @"password" : self.userPasswordTextField.text};
+    
+    [self performSegueWithIdentifier:@"registrationSegue" sender:parameters];
 }
 
 - (IBAction)emailViewTapped:(id)sender {

@@ -11,9 +11,11 @@
 #define API @"/api"
 
 #define URL_LOGIN                           BASE_URL API @"/sessions"
-#define URL_SIGNUP                          BASE_URL API @"/signup"
+#define URL_SIGNUP                          BASE_URL API @"/users"
 
-#define URL_PROFILE(uid)                    [NSString stringWithFormat:@"%@%@/users?uid=%@", BASE_URL, API, uid]
+#define URL_PROFILE(uid)                    [NSString stringWithFormat:@"%@%@/users/uid?uid=%@", BASE_URL, API, uid]
+#define URL_ALL_POSTS(uid)                  [NSString stringWithFormat:@"%@%@/posts?uid=%@", BASE_URL, API, uid]
+#define URL_MY_POSTS(uid)                   [NSString stringWithFormat:@"%@%@/my_posts?uid=%@", BASE_URL, API, uid]
 
 
 

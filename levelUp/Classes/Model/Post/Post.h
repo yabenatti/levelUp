@@ -16,6 +16,6 @@
 @property (strong, nonatomic) NSString *postDescription;
 @property (strong, nonatomic) NSString *postDate;
 
-- (void)parseToPost:(NSDictionary *)postToParse;
+- (Post *)parseToPost:(NSDictionary *)postToParse;
 
 @end

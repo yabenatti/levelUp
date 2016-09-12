@@ -10,7 +10,7 @@
 #import "AFNetworkReachabilityManager.h"
 #import "AFHTTPSessionManager.h"
 #import "JSONResponseSerializerWithData.h"
-//#import "AppUtils.h"
+#import "AppUtils.h"
 
 @implementation NetworkManager
 
@@ -139,8 +139,8 @@ static NetworkManager *sharedInstance = nil;
 - (void)callHttpWithParameters:(NSDictionary*)parameters requestType:(NSString*)type atPath:(NSString*)path withCompletion:(void (^) (id response, BOOL isSuccess, NSString *message, NSError *error))completion {
 
     //so inclui o token no header se ele existir
-//    if([AppUtils retrieveFromUserDefaultWithKey:API_TOKEN])
-//        [manager.requestSerializer setValue:[NSString stringWithFormat:@"Token %@",[AppUtils retrieveFromUserDefaultWithKey:API_TOKEN]] forHTTPHeaderField:@"Authorization"];
+    if([AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN])
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"Token %@",[AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN]] forHTTPHeaderField:@"Authorization"];
     
     NSLog(@"%@", path);
     NSLog(@"%@", manager.requestSerializer.HTTPRequestHeaders);

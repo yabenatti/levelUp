@@ -48,7 +48,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_lock_white" translatesAutoresizingMaskIntoConstraints="NO" id="dkR-BL-TTB">
                                 <rect key="frame" x="30" y="398" width="30" height="30"/>
@@ -62,7 +62,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m51-1f-Plb">
                                 <rect key="frame" x="30" y="468" width="260" height="50"/>
@@ -166,7 +166,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CME-uT-ju1">
                                         <rect key="frame" x="116" y="16" width="129" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                         <connections>
                                             <outlet property="delegate" destination="2hi-Gv-bEE" id="bDp-4U-08Z"/>
                                         </connections>
@@ -204,7 +204,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lS0-T0-DRp">
                                         <rect key="frame" x="116" y="17" width="129" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="2hi-Gv-bEE" id="stV-Jo-uYn"/>
                                         </connections>
@@ -234,7 +234,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="confim" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gdH-qh-Jfl">
                                         <rect key="frame" x="116" y="17" width="129" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="2hi-Gv-bEE" id="UNa-Dv-bG7"/>
                                         </connections>
@@ -310,7 +310,7 @@
                         <outlet property="userEmailTextField" destination="CME-uT-ju1" id="wwQ-iy-1sT"/>
                         <outlet property="userPasswordTextField" destination="lS0-T0-DRp" id="hv2-Ob-f08"/>
                         <outlet property="userPictureButton" destination="fZD-Gj-jTF" id="b9F-q0-iFS"/>
-                        <segue destination="fy6-0N-xMa" kind="show" identifier="formSegue" id="MAu-Hl-ee5"/>
+                        <segue destination="fy6-0N-xMa" kind="show" identifier="registrationSegue" id="MAu-Hl-ee5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6V0-5E-W26" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -349,14 +349,22 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pet name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lu-OW-g6m">
                                         <rect key="frame" x="20" y="14" width="77" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="77" id="021-bX-dgN"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.19215686269999999" green="0.54901960780000003" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="021-bX-dgN"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="name" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a9S-Jc-v1k">
                                         <rect key="frame" x="205" y="16" width="40" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                         <connections>
                                             <outlet property="delegate" destination="2hi-Gv-bEE" id="LQ6-9m-n1i"/>
                                         </connections>
@@ -391,7 +399,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="id" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VJ2-63-odk">
                                         <rect key="frame" x="229" y="16" width="16" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                         <connections>
                                             <outlet property="delegate" destination="2hi-Gv-bEE" id="hKO-fC-bhY"/>
                                         </connections>
@@ -426,7 +434,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="min" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mrE-y7-dV4">
                                         <rect key="frame" x="217" y="16" width="28" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                         <connections>
                                             <outlet property="delegate" destination="2hi-Gv-bEE" id="FLr-1G-adT"/>
                                         </connections>
@@ -461,7 +469,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="max" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CBu-3R-W00">
                                         <rect key="frame" x="214" y="16" width="31" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                         <connections>
                                             <outlet property="delegate" destination="2hi-Gv-bEE" id="qMR-jH-hJ7"/>
                                         </connections>
@@ -484,14 +492,31 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jx3-Z2-vfj">
+                                <rect key="frame" x="30" y="478" width="260" height="50"/>
+                                <color key="backgroundColor" red="0.19215686269999999" green="0.54901960780000003" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dOi-9q-GuT"/>
+                                </constraints>
+                                <state key="normal" title="REGISTER">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerButtonTouched:" destination="fy6-0N-xMa" eventType="touchUpInside" id="IkU-vj-R8Q"/>
+                                    <action selector="signUpButtonTouched:" destination="2hi-Gv-bEE" eventType="touchUpInside" id="Dx7-7T-yWG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="WBT-9e-cGJ" firstAttribute="top" secondItem="IRm-TV-XeJ" secondAttribute="bottom" constant="15" id="4rC-dR-jgK"/>
                             <constraint firstItem="91O-es-Sb8" firstAttribute="top" secondItem="gto-Qd-llS" secondAttribute="bottom" constant="30" id="6Li-lA-Dj4"/>
+                            <constraint firstAttribute="trailing" secondItem="jx3-Z2-vfj" secondAttribute="trailing" constant="30" id="7I0-iN-meg"/>
                             <constraint firstItem="QXX-ih-5Ew" firstAttribute="top" secondItem="91O-es-Sb8" secondAttribute="bottom" constant="15" id="G7C-pZ-MtK"/>
+                            <constraint firstItem="15e-h0-bp9" firstAttribute="top" secondItem="jx3-Z2-vfj" secondAttribute="bottom" constant="40" id="LYb-lc-vRd"/>
                             <constraint firstItem="QXX-ih-5Ew" firstAttribute="trailing" secondItem="91O-es-Sb8" secondAttribute="trailing" id="YYi-Qx-HmV"/>
                             <constraint firstItem="91O-es-Sb8" firstAttribute="leading" secondItem="XjQ-K2-d3d" secondAttribute="leading" constant="30" id="bdI-Za-2vY"/>
+                            <constraint firstItem="jx3-Z2-vfj" firstAttribute="leading" secondItem="XjQ-K2-d3d" secondAttribute="leading" constant="30" id="itT-yY-kMJ"/>
                             <constraint firstAttribute="trailing" secondItem="91O-es-Sb8" secondAttribute="trailing" constant="30" id="k6L-Zp-cRc"/>
                             <constraint firstItem="QXX-ih-5Ew" firstAttribute="leading" secondItem="91O-es-Sb8" secondAttribute="leading" id="lDP-4q-6t3"/>
                             <constraint firstItem="IRm-TV-XeJ" firstAttribute="trailing" secondItem="91O-es-Sb8" secondAttribute="trailing" id="mwJ-pM-JhX"/>
@@ -502,9 +527,18 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="petNameCornerView" destination="91O-es-Sb8" id="xu6-lE-yFy"/>
-                        <outlet property="petNameLabel" destination="3lu-OW-g6m" id="bwh-Gt-ag6"/>
-                        <outlet property="petNameTextField" destination="a9S-Jc-v1k" id="0Cb-1G-CDB"/>
+                        <outlet property="beaconIdCornerView" destination="QXX-ih-5Ew" id="DUA-Fg-oUs"/>
+                        <outlet property="beaconIdLabel" destination="JrE-FC-DfO" id="wwS-gb-41g"/>
+                        <outlet property="beaconIdTextField" destination="VJ2-63-odk" id="gv5-k4-c56"/>
+                        <outlet property="beaconMajorCornerView" destination="WBT-9e-cGJ" id="pC7-oX-Rmw"/>
+                        <outlet property="beaconMajorTextField" destination="CBu-3R-W00" id="bIL-lQ-thP"/>
+                        <outlet property="beaconManjorLabel" destination="MIG-7P-3Jg" id="D6I-h4-IMF"/>
+                        <outlet property="beaconMinorCornerView" destination="IRm-TV-XeJ" id="GGF-5q-Gff"/>
+                        <outlet property="beaconMinorLabel" destination="1bA-NB-4Hq" id="vvK-m1-A1O"/>
+                        <outlet property="beaconMinorTextField" destination="mrE-y7-dV4" id="UKy-TU-E3X"/>
+                        <outlet property="petNameCornerView" destination="91O-es-Sb8" id="2az-Ai-ovE"/>
+                        <outlet property="petNameLabel" destination="3lu-OW-g6m" id="FPb-sm-E34"/>
+                        <outlet property="petNameTextField" destination="a9S-Jc-v1k" id="Tki-3C-wAO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D1G-GK-Zhq" userLabel="First Responder" sceneMemberID="firstResponder"/>

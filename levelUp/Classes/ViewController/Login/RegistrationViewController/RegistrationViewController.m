@@ -7,6 +7,8 @@
 //
 
 #import "RegistrationViewController.h"
+#import "TimelineViewController.h"
+#import "SignupManager.h"
 
 @interface RegistrationViewController ()
 
@@ -34,4 +36,22 @@
 }
 */
 
+- (IBAction)registerButtonTouched:(id)sender {
+    
+    NSDictionary *parameters = @{@"user" : @{@"email" : [self.parameters objectForKey:@"email"],
+                                             @"password" : [self.parameters objectForKey:@"password"],
+                                             @"pet_name" : self.petNameTextField.text
+                                             }
+                                 };
+    
+    [[SignupManager sharedInstance]signUpWithParameters:parameters andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *theError) {
+        if(isSuccess) {
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+            TimelineViewController *vc = [sb instantiateViewControllerWithIdentifier:@"timeline"];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            NSLog(@"nope.");
+        }
+    }];
+}
 @end

@@ -10,4 +10,9 @@
 
 @interface NewPostViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
+@property (weak, nonatomic) IBOutlet UITextView *imageTextView;
+
+- (IBAction)imageButtonTouched:(id)sender;
+
 @end

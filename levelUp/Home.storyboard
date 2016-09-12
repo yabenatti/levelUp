@@ -229,18 +229,48 @@
                                     <outlet property="delegate" destination="npJ-OW-R5F" id="5nN-UQ-rGp"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HF0-3k-nrB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wA1-Xe-3IU">
+                                        <rect key="frame" x="100" y="100" width="120" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="wA1-Xe-3IU" secondAttribute="height" multiplier="1:1" id="MEg-vJ-KdQ"/>
+                                            <constraint firstAttribute="width" constant="120" id="aGi-P2-L4W"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There's Nothing Here YET!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Vh-Jb-eZC">
+                                        <rect key="frame" x="36" y="240" width="249" height="26"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="7Vh-Jb-eZC" firstAttribute="centerX" secondItem="wA1-Xe-3IU" secondAttribute="centerX" id="7vE-ii-VKW"/>
+                                    <constraint firstItem="7Vh-Jb-eZC" firstAttribute="top" secondItem="wA1-Xe-3IU" secondAttribute="bottom" constant="20" id="WJ8-ny-VCw"/>
+                                    <constraint firstItem="wA1-Xe-3IU" firstAttribute="top" secondItem="HF0-3k-nrB" secondAttribute="top" constant="100" id="d2P-De-qUJ"/>
+                                    <constraint firstItem="wA1-Xe-3IU" firstAttribute="centerX" secondItem="HF0-3k-nrB" secondAttribute="centerX" id="ema-U3-9uY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0zI-VB-LcZ" firstAttribute="leading" secondItem="5RN-cN-ynN" secondAttribute="leading" id="5Fo-fs-qgm"/>
                             <constraint firstAttribute="trailing" secondItem="0zI-VB-LcZ" secondAttribute="trailing" id="LlJ-7x-i2t"/>
+                            <constraint firstAttribute="trailing" secondItem="HF0-3k-nrB" secondAttribute="trailing" id="NCz-kn-HyQ"/>
+                            <constraint firstItem="HF0-3k-nrB" firstAttribute="leading" secondItem="5RN-cN-ynN" secondAttribute="leading" id="X2R-uG-oyA"/>
+                            <constraint firstItem="4z8-Wi-Uzx" firstAttribute="top" secondItem="HF0-3k-nrB" secondAttribute="bottom" id="Z5J-YY-Mtn"/>
                             <constraint firstItem="4z8-Wi-Uzx" firstAttribute="top" secondItem="0zI-VB-LcZ" secondAttribute="bottom" id="h1C-tI-Ydr"/>
+                            <constraint firstItem="HF0-3k-nrB" firstAttribute="top" secondItem="A6Z-JI-evP" secondAttribute="bottom" id="pU8-bC-601"/>
                             <constraint firstItem="0zI-VB-LcZ" firstAttribute="top" secondItem="A6Z-JI-evP" secondAttribute="bottom" id="ymI-uU-ABI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="q4g-vi-eHR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="emptyView" destination="HF0-3k-nrB" id="yUU-e6-K1T"/>
                         <outlet property="postsTableView" destination="0zI-VB-LcZ" id="vbw-62-7OU"/>
                     </connections>
                 </viewController>
@@ -268,11 +298,13 @@
                                     <constraint firstAttribute="width" secondItem="8XK-hg-HXr" secondAttribute="height" multiplier="1:1" id="ve6-KL-VY3"/>
                                 </constraints>
                                 <state key="normal" image="ic_camera_alt_white"/>
+                                <connections>
+                                    <action selector="imageButtonTouched:" destination="XaE-WY-Rjg" eventType="touchUpInside" id="gkh-y9-cuY"/>
+                                </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OPq-7k-3Mw">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPq-7k-3Mw">
                                 <rect key="frame" x="112" y="0.0" width="208" height="112"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -295,6 +327,10 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="imageButton" destination="8XK-hg-HXr" id="idy-df-GnT"/>
+                        <outlet property="imageTextView" destination="OPq-7k-3Mw" id="3sC-ew-IsJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZOO-rj-Q3g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

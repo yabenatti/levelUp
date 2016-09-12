@@ -38,11 +38,12 @@ static SignupManager *sharedInstance = nil;
     
     [self conectWithParameters:parameters atPath:URL_SIGNUP requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if (isSuccess) {
-            NSDictionary *responseDictionary = (NSDictionary*)response;
+            NSDictionary *responseDictionary = (NSDictionary*)[response objectForKey:@"data"];
             
-            User *user = [[User new] parseToUser:[responseDictionary objectForKey:@"data"]];
+            User *user = [[User new] parseToUser:responseDictionary];
             
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"authentication_token"]] withKey:USER_TOKEN];
+            [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"id"]] withKey:USER_ID];
             
             completion(YES, user, nil, nil);
             

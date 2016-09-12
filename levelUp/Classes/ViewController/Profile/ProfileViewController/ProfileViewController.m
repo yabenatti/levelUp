@@ -9,8 +9,14 @@
 #import "ProfileViewController.h"
 #import "TimeLineTableViewCell.h"
 #import "PostTableViewCell.h"
+#import "ProfileManager.h"
+#import "PostManager.h"
+#import "AppUtils.h"
 
 @interface ProfileViewController ()
+
+@property (strong, nonatomic) User *currentUser;
+@property (strong, nonatomic) NSArray *myPosts;
 
 @end
 
@@ -22,7 +28,29 @@
     
     [self.profileImageView.layer setCornerRadius:self.profileImageView.frame.size.width/2];
     [self.profileImageView.layer setMasksToBounds:YES];
-    self.usernameLabel.text = @"Yasmin Benatti";
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [[ProfileManager sharedInstance]retrieveProfileWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *error) {
+        if(isSuccess) {
+            self.currentUser = user;
+            self.usernameLabel.text = user.petName;
+            
+            [[PostManager sharedInstance]getMyPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
+                if(isSuccess) {
+                    self.myPosts = posts;
+                    
+                    [self.postsTableView reloadData];
+                } else {
+                    
+                }
+            }];
+            
+        } else {
+            
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,7 +65,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return [self.myPosts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

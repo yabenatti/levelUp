@@ -10,4 +10,8 @@
 
 @implementation Post
 
+- (Post *)parseToPost:(NSDictionary *)postToParse {
+    return self;
+}
+
 @end
