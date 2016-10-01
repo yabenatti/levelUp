@@ -36,7 +36,7 @@ static SignupManager *sharedInstance = nil;
 - (void)signUpWithParameters:(NSDictionary*)parameters andCompletion:(void (^)(BOOL isSuccess, User *user, NSString* message,NSError* theError)) completion {
     
     
-    [self conectWithParameters:parameters atPath:URL_SIGNUP requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    [self connectWithParameters:parameters atPath:URL_SIGNUP requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if (isSuccess) {
             NSDictionary *responseDictionary = (NSDictionary*)[response objectForKey:@"data"];
             
@@ -62,7 +62,7 @@ static SignupManager *sharedInstance = nil;
 - (void)registrationWithParameters:(NSDictionary*)parameters andCompletion:(void (^)(BOOL isSuccess, User *user, NSString* message,NSError* theError)) completion {
     
     
-    [self conectWithParameters:parameters atPath:URL_SIGNUP requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    [self connectWithParameters:parameters atPath:URL_SIGNUP requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if (isSuccess) {
             NSDictionary *responseDictionary = (NSDictionary*)response;
             

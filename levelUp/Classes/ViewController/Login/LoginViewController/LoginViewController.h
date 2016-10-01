@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *userPasswordTextField;
@@ -16,5 +16,6 @@
 
 - (IBAction)loginButtonTouched:(id)sender;
 - (IBAction)signUpButtonTouched:(id)sender;
+- (IBAction)hideKeyboard:(id)sender;
 
 @end

@@ -35,8 +35,10 @@ static LoginManager *sharedInstance = nil;
  */
 - (void)authenticateWithLogin:(NSDictionary*)parameters andCompletion:(void (^)(BOOL isSuccess, User *user, NSString* message,NSError* theError)) completion {
 
+//    NSDictionary *login = @{@"username" : @"min.benatti@gmail.com", @"password" : @"12345"};
+//    NSString *url = @"https://api-sandbox.cravefood.services/account/session";
     
-    [self conectWithParameters:parameters atPath:URL_LOGIN requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    [self connectWithParameters:parameters atPath:URL_LOGIN requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if (isSuccess) {
             NSDictionary *responseDictionary = (NSDictionary*)[response objectForKey:@"data"];
             
@@ -44,6 +46,7 @@ static LoginManager *sharedInstance = nil;
             
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"authentication_token"]] withKey:USER_TOKEN];
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"id"]] withKey:USER_ID];
+            [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"name"]] withKey:USER_NAME];
 
             
             completion(YES, user, nil, nil);
@@ -62,7 +65,7 @@ static LoginManager *sharedInstance = nil;
  */
 - (void)logoutWithApi:(NSDictionary *)parameters andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion {
     
-    [self conectWithParameters:parameters atPath:URL_LOGIN requestType:@"DELETE" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    [self connectWithParameters:parameters atPath:URL_LOGIN requestType:@"DELETE" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
             completion(YES, nil, nil);
         } else {

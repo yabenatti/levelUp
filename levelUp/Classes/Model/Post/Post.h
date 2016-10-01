@@ -15,6 +15,7 @@
 @property (nonatomic) int likesCount;
 @property (strong, nonatomic) NSString *postDescription;
 @property (strong, nonatomic) NSString *postDate;
+@property (strong, nonatomic) NSString *postImage;
 
 - (Post *)parseToPost:(NSDictionary *)postToParse;
 

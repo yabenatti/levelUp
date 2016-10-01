@@ -22,4 +22,9 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)likeButtonTouched:(id)sender {
+}
+
+- (IBAction)commentButtonTouched:(id)sender {
+}
 @end

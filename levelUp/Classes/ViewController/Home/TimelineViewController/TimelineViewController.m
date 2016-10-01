@@ -14,11 +14,17 @@
 #import "PostManager.h"
 #import "AppUtils.h"
 #import "Constants.h"
+#import <EstimoteSDK/EstimoteSDK.h>
 
 
-@interface TimelineViewController ()
+
+@interface TimelineViewController () <ESTBeaconManagerDelegate>
 
 @property (strong, nonatomic) NSArray *posts;
+@property (nonatomic) ESTBeaconManager *beaconManager;
+@property (nonatomic) CLBeaconRegion *beaconRegion;
+@property (nonatomic) NSDictionary *placesByBeacons;
+@property (nonatomic) BOOL enteredRegion;
 
 @end
 
@@ -27,6 +33,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.enteredRegion = NO;
+    
+    self.beaconManager = [ESTBeaconManager new];
+    self.beaconManager.delegate = self;
+    self.beaconRegion = [[CLBeaconRegion alloc]
+                         initWithProximityUUID:[[NSUUID alloc]
+                                                initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"]
+                         identifier:@"ranged region"];
+    [self.beaconManager requestAlwaysAuthorization];
     
     UIBarButtonItem *postItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"ic_pets"] style:UIBarButtonItemStyleDone target:self action:@selector(postTouched:)];
     
@@ -47,27 +62,118 @@
         [self.navigationController presentViewController:vc animated:YES completion:nil];
         
     } else {
-        [[PostManager sharedInstance]getAllPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
-            if(isSuccess) {
-                self.posts = posts;
-                
-                if([posts count] == 0) {
-                    [self.emptyView setHidden:NO];
-                } else {
-                    [self.emptyView setHidden:YES];
-                    [self.postsTableView reloadData];
-                }
-                
-            } else {
-                
-            }
-        }];
+        [self getAllPosts];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)getAllPosts {
+    [[PostManager sharedInstance]getAllPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
+        if(isSuccess) {
+            self.posts = posts;
+            [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
+
+            [self.postsTableView reloadData];
+            
+            if([posts count] == 0) {
+                [self.emptyView setHidden:NO];
+            } else {
+                [self.emptyView setHidden:YES];
+                [self.postsTableView reloadData];
+            }
+            
+        } else {
+            
+        }
+    }];
+}
+
+- (NSArray *)placesNearBeacon:(CLBeacon *)beacon {
+    NSString *beaconKey = [NSString stringWithFormat:@"%@:%@",
+                           beacon.major, beacon.minor];
+    NSDictionary *places = [self.placesByBeacons objectForKey:beaconKey];
+    NSArray *sortedPlaces = [places keysSortedByValueUsingComparator:
+                             ^NSComparisonResult(id obj1, id obj2) {
+                                 return [obj1 compare:obj2];
+                             }];
+    return sortedPlaces;
+}
+
+- (void)beaconManager:(id)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
+    CLBeacon *nearestBeacon = beacons.firstObject;
+    NSDictionary *postInfo = [NSDictionary new];
+    if (nearestBeacon) {
+        if(!self.enteredRegion) {
+            if([nearestBeacon.major  isEqual: @47798] && [nearestBeacon.minor  isEqual: @37813]) {
+                [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
+                
+                self.enteredRegion = YES;
+                
+                postInfo = @{@"post" : @{@"description" : @"I'm the food beacon YUM",
+                                                       @"image" : @""}};
+                
+                [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+                    if (isSuccess) {
+                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:@"FOOD! YUM!"] animated:YES completion:nil];
+                        self.enteredRegion = NO;
+                        [self getAllPosts];
+                    } else {
+                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+                    }
+                }];
+                
+            } else if([nearestBeacon.major  isEqual: @58375] && [nearestBeacon.minor  isEqual: @30394]) {
+                [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
+                
+                self.enteredRegion = YES;
+                
+                postInfo = @{@"post" : @{@"description" : @"Sleepests Warriors, to the pillow zone!",
+                                         @"image" : @""}};
+                
+                
+                [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+                    if (isSuccess) {
+                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:@"NIGHT TIME!"] animated:YES completion:nil];
+                        self.enteredRegion = NO;
+                        [self getAllPosts];
+                    } else {
+                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+                    }
+                }];
+
+            } else if([nearestBeacon.major  isEqual: @59492] && [nearestBeacon.minor  isEqual: @13064]) {
+                [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
+                
+                self.enteredRegion = YES;
+                
+                postInfo = @{@"post" : @{@"description" : @"LET ME OUT!",
+                                         @"image" : @""}};
+                
+                
+                [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+                    if (isSuccess) {
+                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:@"AT THE DOOR!"] animated:YES completion:nil];
+                        self.enteredRegion = NO;
+                        [self getAllPosts];
+                    } else {
+                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+                    }
+                }];
+
+            }
+            
+        }
+        
+    }
 }
 
 - (void)postTouched:(id)sender {
@@ -85,48 +191,34 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == 0) {
-        //Com imagem
-        TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timelineCell" forIndexPath:indexPath];
-        
-        if(cell == nil) {
-            cell = [[TimelineTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timelineCell"];
-        }
-        
-        Post *post = [self.posts objectAtIndex:indexPath.row];
-        
-        [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
-        [cell.userImageView.layer setMasksToBounds:YES];
-        
-        cell.usernameLabel.text = @"Yasmin Benatti";
-        
+    Post *post = [self.posts objectAtIndex:indexPath.row];
 
-        
-        return cell;
-    } else {
-        //sem imagem
-        PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
-        
-        if(cell == nil) {
-            cell = [[PostTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"postCell"];
-        }
-        
-        [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
-        [cell.userImageView.layer setMasksToBounds:YES];
-        cell.usernameLabel.text = @"Yasmin Benatti";
-        cell.postLabel.text = @"This is a text post";
-        
-        return cell;
+    TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timelineCell" forIndexPath:indexPath];
+    
+    if(cell == nil) {
+        cell = [[TimelineTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timelineCell"];
     }
+    
+    
+    [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
+    [cell.userImageView.layer setMasksToBounds:YES];
+    
+    cell.usernameLabel.text = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_NAME]];
+    cell.postCaptionLabel.text = post.postDescription;
+    
+    if([post.postImage isEqualToString:@""]) {
+        cell.imageHeightConstraint.constant = 0;
+    } else {
+        cell.imageHeightConstraint.constant = 256.0f;
+    }
+
+    return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    Post *post = [self.posts objectAtIndex:indexPath.row];
-    
-//    [self performSegueWithIdentifier:@"postSegue" sender:[NSString stringWithFormat:@"%d", post.postId]];
+        
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

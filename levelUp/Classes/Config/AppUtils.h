@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "Constants.h"
 
 @interface AppUtils : NSObject
@@ -14,5 +15,6 @@
 + (void) saveToUserDefault:(NSObject*) objectToSave withKey:(NSString*) key;
 + (NSObject*) retrieveFromUserDefaultWithKey:(NSString*) key;
 +(void) clearUserDefault;
++(UIAlertController*)setupAlertWithMessage:(NSString*)message;
 
 @end

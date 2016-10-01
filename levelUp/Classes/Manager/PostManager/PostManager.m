@@ -7,6 +7,8 @@
 //
 
 #import "PostManager.h"
+#import "Constants.h"
+#import "AppUtils.h"
 #import "Urls.h"
 
 @implementation PostManager
@@ -27,7 +29,7 @@ static PostManager *sharedInstance = nil;
 
 - (void)getAllPostsWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error)) completion {
     
-    [self conectWithParameters:nil atPath:URL_ALL_POSTS(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    [self connectWithParameters:nil atPath:URL_ALL_POSTS(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
             NSArray *posts = (NSArray *)[response objectForKey:@"data"];
             NSMutableArray *postsArray = [NSMutableArray new];
@@ -48,7 +50,7 @@ static PostManager *sharedInstance = nil;
 
 - (void)getMyPostsWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error)) completion {
     
-    [self conectWithParameters:nil atPath:URL_MY_POSTS(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    [self connectWithParameters:nil atPath:URL_MY_POSTS(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
             NSArray *posts = (NSArray *)[response objectForKey:@"data"];
             
@@ -60,6 +62,19 @@ static PostManager *sharedInstance = nil;
             completion(YES, posts, nil,nil);
         } else {
             completion(NO, nil, message, error);
+        }
+    }];
+}
+
+- (void)createPostWithInfo:(NSDictionary *)postInfo andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion {
+    
+    NSString *userId = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+    
+    [self connectWithParameters:postInfo atPath:URL_CREATE_POST(userId) requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+        if(isSuccess) {
+            completion(YES, nil, nil);
+        } else {
+            completion(NO, message, error);
         }
     }];
 }

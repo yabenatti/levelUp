@@ -13,7 +13,20 @@
 - (Post *)parseToPost:(NSDictionary *)postToParse {
     
     self.postId = [[postToParse objectForKey:@"id"] intValue];
-    self.postDescription = [postToParse objectForKey:@"description"];
+    self.userId = [[postToParse objectForKey:@"user_id"] intValue];
+    
+    if(![[postToParse objectForKey:@"description"] isKindOfClass:[NSNull class]]) {
+        self.postDescription = [postToParse objectForKey:@"description"];
+    }
+    if(![[postToParse objectForKey:@"created_at"] isKindOfClass:[NSNull class]]) {
+        self.postDate = [postToParse objectForKey:@"created_at"];
+    }
+    if(![[postToParse objectForKey:@"likes"] isKindOfClass:[NSNull class]]) {
+        self.likesCount = [[postToParse objectForKey:@"likes"] intValue];
+    }
+    if(![[postToParse objectForKey:@"image"] isKindOfClass:[NSNull class]]) {
+        self.postImage = [postToParse objectForKey:@"image"];
+    }
     
     return self;
 }

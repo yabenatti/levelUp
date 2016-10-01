@@ -34,7 +34,7 @@ static ProfileManager *sharedInstance = nil;
  */
 - (void)retrieveProfileWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, User * user, NSString *message, NSError *error)) completion {
     
-    [self conectWithParameters:nil atPath:URL_PROFILE(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    [self connectWithParameters:nil atPath:URL_PROFILE(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
             NSDictionary *responseDictionary = (NSDictionary *)response;
             

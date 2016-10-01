@@ -16,7 +16,7 @@
 
 +(NetworkManager*) sharedInstance;
 
-- (void)conectWithParameters:(NSDictionary*)parameters atPath:(NSString*)path requestType:(NSString*)type withCompletion:(void (^) (id response, BOOL isSuccess, NSString *message, NSError *error))completion;
+- (void)connectWithParameters:(NSDictionary*)parameters atPath:(NSString*)path requestType:(NSString*)type withCompletion:(void (^) (id response, BOOL isSuccess, NSString *message, NSError *error))completion;
 
 -(void)uploadFileToAPI:(NSDictionary*)parameters atPath:(NSString*)path requestType:(NSString*)type imageData:(NSData*)image withCompletion:(void (^) (id response, BOOL isSuccess, NSString *message, NSError *error))completion;
 

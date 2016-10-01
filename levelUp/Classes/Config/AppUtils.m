@@ -26,6 +26,7 @@
 
 +(void) clearUserDefault {
     [AppUtils saveToUserDefault:nil withKey:USER_ID];
+    [AppUtils saveToUserDefault:nil withKey:USER_NAME];
     [AppUtils saveToUserDefault:nil withKey:USER_TOKEN];
 }
 
@@ -45,6 +46,17 @@
         NSLog(@"%@", error);
     }];
 
+}
+
++(UIAlertController*)setupAlertWithMessage:(NSString*)message {
+    UIAlertController *myAlertController = [UIAlertController alertControllerWithTitle:@"Attention" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [myAlertController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [myAlertController addAction: ok];
+    
+    return myAlertController;
 }
 
 

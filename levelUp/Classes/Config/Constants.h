@@ -9,6 +9,7 @@
 //user default
 
 #define USER_ID @"user_id"
+#define USER_NAME @"user_name"
 #define USER_TOKEN @"authentication_token"
 
 //Cores da tag do perfil
