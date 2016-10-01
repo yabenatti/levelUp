@@ -10,16 +10,9 @@
 
 @interface SignUpViewController : UIViewController <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *userPictureButton;
 @property (weak, nonatomic) IBOutlet UITextField *userEmailTextField;
-@property (weak, nonatomic) IBOutlet UIView *emailCornerView;
-@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 @property (weak, nonatomic) IBOutlet UITextField *userPasswordTextField;
-@property (weak, nonatomic) IBOutlet UIView *passwordCornerView;
-@property (weak, nonatomic) IBOutlet UILabel *passwordLabel;
 @property (weak, nonatomic) IBOutlet UITextField *userConfirmPasswordTextField;
-@property (weak, nonatomic) IBOutlet UIView *confirmCornerView;
-@property (weak, nonatomic) IBOutlet UILabel *confirmLabel;
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 
 - (IBAction)signUpButtonTouched:(id)sender;

@@ -32,6 +32,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Navigation Bar
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.hidden = NO;
+    
+    //Title View
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:16];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    label.text = NSLocalizedString(@"Level Up Your Pet", @"");
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+    
     // Do any additional setup after loading the view.
     self.enteredRegion = NO;
     
@@ -80,7 +95,7 @@
     [[PostManager sharedInstance]getAllPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
         if(isSuccess) {
             self.posts = posts;
-            [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
+//            [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
 
             [self.postsTableView reloadData];
             

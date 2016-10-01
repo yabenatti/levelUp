@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Constants.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Override point for customization after application launch.
+    [[UINavigationBar appearance] setBarTintColor:COLOR_WHITE_SMOKE];
+    [[UINavigationBar appearance] setTintColor:COLOR_LIGHT_BLUE];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
+    
+    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setBackgroundColor:COLOR_WHITE_SMOKE];
     
     return YES;
 }

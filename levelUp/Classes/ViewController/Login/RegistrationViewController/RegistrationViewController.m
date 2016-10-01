@@ -9,6 +9,7 @@
 #import "RegistrationViewController.h"
 #import "TimelineViewController.h"
 #import "SignupManager.h"
+#import "Constants.h"
 
 @interface RegistrationViewController ()
 
@@ -19,6 +20,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //Navigation Bar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.hidesBackButton = YES;
+    
+    //Title View
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:16];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = COLOR_LIGHT_BLUE;
+    label.text = NSLocalizedString(@"Registration", @"");
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +56,53 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark - Image
+
+- (void)chooseImageAlert {
+    
+    UIAlertController *actionSheet = [UIAlertController new];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+        
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker animated:YES completion:nil];
+        
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Choose Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+        
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self.navigationController presentViewController:actionSheet animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePicker delegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = [UIImage new];
+    
+    image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
+    [self.userPictureButton setImage:image forState:UIControlStateNormal];
+    [self.userPictureButton.layer setCornerRadius:self.userPictureButton.frame.size.width/2];
+    [self.userPictureButton.layer setMasksToBounds:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+#pragma mark - IBActions
 
 - (IBAction)registerButtonTouched:(id)sender {
     
@@ -53,5 +121,9 @@
             NSLog(@"nope.");
         }
     }];
+}
+
+- (IBAction)pictureButtonTouched:(id)sender {
+    [self chooseImageAlert];
 }
 @end

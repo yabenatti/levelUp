@@ -41,5 +41,9 @@
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Allow me to use your beacons! </string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow me to use your camera!</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow me to see your pictures!</string>
 </dict>
 </plist>

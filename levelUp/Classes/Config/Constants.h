@@ -13,5 +13,6 @@
 #define USER_TOKEN @"authentication_token"
 
 //Cores da tag do perfil
-#define BEAUTY_PRO_COLOR [UIColor colorWithRed:234.0/255.0f green:53.0/255.0f blue:86.0/255.0f alpha:1]
+#define COLOR_WHITE_SMOKE [UIColor colorWithRed:246.0/255.0f green:248.0/255.0f blue:249.0/255.0f alpha:1]
+#define COLOR_LIGHT_BLUE  [UIColor colorWithRed:118.0/255.0f green:178.0/255.0f blue:239.0/255.0f alpha:1]
 

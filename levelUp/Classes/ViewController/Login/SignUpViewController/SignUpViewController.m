@@ -9,6 +9,7 @@
 #import "SignUpViewController.h"
 #import "RegistrationViewController.h"
 #import "SignUpManager.h"
+#import "Constants.h"
 
 @interface SignUpViewController ()
 
@@ -22,25 +23,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationItem setHidesBackButton:YES];
+    //Navigation Bar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    
+    //Title View
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:16];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = COLOR_LIGHT_BLUE;
+    label.text = NSLocalizedString(@"SignUp", @"");
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+    
     // Do any additional setup after loading the view.
     [self.signUpButton.layer setCornerRadius:4.0f];
-    [self.userPictureButton.layer setCornerRadius:self.userPictureButton.frame.size.width/2];
-    
-    [self.emailCornerView.layer setCornerRadius:4.0f];
-    [self.emailCornerView.layer setBorderWidth:1.0];
-    [self.emailCornerView.layer setBorderColor:[COLOR_GRAY_LIGHT CGColor]];
-    self.emailLabel.textColor = [UIColor colorWithCGColor:[COLOR_GRAY_LIGHT CGColor]];
-    
-    [self.passwordCornerView.layer setCornerRadius:4.0f];
-    [self.passwordCornerView.layer setBorderWidth:1.0];
-    [self.passwordCornerView.layer setBorderColor:[COLOR_GRAY_LIGHT CGColor]];
-    self.passwordLabel.textColor = [UIColor colorWithCGColor:[COLOR_GRAY_LIGHT CGColor]];
-
-    [self.confirmCornerView.layer setCornerRadius:4.0f];
-    [self.confirmCornerView.layer setBorderWidth:1.0];
-    [self.confirmCornerView.layer setBorderColor:[COLOR_GRAY_LIGHT CGColor]];
-    self.confirmLabel.textColor = [UIColor colorWithCGColor:[COLOR_GRAY_LIGHT CGColor]];
     
     self.userEmailTextField.text = @"user4@example.com";
     self.userPasswordTextField.text = @"123456";
@@ -53,39 +52,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - TextField Delegate
 
--(void)textFieldDidBeginEditing:(UITextField *)textField {
-    if([textField isEqual:self.userEmailTextField]) {
-        [self changeColorWithView:self.emailCornerView andColor:[COLOR_BLUE_LIGHT CGColor] andLabel:self.emailLabel andLabelColor:[COLOR_BLUE_LIGHT CGColor]];
-    } else if([textField isEqual:self.userPasswordTextField]) {
-        [self changeColorWithView:self.passwordCornerView andColor:[COLOR_BLUE_LIGHT CGColor] andLabel:self.passwordLabel andLabelColor:[COLOR_BLUE_LIGHT CGColor]];
-    } else if([textField isEqual:self.userConfirmPasswordTextField]) {
-        [self changeColorWithView:self.confirmCornerView andColor:[COLOR_BLUE_LIGHT CGColor] andLabel:self.confirmLabel andLabelColor:[COLOR_BLUE_LIGHT CGColor]];
-    }
-}
-
--(void)textFieldDidEndEditing:(UITextField *)textField {
-    if([textField isEqual:self.userEmailTextField]) {
-        if([textField.text isEqualToString:@""]) {
-            [self changeColorWithView:self.emailCornerView andColor:[COLOR_GRAY_LIGHT CGColor] andLabel:self.emailLabel andLabelColor:[COLOR_GRAY_LIGHT CGColor]];
-        } else {
-            [self changeColorWithView:self.emailCornerView andColor:[COLOR_GRAY_LIGHT CGColor] andLabel:self.emailLabel andLabelColor:[COLOR_BLUE_LIGHT CGColor]];
-        }
-    } else if([textField isEqual:self.userPasswordTextField]) {
-        if([textField.text isEqualToString:@""]) {
-            [self changeColorWithView:self.passwordCornerView andColor:[COLOR_GRAY_LIGHT CGColor] andLabel:self.passwordLabel andLabelColor:[COLOR_GRAY_LIGHT CGColor]];
-        } else {
-            [self changeColorWithView:self.emailCornerView andColor:[COLOR_GRAY_LIGHT CGColor] andLabel:self.emailLabel andLabelColor:[COLOR_BLUE_LIGHT CGColor]];
-        }
-    } else if([textField isEqual:self.userConfirmPasswordTextField]) {
-        if([textField.text isEqualToString:@""]) {
-            [self changeColorWithView:self.confirmCornerView andColor:[COLOR_GRAY_LIGHT CGColor] andLabel:self.confirmLabel andLabelColor:[COLOR_GRAY_LIGHT CGColor]];
-        } else {
-            [self changeColorWithView:self.emailCornerView andColor:[COLOR_GRAY_LIGHT CGColor] andLabel:self.emailLabel andLabelColor:[COLOR_BLUE_LIGHT CGColor]];
-        }
-    }
-}
 
 #pragma mark - Helpers
 
