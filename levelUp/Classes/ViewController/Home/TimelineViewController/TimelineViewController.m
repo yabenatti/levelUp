@@ -78,6 +78,10 @@
         
     } else {
         [self getAllPosts];
+        NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 15.0
+                                                      target: self
+                                                    selector:@selector(onTick:)
+                                                    userInfo: nil repeats:YES];
     }
 }
 
@@ -91,11 +95,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)onTick:(id)sender {
+    if(self.enteredRegion) {
+        self.enteredRegion = NO;
+    }
+}
+
 - (void)getAllPosts {
     [[PostManager sharedInstance]getAllPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
         if(isSuccess) {
             self.posts = posts;
-//            [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
+            [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
 
             [self.postsTableView reloadData];
             
@@ -139,7 +149,6 @@
                 [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
                     if (isSuccess) {
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:@"FOOD! YUM!"] animated:YES completion:nil];
-                        self.enteredRegion = NO;
                         [self getAllPosts];
                     } else {
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
@@ -158,7 +167,6 @@
                 [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
                     if (isSuccess) {
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:@"NIGHT TIME!"] animated:YES completion:nil];
-                        self.enteredRegion = NO;
                         [self getAllPosts];
                     } else {
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
@@ -177,7 +185,6 @@
                 [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
                     if (isSuccess) {
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:@"AT THE DOOR!"] animated:YES completion:nil];
-                        self.enteredRegion = NO;
                         [self getAllPosts];
                     } else {
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
