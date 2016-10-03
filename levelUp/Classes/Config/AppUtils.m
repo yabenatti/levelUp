@@ -34,20 +34,6 @@
     
 }
 
-+ (void)setUpImageWithUrl:(NSString *)imageUrl andImageView:(UIImageView *)imageView {
-    
-    NSURL *url = [NSURL URLWithString: imageUrl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        imageView.image = image;
-        
-    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
-
-}
-
 +(UIAlertController*)setupAlertWithMessage:(NSString*)message {
     UIAlertController *myAlertController = [UIAlertController alertControllerWithTitle:@"Attention" message:message preferredStyle:UIAlertControllerStyleAlert];
     

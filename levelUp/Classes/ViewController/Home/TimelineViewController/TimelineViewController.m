@@ -15,8 +15,7 @@
 #import "AppUtils.h"
 #import "Constants.h"
 #import <EstimoteSDK/EstimoteSDK.h>
-
-
+#import "UIImageView+AFNetworking.h"
 
 @interface TimelineViewController () <ESTBeaconManagerDelegate>
 
@@ -34,15 +33,16 @@
     [super viewDidLoad];
     
     //Navigation Bar
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
     
     //Title View
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:16];
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor whiteColor];
+    label.textColor = COLOR_LIGHT_BLUE;
     label.text = NSLocalizedString(@"Level Up Your Pet", @"");
     [label sizeToFit];
     self.navigationItem.titleView = label;
@@ -70,6 +70,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    self.enteredRegion = NO;
+
     NSString *token = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN]];
     if([token isEqualToString:@"(null)"]) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
@@ -78,7 +80,7 @@
         
     } else {
         [self getAllPosts];
-        NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 15.0
+        NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 30.0
                                                       target: self
                                                     selector:@selector(onTick:)
                                                     userInfo: nil repeats:YES];
@@ -144,7 +146,7 @@
                 self.enteredRegion = YES;
                 
                 postInfo = @{@"post" : @{@"description" : @"I'm the food beacon YUM",
-                                                       @"image" : @""}};
+                                                       @"image" : @"http://data3.whicdn.com/images/148217235/large.jpg"}};
                 
                 [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
                     if (isSuccess) {
@@ -161,7 +163,7 @@
                 self.enteredRegion = YES;
                 
                 postInfo = @{@"post" : @{@"description" : @"Sleepests Warriors, to the pillow zone!",
-                                         @"image" : @""}};
+                                         @"image" : @"http://25dip.com/wp-content/uploads/2012/11/cat-sleeping-with-animal.jpg"}};
                 
                 
                 [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
@@ -179,7 +181,7 @@
                 self.enteredRegion = YES;
                 
                 postInfo = @{@"post" : @{@"description" : @"LET ME OUT!",
-                                         @"image" : @""}};
+                                         @"image" : @"http://petslady.com/sites/default/files/inline-images/kitty-pass_.jpg"}};
                 
                 
                 [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
@@ -225,12 +227,44 @@
     [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
     [cell.userImageView.layer setMasksToBounds:YES];
     
+    __weak UIImageView *weakImageView2 = cell.userImageView;
+    
+    NSURL *url = [NSURL URLWithString: @"https://www.facebook.com/photo.php?fbid=869040959839803&set=a.564828320261070.1073741828.100002017222504&type=3&theater"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [weakImageView2 setContentMode:UIViewContentModeScaleAspectFill];
+        weakImageView2.image = image;
+        weakImageView2.layer.masksToBounds = YES;
+        
+    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+
+    
     cell.usernameLabel.text = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_NAME]];
     cell.postCaptionLabel.text = post.postDescription;
     
     if([post.postImage isEqualToString:@""]) {
         cell.imageHeightConstraint.constant = 0;
     } else {
+        
+
+        __weak UIImageView *weakImageView = cell.postImageView;
+        
+        NSURL *url = [NSURL URLWithString: post.postImage];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        
+        [weakImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_pets"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [weakImageView setContentMode:UIViewContentModeScaleAspectFill];
+            weakImageView.image = image;
+            weakImageView.layer.masksToBounds = YES;
+            
+        }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
+        
+
         cell.imageHeightConstraint.constant = 256.0f;
     }
 
@@ -244,11 +278,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == 0) {
-        return 450;
-    } else {
-        return 250;
-    }
+    return 450;
 }
 
 
