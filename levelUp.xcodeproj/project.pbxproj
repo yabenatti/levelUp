@@ -233,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				19534DE91D49957D00309D28 /* levelUp */,
+				19EE37131D529949009BA896 /* PostTableViewCell */,
 				19534E031D49957D00309D28 /* levelUpTests */,
 				19534DE81D49957D00309D28 /* Products */,
 				0274A4B20300072F7F0C007F /* Pods */,
@@ -414,7 +415,6 @@
 		19EE37041D52950A009BA896 /* TimelineViewController */ = {
 			isa = PBXGroup;
 			children = (
-				19EE37131D529949009BA896 /* PostTableViewCell */,
 				19EE370C1D529560009BA896 /* TimelineTableViewCell */,
 				19EE37081D529529009BA896 /* TimelineViewController.h */,
 				19EE37091D529529009BA896 /* TimelineViewController.m */,
@@ -437,7 +437,8 @@
 				19EE37141D52995E009BA896 /* PostTableViewCell.h */,
 				19EE37151D52995E009BA896 /* PostTableViewCell.m */,
 			);
-			path = PostTableViewCell;
+			name = PostTableViewCell;
+			path = levelUp/Classes/ViewController/Home/TimelineViewController/PostTableViewCell;
 			sourceTree = "<group>";
 		};
 		19EE37171D529AFD009BA896 /* Profile */ = {
@@ -547,11 +548,12 @@
 				TargetAttributes = {
 					19534DE61D49957D00309D28 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = A729CUJG9B;
+						DevelopmentTeam = 838PHD3FZ3;
 						ProvisioningStyle = Automatic;
 					};
 					19534DFF1D49957D00309D28 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 838PHD3FZ3;
 						TestTargetID = 19534DE61D49957D00309D28;
 					};
 				};
@@ -802,7 +804,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A729CUJG9B;
+				DEVELOPMENT_TEAM = 838PHD3FZ3;
 				INFOPLIST_FILE = levelUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -816,7 +818,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A729CUJG9B;
+				DEVELOPMENT_TEAM = 838PHD3FZ3;
 				INFOPLIST_FILE = levelUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -828,6 +830,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 838PHD3FZ3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -847,6 +850,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 838PHD3FZ3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

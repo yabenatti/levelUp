@@ -13,8 +13,9 @@
 - (Post *)parseToPost:(NSDictionary *)postToParse {
     
     self.postId = [[postToParse objectForKey:@"id"] intValue];
-    self.userId = [[postToParse objectForKey:@"user_id"] intValue];
-    
+    if(![[postToParse objectForKey:@"user_id"] isKindOfClass:[NSNull class]]) {
+        self.userId = [[postToParse objectForKey:@"user_id"] intValue];
+    }
     if(![[postToParse objectForKey:@"description"] isKindOfClass:[NSNull class]]) {
         self.postDescription = [postToParse objectForKey:@"description"];
     }

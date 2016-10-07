@@ -24,6 +24,7 @@
 @property (nonatomic) CLBeaconRegion *beaconRegion;
 @property (nonatomic) NSDictionary *placesByBeacons;
 @property (nonatomic) BOOL enteredRegion;
+@property (strong, nonatomic) NSTimer *timerBeacons;
 
 @end
 
@@ -80,7 +81,7 @@
         
     } else {
         [self getAllPosts];
-        NSTimer *t = [NSTimer scheduledTimerWithTimeInterval: 30.0
+        self.timerBeacons = [NSTimer scheduledTimerWithTimeInterval: 30.0
                                                       target: self
                                                     selector:@selector(onTick:)
                                                     userInfo: nil repeats:YES];
@@ -89,6 +90,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    self.enteredRegion = YES;
     [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
 }
 
@@ -106,16 +108,14 @@
 - (void)getAllPosts {
     [[PostManager sharedInstance]getAllPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
         if(isSuccess) {
-            self.posts = posts;
             [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
 
-            [self.postsTableView reloadData];
-            
-            if([posts count] == 0) {
-                [self.emptyView setHidden:NO];
-            } else {
+            if([posts count] > 0) {
+                self.posts = posts;
                 [self.emptyView setHidden:YES];
                 [self.postsTableView reloadData];
+            } else {
+                [self.emptyView setHidden:NO];
             }
             
         } else {

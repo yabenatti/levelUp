@@ -7,6 +7,8 @@
 //
 
 #import "NewPostViewController.h"
+#import "AppUtils.h"
+#import "PostManager.h"
 
 @interface NewPostViewController ()
 
@@ -27,7 +29,18 @@
 }
 
 - (void)postTouched:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+
+    NSDictionary *postInfo = @{@"post" : @{@"description" : self.imageTextView.text,
+                             @"image" : @"https://scontent.cdninstagram.com/t51.2885-15/s320x320/e15/10948669_907575822627196_116719082_n.jpg?ig_cache_key=OTQwMTgyMTQ3OTcyNzM2ODY5.2"}};
+    
+    [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        if (isSuccess) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+        }
+    }];
+
 }
 
 - (void)cancelTouched:(id)sender {
@@ -50,5 +63,51 @@
 */
 
 - (IBAction)imageButtonTouched:(id)sender {
+    [self chooseImageAlert];
 }
+
+#pragma mark - Image
+
+- (void)chooseImageAlert {
+    
+    UIAlertController *actionSheet = [UIAlertController new];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+        
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker animated:YES completion:nil];
+        
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Choose Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+        
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self.navigationController presentViewController:actionSheet animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePicker delegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = [UIImage new];
+    
+    image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
+    [self.imageButton setImage:image forState:UIControlStateNormal];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
 @end

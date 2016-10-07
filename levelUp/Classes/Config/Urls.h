@@ -7,7 +7,7 @@
 //
 
 
-#define BASE_URL @"http://192.168.0.140:3000"
+#define BASE_URL @"http://186.219.93.124:3000"
 #define API @"/api"
 
 #define URL_LOGIN                           BASE_URL API @"/sessions"

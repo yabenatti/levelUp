@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewPostViewController : UIViewController
+@interface NewPostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (weak, nonatomic) IBOutlet UITextView *imageTextView;
