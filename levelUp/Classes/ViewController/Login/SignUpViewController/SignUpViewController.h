@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *userPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *userConfirmPasswordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
+@property (weak, nonatomic) IBOutlet UITextField *petNameTextField;
 
 - (IBAction)signUpButtonTouched:(id)sender;
 - (IBAction)emailViewTapped:(id)sender;

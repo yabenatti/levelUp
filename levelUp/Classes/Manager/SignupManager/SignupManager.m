@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "AppUtils.h"
 #import "Urls.h"
+#import "Beacon.h"
 
 @implementation SignupManager
 
@@ -44,7 +45,8 @@ static SignupManager *sharedInstance = nil;
             
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"authentication_token"]] withKey:USER_TOKEN];
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"id"]] withKey:USER_ID];
-            
+            [AppUtils saveToUserDefault: @"NO" withKey:DID_REGISTER];
+
             completion(YES, user, nil, nil);
             
         } else {
@@ -54,25 +56,31 @@ static SignupManager *sharedInstance = nil;
 }
 
 /*!
- * @discussion Registra beacon e pet
+ * @discussion Registra beacon
  * @param parameters dicionario com informações de registration.
  * @param completion bloco que executa ações com a resposta do server
  * @return void
  */
-- (void)registrationWithParameters:(NSDictionary*)parameters andCompletion:(void (^)(BOOL isSuccess, User *user, NSString* message,NSError* theError)) completion {
+- (void)registerBeaconWithParameters:(NSDictionary*)parameters andCompletion:(void (^)(BOOL isSuccess, NSString* message,NSError* theError)) completion {
     
+    NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
     
-    [self connectWithParameters:parameters atPath:URL_SIGNUP requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    [self connectWithParameters:parameters atPath:URL_REGISTER_BEACON(uid) requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if (isSuccess) {
             NSDictionary *responseDictionary = (NSDictionary*)response;
             
-#warning EDITAR PARSE
-            User *user = [[User new] parseToUser:[responseDictionary objectForKey:@"data"]];
+            Beacon *beacon = [[Beacon new] parseToBeacon:[responseDictionary objectForKey:@"data"]];
+            [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.beaconId] withKey:BEACON_ID];
+            [AppUtils saveToUserDefault:beacon.beaconUniqueId withKey:BEACON_UNIQUE_ID];
+            [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.major] withKey:BEACON_MAJOR];
+            [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.minor] withKey:BEACON_MINOR];
+            [AppUtils saveToUserDefault: @"YES" withKey:DID_REGISTER];
+
             
-            completion(YES, user, nil, nil);
+            completion(YES, nil, nil);
             
         } else {
-            completion(NO, nil, message, error);
+            completion(NO, message, error);
         }
     }];
 }

@@ -10,8 +10,13 @@
 
 @implementation Beacon
 
-- (void)parseToBeacon:(NSDictionary *)beaconToParse {
+- (Beacon *)parseToBeacon:(NSDictionary *)beaconToParse {
+    self.beaconId = [[beaconToParse objectForKey:@"id"] intValue];
+    self.minor = [[beaconToParse objectForKey:@"minor"] intValue];
+    self.major = [[beaconToParse objectForKey:@"major"] intValue];
+    self.beaconUniqueId = [beaconToParse objectForKey:@"unique_id"];
     
+    return self;
 }
 
 @end

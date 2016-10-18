@@ -39,7 +39,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    self.beaconIdTextField.text = @"B9407F30-F5F8-466E-AFF9-25556B57FE6D";
+    self.beaconMajorTextField.text = @"47798";
+    self.beaconMinorTextField.text = @"37813";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +58,15 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - TextField
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 #pragma mark - Image
 
 - (void)chooseImageAlert {
@@ -106,21 +117,23 @@
 
 - (IBAction)registerButtonTouched:(id)sender {
     
-    NSDictionary *parameters = @{@"user" : @{@"email" : [self.parameters objectForKey:@"email"],
-                                             @"password" : [self.parameters objectForKey:@"password"],
-                                             @"pet_name" : self.petNameTextField.text
+    NSDictionary *parameters = @{@"beacon" : @{@"unique_id" : self.beaconIdTextField.text,
+                                               @"major" : self.beaconMajorTextField.text,
+                                               @"minor" : self.beaconMinorTextField.text
                                              }
                                  };
     
-    [[SignupManager sharedInstance]signUpWithParameters:parameters andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *theError) {
-        if(isSuccess) {
-            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
-            TimelineViewController *vc = [sb instantiateViewControllerWithIdentifier:@"timeline"];
-            [self.navigationController pushViewController:vc animated:YES];
+    [[SignupManager sharedInstance]registerBeaconWithParameters:parameters andCompletion:^(BOOL isSuccess, NSString *message, NSError *theError) {
+        if (isSuccess) {
+            for (UIViewController *vc in [self.navigationController viewControllers]) {
+                NSLog(@"%@", vc);
+            }
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         } else {
-            NSLog(@"nope.");
+            
         }
     }];
+    
 }
 
 - (IBAction)pictureButtonTouched:(id)sender {

@@ -61,6 +61,13 @@
     label.textColor = [UIColor colorWithCGColor:labelColor];
 }
 
+#pragma mark - TextField 
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    return YES;
+}
 
 #pragma mark - Navigation
 
@@ -78,10 +85,19 @@
 
 
 - (IBAction)signUpButtonTouched:(id)sender {
-    NSDictionary *parameters = @{@"email" : self.userEmailTextField.text,
-                                 @"password" : self.userPasswordTextField.text};
-    
-    [self performSegueWithIdentifier:@"registrationSegue" sender:parameters];
+    NSDictionary *parameters = @{@"user" : @{@"email" : self.userEmailTextField.text,
+                                             @"password" : self.userPasswordTextField.text,
+                                             @"pet_name" : self.petNameTextField.text
+                                            }
+                                };
+    [[SignupManager sharedInstance]signUpWithParameters:parameters andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *theError) {
+        if(isSuccess) {
+            [self performSegueWithIdentifier:@"registrationSegue" sender:nil];
+        } else {
+            NSLog(@"nope.");
+        }
+    }];
+
 }
 
 - (IBAction)emailViewTapped:(id)sender {
@@ -100,5 +116,6 @@
     [self.userEmailTextField resignFirstResponder];
     [self.userPasswordTextField resignFirstResponder];
     [self.userConfirmPasswordTextField resignFirstResponder];
+    [self.petNameTextField resignFirstResponder];
 }
 @end

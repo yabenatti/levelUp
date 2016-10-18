@@ -14,5 +14,6 @@
 +(SignupManager*)sharedInstance;
 
 - (void)signUpWithParameters:(NSDictionary*)parameters andCompletion:(void (^)(BOOL isSuccess, User *user, NSString* message,NSError* theError)) completion;
+- (void)registerBeaconWithParameters:(NSDictionary*)parameters andCompletion:(void (^)(BOOL isSuccess, NSString* message,NSError* theError)) completion;
 
 @end

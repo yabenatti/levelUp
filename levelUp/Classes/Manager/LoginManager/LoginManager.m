@@ -7,6 +7,7 @@
 //
 
 #import "LoginManager.h"
+#import "Beacon.h"
 #import "AppUtils.h"
 #import "Constants.h"
 #import "Urls.h"
@@ -34,25 +35,59 @@ static LoginManager *sharedInstance = nil;
  * @return void
  */
 - (void)authenticateWithLogin:(NSDictionary*)parameters andCompletion:(void (^)(BOOL isSuccess, User *user, NSString* message,NSError* theError)) completion {
-
-//    NSDictionary *login = @{@"username" : @"min.benatti@gmail.com", @"password" : @"12345"};
-//    NSString *url = @"https://api-sandbox.cravefood.services/account/session";
     
     [self connectWithParameters:parameters atPath:URL_LOGIN requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if (isSuccess) {
             NSDictionary *responseDictionary = (NSDictionary*)[response objectForKey:@"data"];
-            
+
             User *user = [[User new] parseToUser:responseDictionary];
             
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"authentication_token"]] withKey:USER_TOKEN];
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"id"]] withKey:USER_ID];
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"name"]] withKey:USER_NAME];
-
+            [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"pet_name"]] withKey:PET_NAME];
             
-            completion(YES, user, nil, nil);
+            [self getUserBeaconWithCompletion:^(BOOL isSuccess, NSString *message, NSError *theError) {
+                if (isSuccess) {
+                    completion(YES, user, nil, nil);
+                } else {
+                    completion(NO, nil, message, error);
+                }
+            }];
+            
             
         } else {
             completion(NO, nil, message, error);
+        }
+    }];
+}
+
+/*!
+ * @discussion Recupera o beacon do usuario
+ * @param parameters nil
+ * @param completion bloco que executa ações com a resposta do server
+ * @return void
+ */
+- (void)getUserBeaconWithCompletion:(void (^)(BOOL isSuccess, NSString* message,NSError* theError)) completion {
+    
+    NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+
+    
+    [self connectWithParameters:nil atPath:URL_MY_BEACON(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+        if (isSuccess) {
+            NSDictionary *responseDictionary = (NSDictionary*)response;
+
+            Beacon *beacon = [[Beacon new] parseToBeacon:[responseDictionary objectForKey:@"data"]];
+            [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.beaconId] withKey:BEACON_ID];
+            [AppUtils saveToUserDefault:beacon.beaconUniqueId withKey:BEACON_UNIQUE_ID];
+            [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.major] withKey:BEACON_MAJOR];
+            [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.minor] withKey:BEACON_MINOR];
+            
+            [AppUtils saveToUserDefault:@"YES" withKey:DID_REGISTER];
+            completion(YES, nil, nil);
+            
+        } else {
+            completion(NO, message, error);
         }
     }];
 }
@@ -65,7 +100,7 @@ static LoginManager *sharedInstance = nil;
  */
 - (void)logoutWithApi:(NSDictionary *)parameters andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion {
     
-    [self connectWithParameters:parameters atPath:URL_LOGIN requestType:@"DELETE" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    [self connectWithParameters:parameters atPath:URL_LOGOUT([parameters objectForKey:@"id"]) requestType:@"DELETE" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
             completion(YES, nil, nil);
         } else {

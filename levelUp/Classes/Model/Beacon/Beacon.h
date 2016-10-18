@@ -13,7 +13,9 @@
 @property (nonatomic) int beaconId;
 @property (nonatomic) int minor;
 @property (nonatomic) int major;
+@property (strong, nonatomic) NSString *beaconUniqueId;
+@property (strong, nonatomic) NSString *petImage;
 
-- (void)parseToBeacon:(NSDictionary *)beaconToParse;
+- (Beacon *)parseToBeacon:(NSDictionary *)beaconToParse;
 
 @end

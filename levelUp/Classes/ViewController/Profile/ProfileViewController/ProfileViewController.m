@@ -9,8 +9,10 @@
 #import "ProfileViewController.h"
 #import "TimeLineTableViewCell.h"
 #import "PostTableViewCell.h"
+#import "TabBarViewController.h"
 #import "ProfileManager.h"
 #import "PostManager.h"
+#import "LoginManager.h"
 #import "AppUtils.h"
 
 @interface ProfileViewController ()
@@ -28,6 +30,26 @@
     
     [self.profileImageView.layer setCornerRadius:self.profileImageView.frame.size.width/2];
     [self.profileImageView.layer setMasksToBounds:YES];
+    
+    //Navigation Bar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.hidesBackButton = YES;
+    
+    //Title View
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:16];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = COLOR_LIGHT_BLUE;
+    label.text = NSLocalizedString(@"Profile", @"");
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+    
+    //Logout Button
+    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log out" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonTouched:)];
+    self.navigationItem.leftBarButtonItem = logoutButton;
     
     //Inicializacoes
     self.myPosts = [NSArray new];
@@ -59,6 +81,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)logoutButtonTouched:(id)sender {
+    NSDictionary *parameters = @{@"id" : [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]]};
+    
+    [[LoginManager sharedInstance]logoutWithApi:parameters andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        if (isSuccess) {
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            TabBarViewController *vc = [sb instantiateInitialViewController];
+            [self.navigationController presentViewController:vc animated:NO completion:nil];
+        } else {
+            
+        }
+    }];
 }
 
 #pragma mark - TableView

@@ -8,6 +8,7 @@
 
 #import "TimelineViewController.h"
 #import "NewPostViewController.h"
+#import "RegistrationViewController.h"
 #import "TimeLineTableViewCell.h"
 #import "LoginViewController.h"
 #import "PostTableViewCell.h"
@@ -53,11 +54,6 @@
     
     self.beaconManager = [ESTBeaconManager new];
     self.beaconManager.delegate = self;
-    self.beaconRegion = [[CLBeaconRegion alloc]
-                         initWithProximityUUID:[[NSUUID alloc]
-                                                initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"]
-                         identifier:@"ranged region"];
-    [self.beaconManager requestAlwaysAuthorization];
     
     UIBarButtonItem *postItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"ic_pets"] style:UIBarButtonItemStyleDone target:self action:@selector(postTouched:)];
     
@@ -74,17 +70,29 @@
     self.enteredRegion = NO;
 
     NSString *token = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN]];
+    NSString *registration = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:DID_REGISTER]];
+
     if([token isEqualToString:@"(null)"]) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         LoginViewController *vc = [sb instantiateInitialViewController];
         [self.navigationController presentViewController:vc animated:YES completion:nil];
-        
+    } else if (![registration isEqualToString:@"YES"]) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+        RegistrationViewController *vc = [sb instantiateViewControllerWithIdentifier:@"registration"];
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
     } else {
-        [self getAllPosts];
+        self.beaconRegion = [[CLBeaconRegion alloc]
+                             initWithProximityUUID:[[NSUUID alloc]
+                                                    initWithUUIDString:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:BEACON_UNIQUE_ID ]]]
+                             identifier:@"ranged region"];
+        
         self.timerBeacons = [NSTimer scheduledTimerWithTimeInterval: 30.0
-                                                      target: self
-                                                    selector:@selector(onTick:)
-                                                    userInfo: nil repeats:YES];
+                                                             target: self
+                                                           selector:@selector(onTick:)
+                                                           userInfo: nil repeats:YES];
+
+        [self getAllPosts];
+       
     }
 }
 
@@ -109,6 +117,7 @@
     [[PostManager sharedInstance]getAllPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
         if(isSuccess) {
             [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
+            [self.beaconManager requestAlwaysAuthorization];
 
             if([posts count] > 0) {
                 self.posts = posts;
@@ -140,7 +149,18 @@
     NSDictionary *postInfo = [NSDictionary new];
     if (nearestBeacon) {
         if(!self.enteredRegion) {
-            if([nearestBeacon.major  isEqual: @47798] && [nearestBeacon.minor  isEqual: @37813]) {
+            NSString *major = [NSString stringWithFormat:@"%@",[AppUtils retrieveFromUserDefaultWithKey:BEACON_MAJOR]];
+            NSString *minor = [NSString stringWithFormat:@"%@",[AppUtils retrieveFromUserDefaultWithKey:BEACON_MINOR]];
+            
+            NSLog(@"Major: %@ Minor: %@", major, minor);
+
+            NSString *nearestMajor = [NSString stringWithFormat:@"%@",nearestBeacon.major];
+            NSString *nearestMinor = [NSString stringWithFormat:@"%@",nearestBeacon.minor];
+            
+            NSLog(@"Nearest Major: %@ Nearest Minor: %@", nearestMajor, nearestMinor);
+
+            
+            if([nearestMajor isEqualToString:major] && [nearestMinor isEqualToString:minor]) {
                 [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
                 
                 self.enteredRegion = YES;
@@ -156,45 +176,7 @@
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
                     }
                 }];
-                
-            } else if([nearestBeacon.major  isEqual: @58375] && [nearestBeacon.minor  isEqual: @30394]) {
-                [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
-                
-                self.enteredRegion = YES;
-                
-                postInfo = @{@"post" : @{@"description" : @"Sleepests Warriors, to the pillow zone!",
-                                         @"image" : @"http://25dip.com/wp-content/uploads/2012/11/cat-sleeping-with-animal.jpg"}};
-                
-                
-                [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
-                    if (isSuccess) {
-                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:@"NIGHT TIME!"] animated:YES completion:nil];
-                        [self getAllPosts];
-                    } else {
-                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
-                    }
-                }];
-
-            } else if([nearestBeacon.major  isEqual: @59492] && [nearestBeacon.minor  isEqual: @13064]) {
-                [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
-                
-                self.enteredRegion = YES;
-                
-                postInfo = @{@"post" : @{@"description" : @"LET ME OUT!",
-                                         @"image" : @"http://petslady.com/sites/default/files/inline-images/kitty-pass_.jpg"}};
-                
-                
-                [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
-                    if (isSuccess) {
-                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:@"AT THE DOOR!"] animated:YES completion:nil];
-                        [self getAllPosts];
-                    } else {
-                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
-                    }
-                }];
-
             }
-            
         }
         
     }
@@ -242,7 +224,7 @@
     }];
 
     
-    cell.usernameLabel.text = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_NAME]];
+    cell.usernameLabel.text = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]];
     cell.postCaptionLabel.text = post.postDescription;
     
     if([post.postImage isEqualToString:@""]) {

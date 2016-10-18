@@ -28,7 +28,7 @@
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.navigationBar.translucent = YES;
     
-    self.usernameTextField.text = @"ybenatti@gmail.com";
+    self.usernameTextField.text = @"user7@example.com";
     self.userPasswordTextField.text = @"123456";
     
     [self.loginButton.layer setCornerRadius:4.0f];
@@ -58,6 +58,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - TextField
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    return YES;
+}
 
 #pragma mark - IBActions
 
