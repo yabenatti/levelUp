@@ -10,6 +10,7 @@
 #import "TimeLineTableViewCell.h"
 #import "PostTableViewCell.h"
 #import "TabBarViewController.h"
+#import "UIImageView+AFNetworking.h"
 #import "ProfileManager.h"
 #import "PostManager.h"
 #import "LoginManager.h"
@@ -56,6 +57,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     
     [[ProfileManager sharedInstance]retrieveProfileWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *error) {
         if(isSuccess) {
@@ -108,34 +112,60 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == 0) {
-        TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timelineCell" forIndexPath:indexPath];
-        
-        if(cell == nil) {
-            cell = [[TimelineTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timelineCell"];
-        }
-        
-        [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
-        [cell.userImageView.layer setMasksToBounds:YES];
-        cell.usernameLabel.text = @"Yasmin Benatti";
-        
-        
-        
-        return cell;
-    } else {
-        PostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
-        
-        if(cell == nil) {
-            cell = [[PostTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"postCell"];
-        }
-        
-        [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
-        [cell.userImageView.layer setMasksToBounds:YES];
-        cell.usernameLabel.text = @"Yasmin Benatti";
-        cell.postLabel.text = @"This is a text post";
-        
-        return cell;
+    Post *post = [self.myPosts objectAtIndex:indexPath.row];
+    
+    TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timelineCell" forIndexPath:indexPath];
+    
+    if(cell == nil) {
+        cell = [[TimelineTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timelineCell"];
     }
+    
+    
+    [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
+    [cell.userImageView.layer setMasksToBounds:YES];
+    
+    __weak UIImageView *weakImageView2 = cell.userImageView;
+    
+    NSURL *url = [NSURL URLWithString: @"http://www.lovethispic.com/uploaded_images/59474-Cute-Kitty-Hat.jpg"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [weakImageView2 setContentMode:UIViewContentModeScaleAspectFill];
+        weakImageView2.image = image;
+        weakImageView2.layer.masksToBounds = YES;
+        
+    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+    
+    
+    cell.usernameLabel.text = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]];
+    cell.postCaptionLabel.text = post.postDescription;
+    
+    if([post.postImage isEqualToString:@""]) {
+        cell.imageHeightConstraint.constant = 0;
+    } else {
+        
+        
+        __weak UIImageView *weakImageView = cell.postImageView;
+        
+        NSURL *url = [NSURL URLWithString: post.postImage];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        
+        [weakImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_pets"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [weakImageView setContentMode:UIViewContentModeScaleAspectFill];
+            weakImageView.image = image;
+            weakImageView.layer.masksToBounds = YES;
+            
+        }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
+        
+        
+        cell.imageHeightConstraint.constant = 256.0f;
+    }
+    
+    return cell;
     
 }
 

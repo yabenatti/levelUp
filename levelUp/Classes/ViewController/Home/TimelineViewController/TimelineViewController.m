@@ -211,7 +211,7 @@
     
     __weak UIImageView *weakImageView2 = cell.userImageView;
     
-    NSURL *url = [NSURL URLWithString: @"https://www.facebook.com/photo.php?fbid=869040959839803&set=a.564828320261070.1073741828.100002017222504&type=3&theater"];
+    NSURL *url = [NSURL URLWithString: @"http://www.lovethispic.com/uploaded_images/59474-Cute-Kitty-Hat.jpg"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {

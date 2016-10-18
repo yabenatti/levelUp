@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditProfileViewController : UIViewController
+@interface EditProfileViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *editImageButton;
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *petNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *birthdateTextField;
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *ownerNameTextField;
+
+- (IBAction)hideKeyboard:(id)sender;
 
 @end
