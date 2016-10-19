@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (weak, nonatomic) IBOutlet UITextView *imageTextView;
+@property (weak, nonatomic) IBOutlet UIView *facebookShareView;
 
 - (IBAction)imageButtonTouched:(id)sender;
 

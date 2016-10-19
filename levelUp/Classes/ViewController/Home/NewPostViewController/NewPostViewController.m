@@ -9,6 +9,10 @@
 #import "NewPostViewController.h"
 #import "AppUtils.h"
 #import "PostManager.h"
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKShareKit/FBSDKShareDialog.h>
+#import <FBSDKShareKit/FBSDKShareLinkContent.h>
+#import <FBSDKShareKit/FBSDKShareAPI.h>
 
 @interface NewPostViewController ()
 
@@ -25,6 +29,12 @@
 
     self.navigationItem.rightBarButtonItem = postItem;
     self.navigationItem.leftBarButtonItem = cancelItem;
+    
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
+   
+//    [FBSDKShareAPI shareWithContent:content delegate:nil];
+
     
 }
 

@@ -3,4 +3,7 @@ target 'levelUp' do
 	platform :ios, '9.0'
   pod "AFNetworking", "~> 3.0"
   pod 'EstimoteSDK'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
 end

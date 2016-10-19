@@ -13,6 +13,8 @@
 
 @interface RegistrationViewController ()
 
+@property (strong, nonatomic) NSData *petImage;
+
 @end
 
 @implementation RegistrationViewController
@@ -105,6 +107,9 @@
     
     image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     
+    self.petImage = UIImageJPEGRepresentation(image, 0.5);
+
+    
     [self.userPictureButton setImage:image forState:UIControlStateNormal];
     [self.userPictureButton.layer setCornerRadius:self.userPictureButton.frame.size.width/2];
     [self.userPictureButton.layer setMasksToBounds:YES];
@@ -117,22 +122,21 @@
 
 - (IBAction)registerButtonTouched:(id)sender {
     
-    NSDictionary *parameters = @{@"beacon" : @{@"unique_id" : self.beaconIdTextField.text,
-                                               @"major" : self.beaconMajorTextField.text,
-                                               @"minor" : self.beaconMinorTextField.text
-                                             }
-                                 };
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]initWithDictionary:@{@"beacon[unique_id]" : self.beaconIdTextField.text,
+                                                                                      @"beacon[major]" : self.beaconMajorTextField.text,
+                                                                                      @"beacon[minor]" : self.beaconMinorTextField.text,
+                                                                                      @"beacon[pet_image]" : self.petImage,
+                                                                                       }];
     
-    [[SignupManager sharedInstance]registerBeaconWithParameters:parameters andCompletion:^(BOOL isSuccess, NSString *message, NSError *theError) {
-        if (isSuccess) {
-            for (UIViewController *vc in [self.navigationController viewControllers]) {
-                NSLog(@"%@", vc);
-            }
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            
-        }
-    }];
+  [[SignupManager sharedInstance]registerBeaconWithParameters:parameters imageData:self.petImage withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+      if(isSuccess) {
+          NSLog(@"UHUL");
+      } else {
+          NSLog(@"NOT YET");
+      }
+  }];
+    
+
     
 }
 

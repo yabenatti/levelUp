@@ -18,6 +18,7 @@
 #import <EstimoteSDK/EstimoteSDK.h>
 #import "UIImageView+AFNetworking.h"
 
+
 @interface TimelineViewController () <ESTBeaconManagerDelegate>
 
 @property (strong, nonatomic) NSArray *posts;
@@ -64,9 +65,10 @@
     
     //Inicializacoes
     self.posts = [NSArray new];
+
 }
 
--(void)viewWillAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {    
     self.enteredRegion = NO;
 
     NSString *token = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN]];

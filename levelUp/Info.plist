@@ -45,5 +45,27 @@
 	<string>Allow me to use your camera!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow me to see your pictures!</string>
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb981102878665140</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>981102878665140</string>
+    <key>FacebookDisplayName</key>
+    <string>level Up</string>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 </dict>
 </plist>

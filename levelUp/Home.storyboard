@@ -216,16 +216,25 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gsl-zU-Wgr">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="qGp-jY-W9i"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="OPq-7k-3Mw" secondAttribute="trailing" id="Jgz-GD-2xJ"/>
                             <constraint firstItem="OPq-7k-3Mw" firstAttribute="leading" secondItem="Lzj-Bi-PZd" secondAttribute="leading" id="Kw2-j3-5mM"/>
                             <constraint firstItem="OPq-7k-3Mw" firstAttribute="top" secondItem="8XK-hg-HXr" secondAttribute="bottom" id="RqZ-Oa-Auq"/>
+                            <constraint firstAttribute="trailing" secondItem="Gsl-zU-Wgr" secondAttribute="trailing" id="SkV-dk-WiZ"/>
                             <constraint firstItem="OPq-7k-3Mw" firstAttribute="leading" secondItem="8XK-hg-HXr" secondAttribute="leading" id="YPC-7Z-J1O"/>
+                            <constraint firstAttribute="bottom" secondItem="Gsl-zU-Wgr" secondAttribute="bottom" constant="50" id="YTM-aB-thV"/>
                             <constraint firstItem="8XK-hg-HXr" firstAttribute="top" secondItem="QLK-8k-Bqf" secondAttribute="bottom" constant="20" id="dCJ-xI-ape"/>
                             <constraint firstItem="OPq-7k-3Mw" firstAttribute="top" secondItem="8XK-hg-HXr" secondAttribute="bottom" constant="10" id="kJm-5U-7NE"/>
                             <constraint firstItem="8XK-hg-HXr" firstAttribute="centerX" secondItem="Lzj-Bi-PZd" secondAttribute="centerX" id="myy-lW-tkZ"/>
+                            <constraint firstItem="Gsl-zU-Wgr" firstAttribute="leading" secondItem="Lzj-Bi-PZd" secondAttribute="leading" id="zLD-ih-1H1"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -235,6 +244,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="facebookShareView" destination="Gsl-zU-Wgr" id="dIe-Rx-OjN"/>
                         <outlet property="imageButton" destination="8XK-hg-HXr" id="idy-df-GnT"/>
                         <outlet property="imageTextView" destination="OPq-7k-3Mw" id="3sC-ew-IsJ"/>
                     </connections>

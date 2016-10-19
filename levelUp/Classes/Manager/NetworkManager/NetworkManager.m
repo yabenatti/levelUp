@@ -88,31 +88,6 @@ static NetworkManager *sharedInstance = nil;
 }
 
 /*!
- * @discussion Método que configura uma requisição à API que possuem upload de arquivos.
- * @param parameters dicionário com os parametros da requisição
- * @param path URL da requisição
- * @param requestType tipo de requisição
- * @param videoURL URL com filepath do video
- * @param imageData imagem a ser submetida no formato NSData
- * @param completion bloco passado para ações com a resposta
- * @return void
- */
--(void)uploadFileToAPI:(NSDictionary*)parameters atPath:(NSString*)path requestType:(NSString*)type imageData:(NSData*)image withCompletion:(void (^) (id response, BOOL isSuccess, NSString *message, NSError *error))completion {
-    
-    [self checkReachabilityWithCompletion:^(BOOL isReachable, NSError *error) {
-        if(isReachable) {
-            
-            [self uploadImageWithParameters:parameters requestType:type atPath:path imageData:image withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
-                completion(response, isSuccess, message, error);
-            }];
-            
-        } else {
-            completion(nil, NO, @"Verifique a sua conexão com a internet", error);
-        }
-    }];
-}
-
-/*!
  * @discussion Metodo que configura um erro de timeout do servidor
  * @return NSError com todas as informações do erro de timeout
  */
@@ -234,6 +209,40 @@ static NetworkManager *sharedInstance = nil;
     }
 }
 
+-(void)uploadFileToAPI:(NSMutableDictionary*)parameters atPath:(NSString*)path requestType:(NSString*)type imageData:(NSData*)image withCompletion:(void (^) (id response, BOOL isSuccess, NSError *error))completion {
+    
+    [self checkReachabilityWithCompletion:^(BOOL isReachable, NSError *error) {
+        if(isReachable) {
+            
+ 
+                [self uploadImageWithParameters:parameters requestType:type atPath:path imageData:image withCompletion:^(id response, BOOL isSuccess, NSError *error) {
+                    NSDictionary *responseDictionary = [response isKindOfClass:[NSDictionary class]] ? response : nil;
+                    NSInteger status = [[responseDictionary objectForKey:@"status"]integerValue];
+                    
+                    if (responseDictionary && status == 0) {
+                        completion(response, isSuccess, error);
+                    }
+                    //não conseguiu se comunicar com o servidor
+                    else {
+                        if(error != nil) {
+                            if (error.code == NSURLErrorTimedOut) {
+                                completion(nil, NO, [self timeoutError]);
+                            } else {
+                                completion(nil, NO, error);
+                            }
+                        } else {
+                            NSError *newError = [NSError errorWithDomain:@"" code:0 userInfo:responseDictionary];
+                            completion(nil, NO, newError);
+                        }
+                    }
+                }];
+            
+        } else {
+            completion(nil, NO, error);
+        }
+    }];
+}
+
 
 /*!
  * @discussion Executa a chamada à API com upload de arquivos de imagem
@@ -244,42 +253,48 @@ static NetworkManager *sharedInstance = nil;
  * @param completion bloco passado para ações com a resposta
  * @return void
  */
-- (void)uploadImageWithParameters:(NSDictionary*)parameters requestType:(NSString*)type atPath:(NSString*)path imageData:(NSData*)image withCompletion:(void (^) (id response, BOOL isSuccess, NSString *message, NSError *error))completion {
+- (void)uploadImageWithParameters:(NSDictionary*)parameters requestType:(NSString*)type atPath:(NSString*)path imageData:(NSData*)image withCompletion:(void (^) (id response, BOOL isSuccess, NSError *error))completion {
     
-//    if([AppUtils retrieveFromUserDefaultWithKey:API_TOKEN])
-//        [manager.requestSerializer setValue:[NSString stringWithFormat:@"Token %@",[AppUtils retrieveFromUserDefaultWithKey:API_TOKEN]] forHTTPHeaderField:@"Authorization"];
-
-    if([type isEqualToString:@"PATCH"]) {
+    if([AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN])
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"Token %@",[AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN]] forHTTPHeaderField:@"Authorization"];
+    
+    if([type isEqualToString:@"MULTIPART-IMAGE"]) {
+        
+        [manager POST:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            [formData appendPartWithFileData:image name:@"post[image]" fileName:@"imagem.jpg" mimeType:@"image/JPEG"];
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //Update the progress view
+                [self.progressView setProgress:uploadProgress.fractionCompleted];
+            });
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            completion(responseObject, YES, nil);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            completion(nil, NO, error);
+        }];
+        
+    } else if([type isEqualToString:@"MULTIPART-SIGNUP"]) {
+        
+        [manager POST:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
+            [formData appendPartWithFileData:image name:@"beacon[pet_image]" fileName:@"imagem.jpg" mimeType:@"image/JPEG"];
+        } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            completion(responseObject, YES, nil);
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            completion(nil, NO, error);
+        }];
+        
+    } else if([type isEqualToString:@"PATCH"]) {
         
         NSMutableURLRequest *request = [manager.requestSerializer multipartFormRequestWithMethod:@"PATCH" URLString:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                [formData appendPartWithFileData:image name:@"registration[avatar]" fileName:@"profile.jpg" mimeType:@"image/jpeg"];
+            [formData appendPartWithFileData:image name:@"beacon[pet_image]" fileName:@"profile.jpg" mimeType:@"image/jpeg"];
         } error:nil];
         
         NSURLSessionUploadTask *task = [manager uploadTaskWithStreamedRequest:request progress:nil completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
             if (error) {
-                if([[error.userInfo objectForKey:JSONResponseSerializerWithDataKey]objectForKey:@"messages"]) {
-                    completion(nil, NO, [[error.userInfo objectForKey:JSONResponseSerializerWithDataKey]objectForKey:@"messages"], error);
-                }
-                //não conseguiu se comunicar com o servidor
-                else {
-                    if(error != nil) {
-                        if (error.code == NSURLErrorTimedOut) {
-                            completion(nil, NO, @"Tempo da requisição foi esgotado.", [self timeoutError]);
-                        } else {
-                            completion(nil, NO, @"Não foi possível se conectar ao servidor, por favor tente novamente" , error);
-                        }
-                    } else {
-                        completion(nil, NO, @"Houve uma falha ao se conectar com o servidor, por favor tente novamente", nil);
-                    }
-                }
-                
+                completion(nil, NO, error);
             } else {
-                if([[[responseObject objectForKey:@"status"] stringValue] isEqualToString:@"0"]) {
-                    completion(responseObject, YES, nil ,nil);
-                } else {
-                    NSString *key = [[[responseObject objectForKey:@"messages"] allKeys] firstObject];
-                    completion(responseObject, NO, [[[responseObject objectForKey:@"messages"]objectForKey:key] firstObject], nil);
-                }
+                completion(responseObject, YES, nil);
             }
         }];
         
