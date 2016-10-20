@@ -14,6 +14,6 @@
 +(PostManager*)sharedInstance;
 - (void)getAllPostsWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error)) completion;
 - (void)getMyPostsWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error)) completion;
-- (void)createPostWithInfo:(NSDictionary *)postInfo andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion;
+-(void)createPostWithParameters:(NSMutableDictionary*)parameters imageData:(NSData*)image withCompletion:(void (^)(BOOL isSuccess, NSString *message, NSError *error))completion;
 
 @end

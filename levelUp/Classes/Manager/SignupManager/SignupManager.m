@@ -56,36 +56,6 @@ static SignupManager *sharedInstance = nil;
     }];
 }
 
-/*!
- * @discussion Registra beacon
- * @param parameters dicionario com informações de registration.
- * @param completion bloco que executa ações com a resposta do server
- * @return void
- */
-//- (void)registerBeaconWithParameters:(NSDictionary*)parameters andCompletion:(void (^)(BOOL isSuccess, NSString* message,NSError* theError)) completion {
-//    
-//    NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
-//    
-//    [self connectWithParameters:parameters atPath:URL_REGISTER_BEACON(uid) requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
-//        if (isSuccess) {
-//            NSDictionary *responseDictionary = (NSDictionary*)response;
-//            
-//            Beacon *beacon = [[Beacon new] parseToBeacon:[responseDictionary objectForKey:@"data"]];
-//            [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.beaconId] withKey:BEACON_ID];
-//            [AppUtils saveToUserDefault:beacon.beaconUniqueId withKey:BEACON_UNIQUE_ID];
-//            [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.major] withKey:BEACON_MAJOR];
-//            [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.minor] withKey:BEACON_MINOR];
-//            [AppUtils saveToUserDefault: @"YES" withKey:DID_REGISTER];
-//
-//            
-//            completion(YES, nil, nil);
-//            
-//        } else {
-//            completion(NO, message, error);
-//        }
-//    }];
-//}
-
 -(void)registerBeaconWithParameters:(NSMutableDictionary*)parameters imageData:(NSData*)image withCompletion:(void (^)(BOOL isSuccess, NSString *message, NSError *error))completion {
     
     NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
@@ -105,7 +75,7 @@ static SignupManager *sharedInstance = nil;
                 [AppUtils saveToUserDefault:beacon.beaconUniqueId withKey:BEACON_UNIQUE_ID];
                 [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.major] withKey:BEACON_MAJOR];
                 [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.minor] withKey:BEACON_MINOR];
-                [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%@", petImage] withKey:PET_IMAGE];
+                [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%@%@", BASE_URL, petImage] withKey:PET_IMAGE];
                 [AppUtils saveToUserDefault: @"YES" withKey:DID_REGISTER];
                 
                 completion(YES, nil, nil);

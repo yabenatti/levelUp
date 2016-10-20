@@ -16,6 +16,8 @@
 
 @interface NewPostViewController ()
 
+@property (strong, nonatomic) NSData *petImageData;
+
 @end
 
 @implementation NewPostViewController
@@ -36,6 +38,11 @@
 //    [FBSDKShareAPI shareWithContent:content delegate:nil];
     
     [self.imageButton.layer setCornerRadius:25.0f];
+    [self.imageButton setBackgroundColor:COLOR_LIGHT_BLUE];
+    [self.twitterButton.layer setCornerRadius:25.0f];
+    [self.twitterButton setBackgroundColor:COLOR_LIGHT_BLUE];
+    [self.facebookButton.layer setCornerRadius:25.0f];
+    [self.facebookButton setBackgroundColor:COLOR_LIGHT_BLUE];
     [self.petImage.layer setCornerRadius:25.0f];
     [self.petImage.layer setBorderColor:[COLOR_LIGHT_BLUE CGColor]];
     [self.petImage.layer setBorderWidth:2.0f];
@@ -45,7 +52,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     
-    [AppUtils setupImageWithUrl:@"https://www.bhmpics.com/walls/cute_white_cat-other.jpg" andPlaceholder:@"ic_person" andImageView:self.petImage];
+    [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.petImage];
     [self.petNameLabel setText:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]]];
     self.captionTextView.text = @"Write your caption :)";
     [self.captionTextView setTextColor:[UIColor lightGrayColor]];
@@ -53,12 +60,13 @@
 
 - (void)postTouched:(id)sender {
 
-    NSDictionary *postInfo = @{@"post" : @{@"description" : self.captionTextView.text,
-                             @"image" : @"https://scontent.cdninstagram.com/t51.2885-15/s320x320/e15/10948669_907575822627196_116719082_n.jpg?ig_cache_key=OTQwMTgyMTQ3OTcyNzM2ODY5.2"}};
-    
-    [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
-        if (isSuccess) {
-            [self.navigationController popViewControllerAnimated:YES];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]initWithDictionary:@{@"post[description]" : self.captionTextView.text,
+                                                                                       @"post[image]" : self.petImageData
+                                                                                       }];
+
+    [[PostManager sharedInstance]createPostWithParameters:parameters imageData:self.petImageData withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        if(isSuccess) {
+            [self.tabBarController setSelectedIndex:0];
         } else {
             [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
         }
@@ -107,6 +115,12 @@
     [self chooseImageAlert];
 }
 
+- (IBAction)twitterButtonTouched:(id)sender {
+}
+
+- (IBAction)facebookButtonTouched:(id)sender {
+}
+
 #pragma mark - Image
 
 - (void)chooseImageAlert {
@@ -145,7 +159,10 @@
     
     image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     
+    self.petImageData = UIImageJPEGRepresentation(image, 0.5);
+    
     [self.imageButton setImage:image forState:UIControlStateNormal];
+    [self.imageButton.layer setCornerRadius:25.0f];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     

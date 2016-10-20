@@ -261,7 +261,7 @@ static NetworkManager *sharedInstance = nil;
     if([type isEqualToString:@"MULTIPART-IMAGE"]) {
         
         [manager POST:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-            [formData appendPartWithFileData:image name:@"beacon[pet_image]" fileName:@"imagem.jpg" mimeType:@"image/JPEG"];
+            [formData appendPartWithFileData:image name:@"post[image]" fileName:@"imagem.jpg" mimeType:@"image/JPEG"];
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 //Update the progress view

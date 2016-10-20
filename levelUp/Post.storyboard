@@ -50,38 +50,65 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdF-kg-o22">
-                                <color key="backgroundColor" red="0.96470588235294119" green="0.89938617231344842" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.89803921568627454" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="QzJ-xJ-DTI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxz-mC-ULu">
-                                <color key="backgroundColor" red="0.46274509800000002" green="0.69803921570000005" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxz-mC-ULu">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xxz-mC-ULu" secondAttribute="height" multiplier="1:1" id="RKs-w4-TfP"/>
                                     <constraint firstAttribute="width" constant="50" id="kqQ-LP-05B"/>
                                 </constraints>
-                                <state key="normal" image="ic_camera_alt_white"/>
+                                <state key="normal" image="ic_photo_camera"/>
                                 <connections>
                                     <action selector="imageButtonTouched:" destination="R5S-v0-xwa" eventType="touchUpInside" id="sy3-sL-dW1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHc-GA-Ypa">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="0mA-2M-QbT"/>
+                                    <constraint firstAttribute="width" secondItem="vHc-GA-Ypa" secondAttribute="height" multiplier="1:1" id="gJy-Bf-VKT"/>
+                                </constraints>
+                                <state key="normal" image="twitter"/>
+                                <connections>
+                                    <action selector="twitterButtonTouched:" destination="R5S-v0-xwa" eventType="touchUpInside" id="lfM-wT-djS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ne9-wR-Gmj">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="R7S-MZ-3HE"/>
+                                    <constraint firstAttribute="width" secondItem="Ne9-wR-Gmj" secondAttribute="height" multiplier="1:1" id="rfz-DA-A4x"/>
+                                </constraints>
+                                <state key="normal" image="fb"/>
+                                <connections>
+                                    <action selector="facebookButtonTouched:" destination="R5S-v0-xwa" eventType="touchUpInside" id="AMZ-uN-Gd3"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Ne9-wR-Gmj" firstAttribute="top" secondItem="xxz-mC-ULu" secondAttribute="top" id="88G-qU-LNr"/>
                             <constraint firstItem="VYv-aq-UqQ" firstAttribute="top" secondItem="3IM-Cl-9Ph" secondAttribute="top" constant="20" id="Aqp-gN-1AJ"/>
                             <constraint firstItem="VYv-aq-UqQ" firstAttribute="leading" secondItem="3IM-Cl-9Ph" secondAttribute="leading" constant="20" id="C15-kI-9qf"/>
                             <constraint firstAttribute="trailing" secondItem="jdF-kg-o22" secondAttribute="trailing" id="GjQ-BV-hj3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ne9-wR-Gmj" secondAttribute="trailing" constant="20" id="Irc-ZV-4yG"/>
                             <constraint firstItem="xxz-mC-ULu" firstAttribute="top" secondItem="jdF-kg-o22" secondAttribute="bottom" constant="30" id="JCA-wc-t8f"/>
                             <constraint firstItem="jdF-kg-o22" firstAttribute="leading" secondItem="3IM-Cl-9Ph" secondAttribute="leading" id="LF5-cZ-aeo"/>
+                            <constraint firstItem="vHc-GA-Ypa" firstAttribute="top" secondItem="xxz-mC-ULu" secondAttribute="top" id="Scd-pz-gXC"/>
                             <constraint firstItem="xxz-mC-ULu" firstAttribute="leading" secondItem="VYv-aq-UqQ" secondAttribute="leading" id="Spb-zh-kxf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YIu-8A-7e1" secondAttribute="trailing" constant="30" id="Xjo-fl-5tc"/>
                             <constraint firstItem="YIu-8A-7e1" firstAttribute="centerY" secondItem="VYv-aq-UqQ" secondAttribute="centerY" id="jLA-Bg-fpS"/>
+                            <constraint firstItem="Ne9-wR-Gmj" firstAttribute="width" secondItem="Ne9-wR-Gmj" secondAttribute="height" multiplier="1:1" id="jd9-a2-O3i"/>
                             <constraint firstItem="jdF-kg-o22" firstAttribute="top" secondItem="VYv-aq-UqQ" secondAttribute="bottom" constant="30" id="k4V-Iq-Hof"/>
                             <constraint firstItem="jdF-kg-o22" firstAttribute="leading" secondItem="xxz-mC-ULu" secondAttribute="leading" id="kXI-hH-pLf"/>
                             <constraint firstItem="jdF-kg-o22" firstAttribute="top" secondItem="xxz-mC-ULu" secondAttribute="bottom" id="oma-zX-kI4"/>
+                            <constraint firstItem="vHc-GA-Ypa" firstAttribute="centerX" secondItem="3IM-Cl-9Ph" secondAttribute="centerX" id="x6a-a5-8Iq"/>
                             <constraint firstItem="YIu-8A-7e1" firstAttribute="leading" secondItem="VYv-aq-UqQ" secondAttribute="trailing" constant="30" id="yYe-mZ-bE9"/>
                         </constraints>
                         <variation key="default">
@@ -95,9 +122,11 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="captionTextView" destination="jdF-kg-o22" id="L1h-of-Sdx"/>
+                        <outlet property="facebookButton" destination="Ne9-wR-Gmj" id="WXZ-TV-geB"/>
                         <outlet property="imageButton" destination="xxz-mC-ULu" id="T3q-DY-ksN"/>
                         <outlet property="petImage" destination="VYv-aq-UqQ" id="SvJ-rS-S94"/>
                         <outlet property="petNameLabel" destination="YIu-8A-7e1" id="boU-oi-oQO"/>
+                        <outlet property="twitterButton" destination="vHc-GA-Ypa" id="R7y-BQ-xTu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jgU-aa-Sfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -106,7 +135,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_camera_alt_white" width="24" height="24"/>
+        <image name="fb" width="24" height="24"/>
         <image name="ic_pets" width="24" height="24"/>
+        <image name="ic_photo_camera" width="24" height="24"/>
+        <image name="twitter" width="24" height="24"/>
     </resources>
 </document>

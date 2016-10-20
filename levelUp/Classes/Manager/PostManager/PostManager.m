@@ -70,17 +70,29 @@ static PostManager *sharedInstance = nil;
     }];
 }
 
-- (void)createPostWithInfo:(NSDictionary *)postInfo andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion {
+-(void)createPostWithParameters:(NSMutableDictionary*)parameters imageData:(NSData*)image withCompletion:(void (^)(BOOL isSuccess, NSString *message, NSError *error))completion {
     
-    NSString *userId = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+    NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
     
-    [self connectWithParameters:postInfo atPath:URL_CREATE_POST(userId) requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
-        if(isSuccess) {
-            completion(YES, nil, nil);
-        } else {
-            completion(NO, message, error);
-        }
-    }];
+    if([parameters objectForKey:@"post[image]"]) {
+        NSData *image = [parameters objectForKey:@"post[image]"];
+        [parameters removeObjectForKey:@"post[image]"];
+        [self uploadFileToAPI:parameters atPath:URL_CREATE_POST(uid) requestType:@"MULTIPART-IMAGE" imageData:image withCompletion:^(id response, BOOL isSuccess, NSError *error) {
+            if (isSuccess) {
+                completion(YES, nil, nil);
+            } else {
+                completion(NO, nil, error);
+            }
+        }];
+    }  else {
+        [self connectWithParameters:parameters atPath:URL_CREATE_POST(uid) requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+            if (isSuccess) {
+                completion(YES, nil, nil);
+            } else {
+                completion(NO, message, error);
+            }
+        }];
+    }
 }
 
 

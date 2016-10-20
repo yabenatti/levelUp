@@ -162,12 +162,14 @@
                 
                 self.enteredRegion = YES;
                 
-                postInfo = @{@"post" : @{@"description" : @"I'm the food beacon YUM",
-                                                       @"image" : @"http://data3.whicdn.com/images/148217235/large.jpg"}};
+                 NSData *petImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"catEating"], 0.5);
                 
-                [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
-                    if (isSuccess) {
-                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:@"FOOD! YUM!"] animated:YES completion:nil];
+                NSMutableDictionary *parameters = [[NSMutableDictionary alloc]initWithDictionary:@{@"post[description]" : @"Food YUM!",
+                                                                                                   @"post[image]" : petImageData
+                                                                                                   }];
+                
+                [[PostManager sharedInstance]createPostWithParameters:parameters imageData:petImageData withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+                    if(isSuccess) {
                         [self getAllPosts];
                     } else {
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];

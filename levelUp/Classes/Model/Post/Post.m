@@ -7,6 +7,7 @@
 //
 
 #import "Post.h"
+#import "Urls.h"
 
 @implementation Post
 
@@ -26,7 +27,7 @@
         self.likesCount = [[postToParse objectForKey:@"likes"] intValue];
     }
     if(![[postToParse objectForKey:@"image"] isKindOfClass:[NSNull class]]) {
-        self.postImage = [postToParse objectForKey:@"image"];
+        self.postImage = [NSString stringWithFormat:@"%@%@", BASE_URL, [[postToParse objectForKey:@"image"]objectForKey:@"url"]];
     }
     
     return self;
