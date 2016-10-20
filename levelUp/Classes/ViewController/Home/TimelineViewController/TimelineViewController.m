@@ -9,9 +9,7 @@
 #import "TimelineViewController.h"
 #import "NewPostViewController.h"
 #import "RegistrationViewController.h"
-#import "TimeLineTableViewCell.h"
 #import "LoginViewController.h"
-#import "PostTableViewCell.h"
 #import "PostManager.h"
 #import "AppUtils.h"
 #import "Constants.h"
@@ -83,6 +81,8 @@
         RegistrationViewController *vc = [sb instantiateViewControllerWithIdentifier:@"registration"];
         [self.navigationController presentViewController:vc animated:YES completion:nil];
     } else {
+        
+        NSLog(@"%@", [AppUtils retrieveFromUserDefaultWithKey:BEACON_UNIQUE_ID ]);
         self.beaconRegion = [[CLBeaconRegion alloc]
                              initWithProximityUUID:[[NSUUID alloc]
                                                     initWithUUIDString:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:BEACON_UNIQUE_ID ]]]
@@ -130,7 +130,7 @@
             }
             
         } else {
-            
+            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
         }
     }];
 }
@@ -185,7 +185,9 @@
 }
 
 - (void)postTouched:(id)sender {
-    [self performSegueWithIdentifier:@"postSegue" sender:self];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Post" bundle:nil];
+    NewPostViewController *vc = [sb instantiateViewControllerWithIdentifier:@"newPost"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - TableView
@@ -207,13 +209,16 @@
         cell = [[TimelineTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timelineCell"];
     }
     
-    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    cell.indexPath = indexPath;
+    cell.delegate = self;
+
     [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
     [cell.userImageView.layer setMasksToBounds:YES];
     
     __weak UIImageView *weakImageView2 = cell.userImageView;
-    
-    NSURL *url = [NSURL URLWithString: @"http://www.lovethispic.com/uploaded_images/59474-Cute-Kitty-Hat.jpg"];
+    NSLog(@"%@", [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]);
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -256,9 +261,8 @@
     
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -268,11 +272,11 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
+//// In a storyboard-based application, you will often want to do a little preparation before navigation
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    // Get the new view controller using [segue destinationViewController].
+//    // Pass the selected object to the new view controller.
+//}
 
 
 @end

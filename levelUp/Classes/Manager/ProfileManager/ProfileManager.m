@@ -36,7 +36,30 @@ static ProfileManager *sharedInstance = nil;
     
     [self connectWithParameters:nil atPath:URL_PROFILE(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
-            NSDictionary *responseDictionary = (NSDictionary *)response;
+            NSDictionary *responseDictionary = (NSDictionary *)[response objectForKey:@"data"];
+            
+            User *user = [User new];
+            user = [user parseToUser:responseDictionary];
+            
+            completion(YES, user, nil, nil);
+            
+        } else {
+            completion(NO, nil, message, error);
+        }
+    }];
+}
+
+/*!
+ * @discussion Edita informacoes do perfil
+ * @param parameters nil.
+ * @param completion bloco que executa ações com a resposta do server
+ * @return void
+ */
+- (void)editProfileWithUserId:(NSString *)uid andParameters:(NSDictionary *)parameters andCompletion:(void(^)(BOOL isSuccess, User * user, NSString *message, NSError *error)) completion {
+    
+    [self connectWithParameters:parameters atPath:URL_PROFILE(uid) requestType:@"PATCH" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+        if(isSuccess) {
+            NSDictionary *responseDictionary = (NSDictionary *)[response objectForKey:@"data"];
             
             User *user = [User new];
             user = [user parseToUser:responseDictionary];

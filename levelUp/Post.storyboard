@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BWe-m8-gts">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Post-->
+        <scene sceneID="sjW-aT-3gl">
+            <objects>
+                <navigationController id="BWe-m8-gts" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Post" image="ic_pets" id="KNV-5L-WCn"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="M4F-P8-nm8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="R5S-v0-xwa" kind="relationship" relationship="rootViewController" id="EnQ-Jj-3a1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jIA-Jw-9vd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-866" y="-315"/>
+        </scene>
+        <!--New Post View Controller-->
+        <scene sceneID="yIu-xa-cvy">
+            <objects>
+                <viewController storyboardIdentifier="newPost" id="R5S-v0-xwa" customClass="NewPostViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1LG-F3-5GF"/>
+                        <viewControllerLayoutGuide type="bottom" id="NCr-ai-nSA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3IM-Cl-9Ph">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxz-mC-ULu">
+                                <color key="backgroundColor" red="0.46274509800000002" green="0.69803921570000005" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xxz-mC-ULu" secondAttribute="height" multiplier="1:1" id="RKs-w4-TfP"/>
+                                    <constraint firstAttribute="width" constant="224" id="kqQ-LP-05B"/>
+                                </constraints>
+                                <state key="normal" image="ic_camera_alt_white"/>
+                                <connections>
+                                    <action selector="imageButtonTouched:" destination="R5S-v0-xwa" eventType="touchUpInside" id="sy3-sL-dW1"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdF-kg-o22">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="QzJ-xJ-DTI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WMK-yD-dfJ">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="vU4-wE-hai"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jdF-kg-o22" firstAttribute="top" secondItem="xxz-mC-ULu" secondAttribute="bottom" constant="10" id="0ku-yc-8Ff"/>
+                            <constraint firstAttribute="trailing" secondItem="jdF-kg-o22" secondAttribute="trailing" id="GjQ-BV-hj3"/>
+                            <constraint firstItem="jdF-kg-o22" firstAttribute="leading" secondItem="3IM-Cl-9Ph" secondAttribute="leading" id="LF5-cZ-aeo"/>
+                            <constraint firstAttribute="bottom" secondItem="WMK-yD-dfJ" secondAttribute="bottom" constant="50" id="Tel-wO-bXC"/>
+                            <constraint firstAttribute="trailing" secondItem="WMK-yD-dfJ" secondAttribute="trailing" id="X1Y-b7-EKx"/>
+                            <constraint firstItem="xxz-mC-ULu" firstAttribute="top" secondItem="1LG-F3-5GF" secondAttribute="bottom" constant="20" id="e7c-0d-Vrt"/>
+                            <constraint firstItem="xxz-mC-ULu" firstAttribute="centerX" secondItem="3IM-Cl-9Ph" secondAttribute="centerX" id="gl5-hf-eOx"/>
+                            <constraint firstItem="WMK-yD-dfJ" firstAttribute="leading" secondItem="3IM-Cl-9Ph" secondAttribute="leading" id="hNi-km-1pY"/>
+                            <constraint firstItem="jdF-kg-o22" firstAttribute="leading" secondItem="xxz-mC-ULu" secondAttribute="leading" id="kXI-hH-pLf"/>
+                            <constraint firstItem="jdF-kg-o22" firstAttribute="top" secondItem="xxz-mC-ULu" secondAttribute="bottom" id="oma-zX-kI4"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="oma-zX-kI4"/>
+                                <exclude reference="kXI-hH-pLf"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="8EK-ju-6sz"/>
+                    <connections>
+                        <outlet property="facebookShareView" destination="WMK-yD-dfJ" id="rH5-Wc-Kdf"/>
+                        <outlet property="imageButton" destination="xxz-mC-ULu" id="T3q-DY-ksN"/>
+                        <outlet property="imageTextView" destination="jdF-kg-o22" id="g6s-dV-NJF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jgU-aa-Sfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7" y="-315"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_camera_alt_white" width="24" height="24"/>
+        <image name="ic_pets" width="24" height="24"/>
+    </resources>
+</document>

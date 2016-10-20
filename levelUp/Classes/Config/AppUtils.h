@@ -17,4 +17,7 @@
 +(void) clearUserDefault;
 +(UIAlertController*)setupAlertWithMessage:(NSString*)message;
 
++(void)setupImageWithUrl:(NSString *)imageUrl andPlaceholder:(NSString *)placeholder andImageView:(UIImageView *)imageView;
++ (NSString *)formatDate:(NSString *)date;
+
 @end

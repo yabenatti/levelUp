@@ -14,7 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *userPictureButton;
 
-@property (weak, nonatomic) IBOutlet UITextField *petNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *beaconIdTextField;
 @property (weak, nonatomic) IBOutlet UITextField *beaconMinorTextField;
 @property (weak, nonatomic) IBOutlet UITextField *beaconMajorTextField;

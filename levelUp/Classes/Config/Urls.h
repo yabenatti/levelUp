@@ -14,7 +14,7 @@
 #define URL_SIGNUP                          BASE_URL API @"/users"
 
 #define URL_LOGOUT(uid)                     [NSString stringWithFormat:@"%@%@/sessions/%@?uid=%@", BASE_URL, API, uid, uid]
-#define URL_PROFILE(uid)                    [NSString stringWithFormat:@"%@%@/users/uid?uid=%@", BASE_URL, API, uid]
+#define URL_PROFILE(uid)                    [NSString stringWithFormat:@"%@%@/users/%@?uid=%@", BASE_URL, API, uid, uid]
 #define URL_ALL_POSTS(uid)                  [NSString stringWithFormat:@"%@%@/posts?uid=%@", BASE_URL, API, uid]
 #define URL_MY_POSTS(uid)                   [NSString stringWithFormat:@"%@%@/my_posts?uid=%@", BASE_URL, API, uid]
 #define URL_CREATE_POST(uid)                [NSString stringWithFormat:@"%@%@/posts?uid=%@", BASE_URL, API, uid]

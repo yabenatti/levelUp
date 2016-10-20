@@ -10,6 +10,7 @@
 #import "TimelineViewController.h"
 #import "SignupManager.h"
 #import "Constants.h"
+#import "AppUtils.h"
 
 @interface RegistrationViewController ()
 
@@ -130,9 +131,9 @@
     
   [[SignupManager sharedInstance]registerBeaconWithParameters:parameters imageData:self.petImage withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
       if(isSuccess) {
-          NSLog(@"UHUL");
+          [self.navigationController dismissViewControllerAnimated:YES completion:nil];
       } else {
-          NSLog(@"NOT YET");
+          [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
       }
   }];
     

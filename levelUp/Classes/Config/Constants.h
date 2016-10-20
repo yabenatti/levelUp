@@ -12,6 +12,8 @@
 #define USER_NAME @"user_name"
 #define USER_TOKEN @"authentication_token"
 #define PET_NAME @"pet_name"
+#define PET_IMAGE @"pet_image"
+
 
 #define DID_REGISTER @"registration"
 

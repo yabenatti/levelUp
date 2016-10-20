@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TimeLineTableViewCell.h"
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UIViewController <TimelineCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *followersButton;
 @property (weak, nonatomic) IBOutlet UIButton *followingButton;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *postsTableView;
+@property (weak, nonatomic) IBOutlet UIView *emptyView;
 
 
 - (IBAction)editTouched:(id)sender;

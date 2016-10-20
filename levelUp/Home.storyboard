@@ -131,7 +131,6 @@
                                             <outlet property="postImageView" destination="Fbu-eJ-Ok9" id="I6f-J5-j2r"/>
                                             <outlet property="userImageView" destination="7mj-XW-Q9i" id="UXZ-WE-LYh"/>
                                             <outlet property="usernameLabel" destination="s0C-Ma-O3Y" id="GOr-eL-tQB"/>
-                                            <segue destination="XaE-WY-Rjg" kind="show" identifier="postSegue" id="2tC-hK-PLV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -185,77 +184,8 @@
             </objects>
             <point key="canvasLocation" x="403" y="109"/>
         </scene>
-        <!--New Post View Controller-->
-        <scene sceneID="7p4-UW-hNk">
-            <objects>
-                <viewController id="XaE-WY-Rjg" customClass="NewPostViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="QLK-8k-Bqf"/>
-                        <viewControllerLayoutGuide type="bottom" id="2qO-Cl-XOU"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Lzj-Bi-PZd">
-                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8XK-hg-HXr">
-                                <color key="backgroundColor" red="0.46274509803921571" green="0.69803921568627447" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="224" id="npM-gg-lg7"/>
-                                    <constraint firstAttribute="width" secondItem="8XK-hg-HXr" secondAttribute="height" multiplier="1:1" id="ve6-KL-VY3"/>
-                                </constraints>
-                                <state key="normal" image="ic_camera_alt_white"/>
-                                <connections>
-                                    <action selector="imageButtonTouched:" destination="XaE-WY-Rjg" eventType="touchUpInside" id="gkh-y9-cuY"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPq-7k-3Mw">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="4ze-xs-IYy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gsl-zU-Wgr">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="qGp-jY-W9i"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="OPq-7k-3Mw" secondAttribute="trailing" id="Jgz-GD-2xJ"/>
-                            <constraint firstItem="OPq-7k-3Mw" firstAttribute="leading" secondItem="Lzj-Bi-PZd" secondAttribute="leading" id="Kw2-j3-5mM"/>
-                            <constraint firstItem="OPq-7k-3Mw" firstAttribute="top" secondItem="8XK-hg-HXr" secondAttribute="bottom" id="RqZ-Oa-Auq"/>
-                            <constraint firstAttribute="trailing" secondItem="Gsl-zU-Wgr" secondAttribute="trailing" id="SkV-dk-WiZ"/>
-                            <constraint firstItem="OPq-7k-3Mw" firstAttribute="leading" secondItem="8XK-hg-HXr" secondAttribute="leading" id="YPC-7Z-J1O"/>
-                            <constraint firstAttribute="bottom" secondItem="Gsl-zU-Wgr" secondAttribute="bottom" constant="50" id="YTM-aB-thV"/>
-                            <constraint firstItem="8XK-hg-HXr" firstAttribute="top" secondItem="QLK-8k-Bqf" secondAttribute="bottom" constant="20" id="dCJ-xI-ape"/>
-                            <constraint firstItem="OPq-7k-3Mw" firstAttribute="top" secondItem="8XK-hg-HXr" secondAttribute="bottom" constant="10" id="kJm-5U-7NE"/>
-                            <constraint firstItem="8XK-hg-HXr" firstAttribute="centerX" secondItem="Lzj-Bi-PZd" secondAttribute="centerX" id="myy-lW-tkZ"/>
-                            <constraint firstItem="Gsl-zU-Wgr" firstAttribute="leading" secondItem="Lzj-Bi-PZd" secondAttribute="leading" id="zLD-ih-1H1"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="RqZ-Oa-Auq"/>
-                                <exclude reference="YPC-7Z-J1O"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="facebookShareView" destination="Gsl-zU-Wgr" id="dIe-Rx-OjN"/>
-                        <outlet property="imageButton" destination="8XK-hg-HXr" id="idy-df-GnT"/>
-                        <outlet property="imageTextView" destination="OPq-7k-3Mw" id="3sC-ew-IsJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZOO-rj-Q3g" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1301" y="109"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="ic_camera_alt_white" width="24" height="24"/>
         <image name="ic_home" width="24" height="24"/>
         <image name="ic_pets_white" width="24" height="24"/>
         <image name="ic_question_answer" width="24" height="24"/>

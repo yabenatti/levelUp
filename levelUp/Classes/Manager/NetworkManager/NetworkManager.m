@@ -261,13 +261,14 @@ static NetworkManager *sharedInstance = nil;
     if([type isEqualToString:@"MULTIPART-IMAGE"]) {
         
         [manager POST:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-            [formData appendPartWithFileData:image name:@"post[image]" fileName:@"imagem.jpg" mimeType:@"image/JPEG"];
+            [formData appendPartWithFileData:image name:@"beacon[pet_image]" fileName:@"imagem.jpg" mimeType:@"image/JPEG"];
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 //Update the progress view
                 [self.progressView setProgress:uploadProgress.fractionCompleted];
             });
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"%@", responseObject);
             completion(responseObject, YES, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             completion(nil, NO, error);
@@ -278,6 +279,7 @@ static NetworkManager *sharedInstance = nil;
         [manager POST:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
             [formData appendPartWithFileData:image name:@"beacon[pet_image]" fileName:@"imagem.jpg" mimeType:@"image/JPEG"];
         } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSLog(@"%@", responseObject);
             completion(responseObject, YES, nil);
             
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -294,6 +296,7 @@ static NetworkManager *sharedInstance = nil;
             if (error) {
                 completion(nil, NO, error);
             } else {
+                NSLog(@"%@", responseObject);
                 completion(responseObject, YES, nil);
             }
         }];

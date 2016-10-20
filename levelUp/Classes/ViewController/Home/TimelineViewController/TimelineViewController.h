@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TimeLineTableViewCell.h"
 
-@interface TimelineViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface TimelineViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, TimelineCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *postsTableView;
 @property (weak, nonatomic) IBOutlet UIView *emptyView;

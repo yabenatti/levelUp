@@ -10,6 +10,7 @@
 #import "RegistrationViewController.h"
 #import "SignUpManager.h"
 #import "Constants.h"
+#import "AppUtils.h"
 
 @interface SignUpViewController ()
 
@@ -41,7 +42,8 @@
     // Do any additional setup after loading the view.
     [self.signUpButton.layer setCornerRadius:4.0f];
     
-    self.userEmailTextField.text = @"user4@example.com";
+    self.petNameTextField.text = @"Pluto";
+    self.userEmailTextField.text = @"user@example.com";
     self.userPasswordTextField.text = @"123456";
     self.userConfirmPasswordTextField.text = @"123456";
  
@@ -104,7 +106,7 @@
         if(isSuccess) {
             [self performSegueWithIdentifier:@"registrationSegue" sender:nil];
         } else {
-            NSLog(@"nope.");
+            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
         }
     }];
 

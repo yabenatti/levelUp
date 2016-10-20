@@ -23,8 +23,10 @@
 }
 
 - (IBAction)likeButtonTouched:(id)sender {
+    [self.delegate likeButton:self.indexPath];
 }
 
 - (IBAction)commentButtonTouched:(id)sender {
+    [self.delegate commentButton:self.indexPath];
 }
 @end

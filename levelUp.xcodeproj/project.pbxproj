@@ -38,6 +38,7 @@
 		19EE37241D529B45009BA896 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EE37231D529B45009BA896 /* Profile.storyboard */; };
 		19EE37271D529C45009BA896 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE37261D529C45009BA896 /* ProfileViewController.m */; };
 		26CDD9B8080103B55AE86ED9 /* libPods-levelUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A88D21C7EDC29E760E26AF6 /* libPods-levelUp.a */; };
+		BEB8357F1DB9246400132A7A /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB8357E1DB9246400132A7A /* Post.storyboard */; };
 		BEC3A4D41DA035E000B14C49 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3A4D31DA035E000B14C49 /* TabBarViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +115,7 @@
 		4A88D21C7EDC29E760E26AF6 /* libPods-levelUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-levelUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C361523AD9FE4D47DBB74C /* Pods-levelUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.debug.xcconfig"; sourceTree = "<group>"; };
 		991C9ED4A346721930D46C95 /* Pods-levelUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.release.xcconfig"; sourceTree = "<group>"; };
+		BEB8357E1DB9246400132A7A /* Post.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		BEC3A4D21DA035E000B14C49 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
 		BEC3A4D31DA035E000B14C49 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,6 +264,7 @@
 				19A9E95F1D4E504B00588822 /* Home.storyboard */,
 				19EE37231D529B45009BA896 /* Profile.storyboard */,
 				19534DF91D49957D00309D28 /* LaunchScreen.xib */,
+				BEB8357E1DB9246400132A7A /* Post.storyboard */,
 				19534DEA1D49957D00309D28 /* Supporting Files */,
 			);
 			path = levelUp;
@@ -587,6 +590,7 @@
 				19A9E9601D4E504B00588822 /* Home.storyboard in Resources */,
 				19534DF61D49957D00309D28 /* Main.storyboard in Resources */,
 				19534DFB1D49957D00309D28 /* LaunchScreen.xib in Resources */,
+				BEB8357F1DB9246400132A7A /* Post.storyboard in Resources */,
 				19534DF81D49957D00309D28 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

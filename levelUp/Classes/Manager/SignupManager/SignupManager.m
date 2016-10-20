@@ -45,6 +45,7 @@ static SignupManager *sharedInstance = nil;
             
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"authentication_token"]] withKey:USER_TOKEN];
             [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"id"]] withKey:USER_ID];
+            [AppUtils saveToUserDefault: [NSString stringWithFormat:@"%@", [responseDictionary valueForKey:@"pet_name"]] withKey:PET_NAME];
             [AppUtils saveToUserDefault: @"NO" withKey:DID_REGISTER];
 
             completion(YES, user, nil, nil);
@@ -94,6 +95,19 @@ static SignupManager *sharedInstance = nil;
         [parameters removeObjectForKey:@"beacon[pet_image]"];
         [self uploadFileToAPI:parameters atPath:URL_REGISTER_BEACON(uid) requestType:@"MULTIPART-SIGNUP" imageData:image withCompletion:^(id response, BOOL isSuccess, NSError *error) {
             if (isSuccess) {
+                
+                NSDictionary *responseDictionary = (NSDictionary*)[response objectForKey:@"data"];
+                NSDictionary *petDic = [responseDictionary objectForKey:@"pet_image"];
+                NSString *petImage = [NSString stringWithFormat:@"%@",[petDic objectForKey:@"url"]];
+                
+                Beacon *beacon = [[Beacon new] parseToBeacon:responseDictionary];
+                [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.beaconId] withKey:BEACON_ID];
+                [AppUtils saveToUserDefault:beacon.beaconUniqueId withKey:BEACON_UNIQUE_ID];
+                [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.major] withKey:BEACON_MAJOR];
+                [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.minor] withKey:BEACON_MINOR];
+                [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%@", petImage] withKey:PET_IMAGE];
+                [AppUtils saveToUserDefault: @"YES" withKey:DID_REGISTER];
+                
                 completion(YES, nil, nil);
             } else {
                 completion(NO, nil, error);

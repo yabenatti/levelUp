@@ -7,14 +7,13 @@
 //
 
 #import "ProfileViewController.h"
-#import "TimeLineTableViewCell.h"
-#import "PostTableViewCell.h"
 #import "TabBarViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "ProfileManager.h"
 #import "PostManager.h"
 #import "LoginManager.h"
 #import "AppUtils.h"
+#import "Constants.h"
 
 @interface ProfileViewController ()
 
@@ -54,6 +53,10 @@
     
     //Inicializacoes
     self.myPosts = [NSArray new];
+    [self.emptyView setHidden:YES];
+    [self.profileImageView.layer setCornerRadius:28.0f];
+    [self.profileImageView.layer setBorderColor:[COLOR_LIGHT_BLUE CGColor]];
+    [self.profileImageView.layer setBorderWidth:2.0f];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,19 +68,28 @@
         if(isSuccess) {
             self.currentUser = user;
             self.usernameLabel.text = user.petName;
+            self.profileImageView.image = [UIImage imageNamed:@"ic_person"];
+            
+//            [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.profileImageView];
             
             [[PostManager sharedInstance]getMyPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
                 if(isSuccess) {
-                    self.myPosts = posts;
                     
-                    [self.postsTableView reloadData];
+                    if([posts count] > 0) {
+                        self.myPosts = posts;
+                        
+                        [self.postsTableView reloadData];
+                    } else {
+                        [self.emptyView setHidden:NO];
+                    }
+                    
                 } else {
-                    
+                    [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
                 }
             }];
             
         } else {
-            
+            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
         }
     }];
 }
@@ -96,7 +108,7 @@
             TabBarViewController *vc = [sb instantiateInitialViewController];
             [self.navigationController presentViewController:vc animated:NO completion:nil];
         } else {
-            
+            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
         }
     }];
 }
@@ -120,6 +132,9 @@
         cell = [[TimelineTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"timelineCell"];
     }
     
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    cell.indexPath = indexPath;
+    cell.delegate = self;
     
     [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
     [cell.userImageView.layer setMasksToBounds:YES];
@@ -174,11 +189,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == 0) {
-        return 450;
-    } else {
-        return 250;
-    }
+    return 450;
 }
 
 

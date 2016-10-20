@@ -14,12 +14,9 @@
     
     self.email = [userToParse objectForKey:@"email"];
     self.petName = [userToParse objectForKey:@"pet_name"];
-//    self.birthDate = [userToParse objectForKey:@"birth_date"];
-//    self.userName = [userToParse objectForKey:@"name"];
-
-//    int apiID = [[userToParse objectForKey:@"beacon_id"]intValue];
-    int apiID = [[userToParse objectForKey:@"id"]intValue];
-    self.userId = apiID;
+    self.birthDate = [userToParse objectForKey:@"birth_date"];
+    self.userName = [userToParse objectForKey:@"name"];
+    self.userId = [[userToParse objectForKey:@"id"]intValue];
     
     return self;
 }
