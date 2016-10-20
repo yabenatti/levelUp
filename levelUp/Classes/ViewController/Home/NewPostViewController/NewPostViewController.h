@@ -11,8 +11,9 @@
 @interface NewPostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
-@property (weak, nonatomic) IBOutlet UITextView *imageTextView;
-@property (weak, nonatomic) IBOutlet UIView *facebookShareView;
+@property (weak, nonatomic) IBOutlet UIImageView *petImage;
+@property (weak, nonatomic) IBOutlet UILabel *petNameLabel;
+@property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 
 - (IBAction)imageButtonTouched:(id)sender;
 

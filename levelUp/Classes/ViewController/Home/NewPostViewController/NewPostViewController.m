@@ -29,18 +29,31 @@
 
     self.navigationItem.rightBarButtonItem = postItem;
     self.navigationItem.leftBarButtonItem = cancelItem;
-    
+
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
     content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
    
 //    [FBSDKShareAPI shareWithContent:content delegate:nil];
+    
+    [self.imageButton.layer setCornerRadius:25.0f];
+    [self.petImage.layer setCornerRadius:25.0f];
+    [self.petImage.layer setBorderColor:[COLOR_LIGHT_BLUE CGColor]];
+    [self.petImage.layer setBorderWidth:2.0f];
 
     
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [AppUtils setupImageWithUrl:@"https://www.bhmpics.com/walls/cute_white_cat-other.jpg" andPlaceholder:@"ic_person" andImageView:self.petImage];
+    [self.petNameLabel setText:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]]];
+    self.captionTextView.text = @"Write your caption :)";
+    [self.captionTextView setTextColor:[UIColor lightGrayColor]];
+}
+
 - (void)postTouched:(id)sender {
 
-    NSDictionary *postInfo = @{@"post" : @{@"description" : self.imageTextView.text,
+    NSDictionary *postInfo = @{@"post" : @{@"description" : self.captionTextView.text,
                              @"image" : @"https://scontent.cdninstagram.com/t51.2885-15/s320x320/e15/10948669_907575822627196_116719082_n.jpg?ig_cache_key=OTQwMTgyMTQ3OTcyNzM2ODY5.2"}};
     
     [[PostManager sharedInstance]createPostWithInfo:postInfo andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
@@ -54,12 +67,30 @@
 }
 
 - (void)cancelTouched:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.tabBarController setSelectedIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - TextView
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:@"Write your caption :)"]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
+    }
+    [textView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = @"Write your caption :)";
+        textView.textColor = [UIColor lightGrayColor];
+    }
+    [textView resignFirstResponder];
 }
 
 /*

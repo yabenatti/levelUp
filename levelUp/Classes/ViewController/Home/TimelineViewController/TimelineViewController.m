@@ -54,12 +54,7 @@
     self.beaconManager = [ESTBeaconManager new];
     self.beaconManager.delegate = self;
     
-    UIBarButtonItem *postItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"ic_pets"] style:UIBarButtonItemStyleDone target:self action:@selector(postTouched:)];
-    
-    self.navigationItem.rightBarButtonItem = postItem;
-    
     [self.emptyView setHidden:YES];
-
     
     //Inicializacoes
     self.posts = [NSArray new];
@@ -182,12 +177,6 @@
         }
         
     }
-}
-
-- (void)postTouched:(id)sender {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Post" bundle:nil];
-    NewPostViewController *vc = [sb instantiateViewControllerWithIdentifier:@"newPost"];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - TableView

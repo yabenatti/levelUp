@@ -451,7 +451,7 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vr6-EZ-oiQ">
-                                <color key="backgroundColor" red="0.96593359185547023" green="0.81127905667567379" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.81176470588235294" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="2XU-2h-hi7"/>
                                     <constraint firstAttribute="width" secondItem="vr6-EZ-oiQ" secondAttribute="height" multiplier="1:1" id="PvN-fA-Hzd"/>
