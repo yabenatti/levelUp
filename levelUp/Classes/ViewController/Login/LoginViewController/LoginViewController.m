@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
+#import "RegistrationViewController.h"
 #import "TimelineViewController.h"
 #import "LoginManager.h"
 #import "AppUtils.h"
@@ -37,6 +38,12 @@
 -(void)viewWillAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    NSString *token = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN]];
+    NSString *registration = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:DID_REGISTER]];
+    if (![token isEqualToString:@"(null)"] && ![registration isEqualToString:@"YES"]) {
+        [self performSegueWithIdentifier:@"registrationSegue" sender:nil];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated {

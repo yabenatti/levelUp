@@ -9,6 +9,7 @@
 #import "PostManager.h"
 #import "Constants.h"
 #import "AppUtils.h"
+#import "Comment.h"
 #import "Urls.h"
 
 @implementation PostManager
@@ -84,15 +85,44 @@ static PostManager *sharedInstance = nil;
                 completion(NO, nil, error);
             }
         }];
-    }  else {
-        [self connectWithParameters:parameters atPath:URL_CREATE_POST(uid) requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
-            if (isSuccess) {
-                completion(YES, nil, nil);
-            } else {
-                completion(NO, message, error);
-            }
-        }];
     }
+}
+
+- (void)createCommentWithPostId:(NSString *)postId andParameters:(NSDictionary *)parameters andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion {
+    
+    NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+
+    [self connectWithParameters:parameters atPath:URL_COMMENT(postId, uid) requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+        if(isSuccess) {
+            completion(YES, nil,nil);
+            
+        } else {
+            completion(NO, message, error);
+        }
+    }];
+}
+
+- (void)getCommentsWithPostId:(NSString *)postId andCompletion:(void(^)(BOOL isSuccess, NSMutableArray *comments, NSString *message, NSError *error)) completion {
+    
+    NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+    
+    [self connectWithParameters:nil atPath:URL_COMMENT(postId, uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+        if(isSuccess) {
+            NSArray *responseArray = (NSArray *)[response objectForKey:@"data"];
+            NSMutableArray *commentsArray = [NSMutableArray new];
+            
+            for (NSDictionary *commentDictionary in responseArray) {
+                Comment *comment = [Comment new];
+                comment = [comment parseToComment:commentDictionary];
+                [commentsArray addObject:comment];
+            }
+            
+            completion(YES, commentsArray, nil,nil);
+            
+        } else {
+            completion(NO, nil, message, error);
+        }
+    }];
 }
 
 

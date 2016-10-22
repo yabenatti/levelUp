@@ -20,4 +20,5 @@
 #define URL_CREATE_POST(uid)                [NSString stringWithFormat:@"%@%@/posts?uid=%@", BASE_URL, API, uid]
 #define URL_REGISTER_BEACON(uid)            [NSString stringWithFormat:@"%@%@/beacons?uid=%@", BASE_URL, API, uid]
 #define URL_MY_BEACON(uid)                  [NSString stringWithFormat:@"%@%@/my_beacons?uid=%@", BASE_URL, API, uid]
+#define URL_COMMENT(postId, uid)     [NSString stringWithFormat:@"%@%@/posts/%@/comments?uid=%@", BASE_URL, API, postId, uid]
 

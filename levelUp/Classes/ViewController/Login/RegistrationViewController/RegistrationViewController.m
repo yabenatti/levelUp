@@ -42,9 +42,17 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
     self.beaconIdTextField.text = @"B9407F30-F5F8-466E-AFF9-25556B57FE6D";
     self.beaconMajorTextField.text = @"47798";
     self.beaconMinorTextField.text = @"37813";
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -144,4 +152,51 @@
 - (IBAction)pictureButtonTouched:(id)sender {
     [self chooseImageAlert];
 }
+
+#pragma mark - Keyboard
+
+- (IBAction)hideKeyboard:(id)sender {
+    [self.beaconIdTextField resignFirstResponder];
+    [self.beaconMajorTextField resignFirstResponder];
+    [self.beaconMinorTextField resignFirstResponder];
+}
+
+- (void)keyboardWillShow:(NSNotification *)n {
+    NSDictionary* info = [n userInfo];
+    
+    NSNumber *duration = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [info objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:[duration doubleValue]];
+    [UIView setAnimationCurve:[curve intValue]];
+    
+    NSLog(@"%f",self.view.frame.origin.x);
+    NSLog(@"%f",self.view.frame.origin.y);
+    
+    self.view.frame = CGRectMake(0, (-kbSize.height) + 120, self.view.frame.size.width, self.view.frame.size.height);
+    
+    [UIView commitAnimations];
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)n {
+    NSDictionary* info = [n userInfo];
+    
+    NSNumber *duration = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [info objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    // animations settings
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:[duration doubleValue]];
+    [UIView setAnimationCurve:[curve intValue]];
+    
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
+    [UIView commitAnimations];
+}
+
 @end

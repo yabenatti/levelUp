@@ -50,6 +50,9 @@
     //Logout Button
     UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log out" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonTouched:)];
     self.navigationItem.leftBarButtonItem = logoutButton;
+    //Edit Button
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonTouched:)];
+    self.navigationItem.rightBarButtonItem = editButton;
     
     //Inicializacoes
     self.myPosts = [NSArray new];
@@ -68,9 +71,8 @@
         if(isSuccess) {
             self.currentUser = user;
             self.usernameLabel.text = user.petName;
-            self.profileImageView.image = [UIImage imageNamed:@"ic_person"];
             
-//            [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.profileImageView];
+            [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.profileImageView];
             
             [[PostManager sharedInstance]getMyPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
                 if(isSuccess) {
@@ -113,6 +115,10 @@
     }];
 }
 
+- (void)editButtonTouched:(id)sender {
+    [self performSegueWithIdentifier:@"editSegue" sender:self];
+}
+
 #pragma mark - TableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -141,7 +147,7 @@
     
     __weak UIImageView *weakImageView2 = cell.userImageView;
     
-    NSURL *url = [NSURL URLWithString: @"http://www.lovethispic.com/uploaded_images/59474-Cute-Kitty-Hat.jpg"];
+    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -202,10 +208,7 @@
     
 }
 
-
-- (IBAction)editTouched:(id)sender {
-    [self performSegueWithIdentifier:@"editSegue" sender:self];
-}
+#pragma mark - IBActions
 
 - (IBAction)followersTouched:(id)sender {
     [self performSegueWithIdentifier:@"followSegue" sender:self];

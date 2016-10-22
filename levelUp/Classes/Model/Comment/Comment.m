@@ -10,4 +10,13 @@
 
 @implementation Comment
 
+-(Comment *)parseToComment:(NSDictionary *)commentToParse {
+    self.commentId = [[commentToParse objectForKey:@"id"]intValue];
+    self.userId = [[commentToParse objectForKey:@"user_id"]intValue];
+    self.postId = [[commentToParse objectForKey:@"post_id"]intValue];
+    self.commentDescription = [commentToParse objectForKey:@"description"];
+    
+    return self;
+}
+
 @end

@@ -131,6 +131,7 @@
                         <outlet property="userPasswordTextField" destination="CB8-BQ-LKE" id="cCe-vv-D8D"/>
                         <outlet property="usernameTextField" destination="JIr-4z-iCa" id="8ut-HD-sxv"/>
                         <segue destination="2hi-Gv-bEE" kind="show" identifier="signUpSegue" id="KRY-5h-Lg3"/>
+                        <segue destination="fy6-0N-xMa" kind="show" identifier="registrationSegue" id="cq4-3M-pk3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBr-yc-IFM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -269,7 +270,7 @@
                         <viewControllerLayoutGuide type="top" id="gto-Qd-llS"/>
                         <viewControllerLayoutGuide type="bottom" id="15e-h0-bp9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="XjQ-K2-d3d">
+                    <view key="view" contentMode="scaleToFill" id="XjQ-K2-d3d" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -358,6 +359,9 @@
                             <constraint firstItem="cMH-kf-c5x" firstAttribute="width" secondItem="cMH-kf-c5x" secondAttribute="height" multiplier="1:1" id="qxg-KR-DCQ"/>
                             <constraint firstItem="mrE-y7-dV4" firstAttribute="top" secondItem="VJ2-63-odk" secondAttribute="bottom" constant="20" id="uuG-Zk-7wv"/>
                         </constraints>
+                        <connections>
+                            <action selector="hideKeyboard:" destination="fy6-0N-xMa" eventType="touchUpInside" id="iaq-po-vwX"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="beaconIdTextField" destination="VJ2-63-odk" id="gv5-k4-c56"/>
@@ -368,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D1G-GK-Zhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3549" y="406"/>
+            <point key="canvasLocation" x="2356" y="1370"/>
         </scene>
     </scenes>
     <resources>
@@ -376,4 +380,7 @@
         <image name="ic_lock_white" width="24" height="24"/>
         <image name="ic_person_white" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="cq4-3M-pk3"/>
+    </inferredMetricsTieBreakers>
 </document>

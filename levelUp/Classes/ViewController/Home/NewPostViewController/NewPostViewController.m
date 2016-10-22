@@ -17,6 +17,7 @@
 @interface NewPostViewController ()
 
 @property (strong, nonatomic) NSData *petImageData;
+@property (strong, nonatomic) NSString *captionText;
 
 @end
 
@@ -26,10 +27,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UIBarButtonItem *postItem = [[UIBarButtonItem alloc]initWithTitle:@"Post" style:UIBarButtonItemStylePlain target:self action:@selector(postTouched:)];
+    //Navigation Bar
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.hidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    
+    //Title View
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:16];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = COLOR_LIGHT_BLUE;
+    label.text = NSLocalizedString(@"New Post", @"");
+    [label sizeToFit];
+    self.navigationItem.titleView = label;
+    
+    UIBarButtonItem *postItem = [[UIBarButtonItem alloc]initWithTitle:@"Send" style:UIBarButtonItemStylePlain target:self action:@selector(postTouched:)];
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelTouched:)];
 
     self.navigationItem.rightBarButtonItem = postItem;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     self.navigationItem.leftBarButtonItem = cancelItem;
 
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
@@ -43,9 +60,28 @@
     [self.twitterButton setBackgroundColor:COLOR_LIGHT_BLUE];
     [self.facebookButton.layer setCornerRadius:25.0f];
     [self.facebookButton setBackgroundColor:COLOR_LIGHT_BLUE];
-    [self.petImage.layer setCornerRadius:25.0f];
+    [self.petImage.layer setCornerRadius:40.0f];
     [self.petImage.layer setBorderColor:[COLOR_LIGHT_BLUE CGColor]];
     [self.petImage.layer setBorderWidth:2.0f];
+    
+    UIToolbar *manufacturerPickerToolbar=[[UIToolbar alloc] init];
+    manufacturerPickerToolbar.barStyle = UIBarStyleDefault;
+    manufacturerPickerToolbar.translucent = YES;
+    manufacturerPickerToolbar.tintColor = COLOR_LIGHT_BLUE;
+    manufacturerPickerToolbar.backgroundColor = [UIColor whiteColor];
+    [manufacturerPickerToolbar sizeToFit];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(captionDoneButtonTouched:)];
+    [doneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: COLOR_LIGHT_BLUE,  NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+    
+    
+    [manufacturerPickerToolbar setItems:@[flexSpace, doneButton]];
+    self.captionTextView.inputAccessoryView = manufacturerPickerToolbar;
+    
+    self.petImageData = nil;
+
 
     
 }
@@ -53,25 +89,39 @@
 -(void)viewWillAppear:(BOOL)animated {
     
     [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.petImage];
-    [self.petNameLabel setText:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]]];
-    self.captionTextView.text = @"Write your caption :)";
-    [self.captionTextView setTextColor:[UIColor lightGrayColor]];
+    [self.petNameLabel setText:[NSString stringWithFormat:@"What are you doing %@ ?", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]]];
+    if ([self.captionTextView.text isEqualToString:@""]) {
+        self.captionTextView.text = @"Write your caption :)";
+        [self.captionTextView setTextColor:[UIColor lightGrayColor]];
+    }
+
+}
+
+#pragma mark - Extra Buttons
+
+-(void)captionDoneButtonTouched:(id)sender {
+    [self.captionTextView resignFirstResponder];
 }
 
 - (void)postTouched:(id)sender {
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
 
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]initWithDictionary:@{@"post[description]" : self.captionTextView.text,
-                                                                                       @"post[image]" : self.petImageData
-                                                                                       }];
+    if(self.petImageData != nil) {
+        [parameters removeAllObjects];
+        [parameters setValue:self.captionTextView.text forKey:@"post[description]"];
+        [parameters setValue:self.petImageData forKey:@"post[image]"];
+        
+        [[PostManager sharedInstance]createPostWithParameters:parameters imageData:self.petImageData withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+            if(isSuccess) {
+                [self.tabBarController setSelectedIndex:0];
+            } else {
+                [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+            }
+        }];
 
-    [[PostManager sharedInstance]createPostWithParameters:parameters imageData:self.petImageData withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
-        if(isSuccess) {
-            [self.tabBarController setSelectedIndex:0];
-        } else {
-            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
-        }
-    }];
-
+        
+    }
+    
 }
 
 - (void)cancelTouched:(id)sender {
@@ -98,6 +148,7 @@
         textView.text = @"Write your caption :)";
         textView.textColor = [UIColor lightGrayColor];
     }
+    
     [textView resignFirstResponder];
 }
 
@@ -163,6 +214,9 @@
     
     [self.imageButton setImage:image forState:UIControlStateNormal];
     [self.imageButton.layer setCornerRadius:25.0f];
+    [self.imageButton. layer setMasksToBounds:YES];
+    
+    self.navigationItem.rightBarButtonItem.enabled = YES;
     
     [self dismissViewControllerAnimated:YES completion:nil];
     

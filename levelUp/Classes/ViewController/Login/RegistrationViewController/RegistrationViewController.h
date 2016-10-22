@@ -20,5 +20,6 @@
 
 - (IBAction)registerButtonTouched:(id)sender;
 - (IBAction)pictureButtonTouched:(id)sender;
+- (IBAction)hideKeyboard:(id)sender;
 
 @end

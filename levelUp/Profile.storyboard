@@ -78,18 +78,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmF-o6-c8L">
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" image="ic_settings"/>
-                                        <connections>
-                                            <action selector="editTouched:" destination="bDV-eQ-5h3" eventType="touchUpInside" id="z2l-6t-dJ5"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="editar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5v0-iA-IEa">
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uqm-ZP-W9z">
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -102,11 +90,8 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.89803921568627454" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="5v0-iA-IEa" firstAttribute="leading" secondItem="wXh-tY-hbE" secondAttribute="trailing" constant="20" id="0hl-U1-bzt"/>
-                                    <constraint firstItem="5v0-iA-IEa" firstAttribute="centerX" secondItem="kmF-o6-c8L" secondAttribute="centerX" id="1C9-EO-Puw"/>
-                                    <constraint firstItem="5v0-iA-IEa" firstAttribute="top" secondItem="wXh-tY-hbE" secondAttribute="top" id="23k-Fn-ePQ"/>
                                     <constraint firstItem="3zr-ER-dPg" firstAttribute="centerX" secondItem="Ype-PX-5sC" secondAttribute="centerX" id="4bC-OB-UuI"/>
                                     <constraint firstAttribute="bottom" secondItem="K6d-oz-bsu" secondAttribute="bottom" constant="30" id="6vg-UI-Vtn"/>
                                     <constraint firstItem="wXh-tY-hbE" firstAttribute="top" secondItem="3zr-ER-dPg" secondAttribute="top" id="72E-AH-S7A"/>
@@ -124,13 +109,11 @@
                                     <constraint firstItem="Ype-PX-5sC" firstAttribute="leading" secondItem="3zr-ER-dPg" secondAttribute="leading" id="Uos-hs-5Xd"/>
                                     <constraint firstItem="oHs-Qv-Upt" firstAttribute="height" secondItem="Ype-PX-5sC" secondAttribute="height" id="W3M-OH-RdX"/>
                                     <constraint firstItem="K6d-oz-bsu" firstAttribute="leading" secondItem="O2s-LN-cch" secondAttribute="leading" constant="25" id="cmd-sl-Vzp"/>
-                                    <constraint firstItem="kmF-o6-c8L" firstAttribute="height" secondItem="Ype-PX-5sC" secondAttribute="height" id="d31-3M-j6B"/>
                                     <constraint firstItem="K6d-oz-bsu" firstAttribute="top" secondItem="O2s-LN-cch" secondAttribute="top" constant="20" id="hFC-LE-Jff"/>
-                                    <constraint firstItem="wXh-tY-hbE" firstAttribute="leading" secondItem="3zr-ER-dPg" secondAttribute="trailing" constant="10" id="iHk-OC-wIX"/>
+                                    <constraint firstItem="wXh-tY-hbE" firstAttribute="leading" secondItem="3zr-ER-dPg" secondAttribute="trailing" constant="30" id="iHk-OC-wIX"/>
                                     <constraint firstItem="Uqm-ZP-W9z" firstAttribute="centerX" secondItem="K6d-oz-bsu" secondAttribute="centerX" id="jmj-7s-gHW"/>
                                     <constraint firstItem="oHs-Qv-Upt" firstAttribute="trailing" secondItem="wXh-tY-hbE" secondAttribute="trailing" id="jsR-sH-xQx"/>
                                     <constraint firstAttribute="height" constant="100" id="ktf-wL-1EL"/>
-                                    <constraint firstItem="kmF-o6-c8L" firstAttribute="centerY" secondItem="oHs-Qv-Upt" secondAttribute="centerY" id="mgD-AT-2tl"/>
                                     <constraint firstItem="wXh-tY-hbE" firstAttribute="centerX" secondItem="oHs-Qv-Upt" secondAttribute="centerX" id="xl0-Ef-t78"/>
                                 </constraints>
                                 <variation key="default">
@@ -486,7 +469,6 @@
         <image name="ic_person" width="24" height="24"/>
         <image name="ic_pets_white" width="24" height="24"/>
         <image name="ic_question_answer" width="24" height="24"/>
-        <image name="ic_settings" width="24" height="24"/>
         <image name="ic_thumb_up" width="24" height="24"/>
     </resources>
 </document>

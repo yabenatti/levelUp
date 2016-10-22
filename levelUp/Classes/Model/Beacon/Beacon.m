@@ -7,6 +7,7 @@
 //
 
 #import "Beacon.h"
+#import "Urls.h"
 
 @implementation Beacon
 
@@ -15,6 +16,7 @@
     self.minor = [[beaconToParse objectForKey:@"minor"] intValue];
     self.major = [[beaconToParse objectForKey:@"major"] intValue];
     self.beaconUniqueId = [beaconToParse objectForKey:@"unique_id"];
+    self.petImage = [NSString stringWithFormat:@"%@%@",BASE_URL, [[beaconToParse objectForKey:@"pet_image"]objectForKey:@"url"]];
     
     return self;
 }

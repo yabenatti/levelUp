@@ -8,7 +8,7 @@
 
 #import "TimelineViewController.h"
 #import "NewPostViewController.h"
-#import "RegistrationViewController.h"
+#import "CommentViewController.h"
 #import "LoginViewController.h"
 #import "PostManager.h"
 #import "AppUtils.h"
@@ -67,13 +67,9 @@
     NSString *token = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN]];
     NSString *registration = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:DID_REGISTER]];
 
-    if([token isEqualToString:@"(null)"]) {
+    if([token isEqualToString:@"(null)"] || ![registration isEqualToString:@"YES"]) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
         LoginViewController *vc = [sb instantiateInitialViewController];
-        [self.navigationController presentViewController:vc animated:YES completion:nil];
-    } else if (![registration isEqualToString:@"YES"]) {
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-        RegistrationViewController *vc = [sb instantiateViewControllerWithIdentifier:@"registration"];
         [self.navigationController presentViewController:vc animated:YES completion:nil];
     } else {
         
@@ -208,6 +204,7 @@
     [cell.userImageView.layer setMasksToBounds:YES];
     
     __weak UIImageView *weakImageView2 = cell.userImageView;
+#warning picture should come in the answer :)
     NSLog(@"%@", [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]);
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -260,14 +257,27 @@
     return 450;
 }
 
+#pragma mark - Timeline Cell Delegate
+
+-(void)commentButton:(NSIndexPath *)indexPath {
+    Post *post = [self.posts objectAtIndex:indexPath.row];
+    
+    [self performSegueWithIdentifier:@"commentSegue" sender:[NSString stringWithFormat:@"%d", post.postId]];
+}
+
+-(void)likeButton:(NSIndexPath *)indexPath {
+    
+}
 
 #pragma mark - Navigation
 
-//// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"commentSegue"]) {
+        CommentViewController *vc = [segue destinationViewController];
+        vc.postId = sender;
+//        vc.hidesBottomBarWhenPushed = YES;
+    }
+}
 
 
 @end

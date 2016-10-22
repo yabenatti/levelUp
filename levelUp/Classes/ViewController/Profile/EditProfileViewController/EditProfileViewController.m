@@ -54,12 +54,16 @@
         if(isSuccess) {
             self.currentUser = user;
             self.petNameTextField.text = user.petName;
-            self.birthdateTextField.text = [AppUtils formatDate:user.birthDate];
-            self.ownerNameTextField.text = user.userName;
+            if(![user.birthDate isKindOfClass:[NSNull class]]) {
+                self.birthdateTextField.text = [AppUtils formatDate:user.birthDate];
+            }
+            if(![user.userName isKindOfClass:[NSNull class]]) {
+                self.ownerNameTextField.text = user.userName;
+            }
             
-            [self.editImageButton setImage:[UIImage imageNamed:@"ic_person" ] forState:UIControlStateNormal];
             
-            //            [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.profileImageView];
+            [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person"
+                           andImageView:self.editImageButton.imageView];
         
         } else {
             [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];

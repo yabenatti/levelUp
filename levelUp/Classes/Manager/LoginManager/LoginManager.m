@@ -82,7 +82,7 @@ static LoginManager *sharedInstance = nil;
             [AppUtils saveToUserDefault:beacon.beaconUniqueId withKey:BEACON_UNIQUE_ID];
             [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.major] withKey:BEACON_MAJOR];
             [AppUtils saveToUserDefault:[NSString stringWithFormat:@"%d", beacon.minor] withKey:BEACON_MINOR];
-            
+            [AppUtils saveToUserDefault:beacon.petImage withKey:PET_IMAGE];
             [AppUtils saveToUserDefault:@"YES" withKey:DID_REGISTER];
             completion(YES, nil, nil);
             

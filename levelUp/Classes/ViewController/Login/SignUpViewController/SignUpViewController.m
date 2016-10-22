@@ -90,8 +90,6 @@
     
     if([segue.identifier isEqualToString:@"registrationSegue"]) {
         RegistrationViewController *vc = [segue destinationViewController];
-        vc.parameters = [NSMutableDictionary new];
-        vc.parameters = sender;
     }
 }
 

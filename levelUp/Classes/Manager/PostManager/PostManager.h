@@ -15,5 +15,7 @@
 - (void)getAllPostsWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error)) completion;
 - (void)getMyPostsWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error)) completion;
 -(void)createPostWithParameters:(NSMutableDictionary*)parameters imageData:(NSData*)image withCompletion:(void (^)(BOOL isSuccess, NSString *message, NSError *error))completion;
+- (void)createCommentWithPostId:(NSString *)postId andParameters:(NSDictionary *)parameters andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion;
+- (void)getCommentsWithPostId:(NSString *)postId andCompletion:(void(^)(BOOL isSuccess, NSMutableArray *comments, NSString *message, NSError *error)) completion;
 
 @end

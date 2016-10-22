@@ -37,6 +37,8 @@
 		19EE37241D529B45009BA896 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EE37231D529B45009BA896 /* Profile.storyboard */; };
 		19EE37271D529C45009BA896 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE37261D529C45009BA896 /* ProfileViewController.m */; };
 		26CDD9B8080103B55AE86ED9 /* libPods-levelUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A88D21C7EDC29E760E26AF6 /* libPods-levelUp.a */; };
+		BE1B2F7C1DBB94DB00793015 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B2F7B1DBB94DB00793015 /* CommentViewController.m */; };
+		BE1B2F801DBB961000793015 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B2F7F1DBB961000793015 /* CommentTableViewCell.m */; };
 		BEB8357F1DB9246400132A7A /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB8357E1DB9246400132A7A /* Post.storyboard */; };
 		BEB835811DB934A200132A7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB835801DB934A200132A7A /* Images.xcassets */; };
 		BEC3A4D41DA035E000B14C49 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3A4D31DA035E000B14C49 /* TabBarViewController.m */; };
@@ -114,6 +116,10 @@
 		4A88D21C7EDC29E760E26AF6 /* libPods-levelUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-levelUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C361523AD9FE4D47DBB74C /* Pods-levelUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.debug.xcconfig"; sourceTree = "<group>"; };
 		991C9ED4A346721930D46C95 /* Pods-levelUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.release.xcconfig"; sourceTree = "<group>"; };
+		BE1B2F7A1DBB94DB00793015 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		BE1B2F7B1DBB94DB00793015 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		BE1B2F7E1DBB961000793015 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
+		BE1B2F7F1DBB961000793015 /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
 		BEB8357E1DB9246400132A7A /* Post.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		BEB835801DB934A200132A7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEC3A4D21DA035E000B14C49 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
@@ -409,6 +415,7 @@
 		19EE37021D52950A009BA896 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				BE1B2F791DBB94C600793015 /* CommentViewController */,
 				199AA7461D577245001E3F4A /* NewPostViewController */,
 				19EE37041D52950A009BA896 /* TimelineViewController */,
 			);
@@ -488,6 +495,25 @@
 				4A88D21C7EDC29E760E26AF6 /* libPods-levelUp.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE1B2F791DBB94C600793015 /* CommentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BE1B2F7D1DBB960000793015 /* CommentTableViewCell */,
+				BE1B2F7A1DBB94DB00793015 /* CommentViewController.h */,
+				BE1B2F7B1DBB94DB00793015 /* CommentViewController.m */,
+			);
+			path = CommentViewController;
+			sourceTree = "<group>";
+		};
+		BE1B2F7D1DBB960000793015 /* CommentTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				BE1B2F7E1DBB961000793015 /* CommentTableViewCell.h */,
+				BE1B2F7F1DBB961000793015 /* CommentTableViewCell.m */,
+			);
+			path = CommentTableViewCell;
 			sourceTree = "<group>";
 		};
 		BEC3A4D11DA035B900B14C49 /* TabBarController */ = {
@@ -661,11 +687,13 @@
 				19534DF01D49957D00309D28 /* AppDelegate.m in Sources */,
 				191486801D84A2E6001CA224 /* User.m in Sources */,
 				19EE37201D529AFD009BA896 /* FollowingViewController.m in Sources */,
+				BE1B2F7C1DBB94DB00793015 /* CommentViewController.m in Sources */,
 				191486761D847E3A001CA224 /* JSONResponseSerializerWithData.m in Sources */,
 				1974B8911D59365300777CF3 /* AppUtils.m in Sources */,
 				191486921D85935A001CA224 /* Comment.m in Sources */,
 				191486951D85936C001CA224 /* Post.m in Sources */,
 				19EE37161D52995E009BA896 /* PostTableViewCell.m in Sources */,
+				BE1B2F801DBB961000793015 /* CommentTableViewCell.m in Sources */,
 				19534DED1D49957D00309D28 /* main.m in Sources */,
 				1914867A1D847E4E001CA224 /* LoginManager.m in Sources */,
 				19EE37271D529C45009BA896 /* ProfileViewController.m in Sources */,
