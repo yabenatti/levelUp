@@ -7,7 +7,10 @@
 //
 
 
-#define BASE_URL @"http://192.168.0.82:3000"
+//#define BASE_URL @"http://192.168.0.82:3000"
+#define BASE_URL @"http://dev.ringa.com.br/level-up-api"
+
+
 #define API @"/api"
 
 #define URL_LOGIN                           BASE_URL API @"/sessions"

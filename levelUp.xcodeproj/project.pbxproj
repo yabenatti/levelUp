@@ -538,6 +538,7 @@
 				19534DE51D49957D00309D28 /* Resources */,
 				E735E6D6261F3584C74A43C0 /* [CP] Embed Pods Frameworks */,
 				CAE3C78234696BE2110E1D45 /* [CP] Copy Pods Resources */,
+				9882D53CCF9897A9767511EC /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -577,7 +578,7 @@
 				TargetAttributes = {
 					19534DE61D49957D00309D28 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = A729CUJG9B;
+						DevelopmentTeam = 838PHD3FZ3;
 						ProvisioningStyle = Automatic;
 					};
 					19534DFF1D49957D00309D28 = {
@@ -631,6 +632,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		9882D53CCF9897A9767511EC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-levelUp/Pods-levelUp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A138F8746544F925B1C4639D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -836,7 +852,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A729CUJG9B;
+				DEVELOPMENT_TEAM = 838PHD3FZ3;
 				INFOPLIST_FILE = levelUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -850,7 +866,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = A729CUJG9B;
+				DEVELOPMENT_TEAM = 838PHD3FZ3;
 				INFOPLIST_FILE = levelUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

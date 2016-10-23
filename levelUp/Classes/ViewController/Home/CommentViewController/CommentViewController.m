@@ -46,7 +46,7 @@
     [self.commentButton setUserInteractionEnabled:NO];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 140;
+    self.tableView.estimatedRowHeight = 70;
 }
 
 -(void)viewWillAppear:(BOOL)animated {

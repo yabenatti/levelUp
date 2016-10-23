@@ -81,6 +81,8 @@
                         self.myPosts = posts;
                         
                         [self.postsTableView reloadData];
+                        [self.emptyView setHidden:YES];
+
                     } else {
                         [self.emptyView setHidden:NO];
                     }

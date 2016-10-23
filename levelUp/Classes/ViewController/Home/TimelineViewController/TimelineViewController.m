@@ -139,7 +139,6 @@
 
 - (void)beaconManager:(id)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
     CLBeacon *nearestBeacon = beacons.firstObject;
-    NSDictionary *postInfo = [NSDictionary new];
     if (nearestBeacon) {
         if(!self.enteredRegion) {
             NSString *major = [NSString stringWithFormat:@"%@",[AppUtils retrieveFromUserDefaultWithKey:BEACON_MAJOR]];

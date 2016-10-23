@@ -39,6 +39,8 @@
     label.text = NSLocalizedString(@"Registration", @"");
     [label sizeToFit];
     self.navigationItem.titleView = label;
+    
+    [self.registerButton setUserInteractionEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -123,6 +125,8 @@
     [self.userPictureButton.layer setCornerRadius:self.userPictureButton.frame.size.width/2];
     [self.userPictureButton.layer setMasksToBounds:YES];
     
+    [self.registerButton setUserInteractionEnabled:YES];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
@@ -130,6 +134,7 @@
 #pragma mark - IBActions
 
 - (IBAction)registerButtonTouched:(id)sender {
+    [self.registerButton setUserInteractionEnabled:NO];
     
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc]initWithDictionary:@{@"beacon[unique_id]" : self.beaconIdTextField.text,
                                                                                       @"beacon[major]" : self.beaconMajorTextField.text,

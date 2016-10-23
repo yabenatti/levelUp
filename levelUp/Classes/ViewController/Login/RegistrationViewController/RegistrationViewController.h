@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *beaconIdTextField;
 @property (weak, nonatomic) IBOutlet UITextField *beaconMinorTextField;
 @property (weak, nonatomic) IBOutlet UITextField *beaconMajorTextField;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
 - (IBAction)registerButtonTouched:(id)sender;
 - (IBAction)pictureButtonTouched:(id)sender;

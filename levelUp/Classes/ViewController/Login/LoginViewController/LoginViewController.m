@@ -29,8 +29,8 @@
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.navigationBar.translucent = YES;
     
-    self.usernameTextField.text = @"user@example.com";
-    self.userPasswordTextField.text = @"123456";
+    self.usernameTextField.text = @"min.benatti@gmail.com";
+    self.userPasswordTextField.text = @"12345";
         
     [self.loginButton.layer setCornerRadius:4.0f];
 }
