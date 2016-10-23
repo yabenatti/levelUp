@@ -82,8 +82,8 @@
     
     self.petImageData = nil;
 
-
-    
+    [self.loadView stopAnimating];
+    [self.loadView setHidesWhenStopped:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -104,6 +104,9 @@
 }
 
 - (void)postTouched:(id)sender {
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    [self.loadView startAnimating];
+
     NSMutableDictionary *parameters = [NSMutableDictionary new];
 
     if(self.petImageData != nil) {
@@ -112,14 +115,19 @@
         [parameters setValue:self.petImageData forKey:@"post[image]"];
         
         [[PostManager sharedInstance]createPostWithParameters:parameters imageData:self.petImageData withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+            [self.loadView stopAnimating];
+            self.navigationItem.rightBarButtonItem.enabled = YES;
             if(isSuccess) {
+                self.captionTextView.text = @"Write your caption :)";
+                [self.captionTextView setTextColor:[UIColor lightGrayColor]];
+                self.imageButton = nil;
+                self.petImageData = nil;
+
                 [self.tabBarController setSelectedIndex:0];
             } else {
                 [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
             }
         }];
-
-        
     }
     
 }

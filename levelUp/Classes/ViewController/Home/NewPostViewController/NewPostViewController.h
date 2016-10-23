@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadView;
 
 - (IBAction)imageButtonTouched:(id)sender;
 - (IBAction)twitterButtonTouched:(id)sender;

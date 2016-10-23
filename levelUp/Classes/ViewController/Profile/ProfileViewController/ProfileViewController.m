@@ -60,6 +60,9 @@
     [self.profileImageView.layer setCornerRadius:28.0f];
     [self.profileImageView.layer setBorderColor:[COLOR_LIGHT_BLUE CGColor]];
     [self.profileImageView.layer setBorderWidth:2.0f];
+    
+    self.postsTableView.rowHeight = UITableViewAutomaticDimension;
+    self.postsTableView.estimatedRowHeight = 450;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -194,10 +197,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 450;
 }
 
 

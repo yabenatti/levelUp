@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BWe-m8-gts">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BWe-m8-gts">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -108,6 +108,7 @@
                                     <action selector="facebookButtonTouched:" destination="R5S-v0-xwa" eventType="touchUpInside" id="AMZ-uN-Gd3"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="zzZ-7v-AFs"/>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -115,9 +116,11 @@
                             <constraint firstItem="YIu-8A-7e1" firstAttribute="top" secondItem="VYv-aq-UqQ" secondAttribute="bottom" constant="20" id="8EU-bs-JgK"/>
                             <constraint firstItem="VYv-aq-UqQ" firstAttribute="top" secondItem="3IM-Cl-9Ph" secondAttribute="top" constant="20" id="Aqp-gN-1AJ"/>
                             <constraint firstItem="YIu-8A-7e1" firstAttribute="leading" secondItem="3IM-Cl-9Ph" secondAttribute="leading" constant="20" id="Lqn-q6-rW7"/>
+                            <constraint firstItem="zzZ-7v-AFs" firstAttribute="centerY" secondItem="3IM-Cl-9Ph" secondAttribute="centerY" id="RgA-bp-vjc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YIu-8A-7e1" secondAttribute="trailing" constant="20" id="Xjo-fl-5tc"/>
                             <constraint firstItem="Ekt-2M-ggi" firstAttribute="leading" secondItem="3IM-Cl-9Ph" secondAttribute="leading" id="YcW-uL-DZd"/>
                             <constraint firstItem="Ne9-wR-Gmj" firstAttribute="centerX" secondItem="3IM-Cl-9Ph" secondAttribute="centerX" multiplier="1.5" id="Yvu-Ak-Oos"/>
+                            <constraint firstItem="zzZ-7v-AFs" firstAttribute="centerX" secondItem="3IM-Cl-9Ph" secondAttribute="centerX" id="ddi-tl-1L2"/>
                             <constraint firstItem="vHc-GA-Ypa" firstAttribute="top" secondItem="Ekt-2M-ggi" secondAttribute="bottom" constant="50" id="h4T-FL-Wow"/>
                             <constraint firstItem="Ne9-wR-Gmj" firstAttribute="width" secondItem="Ne9-wR-Gmj" secondAttribute="height" multiplier="1:1" id="jd9-a2-O3i"/>
                             <constraint firstItem="VYv-aq-UqQ" firstAttribute="centerX" secondItem="3IM-Cl-9Ph" secondAttribute="centerX" id="kFg-ff-krl"/>
@@ -132,6 +135,7 @@
                         <outlet property="captionTextView" destination="jdF-kg-o22" id="L1h-of-Sdx"/>
                         <outlet property="facebookButton" destination="Ne9-wR-Gmj" id="WXZ-TV-geB"/>
                         <outlet property="imageButton" destination="xxz-mC-ULu" id="T3q-DY-ksN"/>
+                        <outlet property="loadView" destination="zzZ-7v-AFs" id="tzW-RR-byC"/>
                         <outlet property="petImage" destination="VYv-aq-UqQ" id="SvJ-rS-S94"/>
                         <outlet property="petNameLabel" destination="YIu-8A-7e1" id="boU-oi-oQO"/>
                         <outlet property="twitterButton" destination="vHc-GA-Ypa" id="R7y-BQ-xTu"/>

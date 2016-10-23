@@ -58,6 +58,9 @@
     
     //Inicializacoes
     self.posts = [NSArray new];
+    
+    self.postsTableView.rowHeight = UITableViewAutomaticDimension;
+    self.postsTableView.estimatedRowHeight = 450;
 
 }
 
@@ -250,10 +253,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 450;
 }
 
 #pragma mark - Timeline Cell Delegate

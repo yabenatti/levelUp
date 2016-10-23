@@ -143,6 +143,7 @@
                                                                                        }];
     
   [[SignupManager sharedInstance]registerBeaconWithParameters:parameters imageData:self.petImage withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+      [self.registerButton setUserInteractionEnabled:YES];
       if(isSuccess) {
           [self.navigationController dismissViewControllerAnimated:YES completion:nil];
       } else {
