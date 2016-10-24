@@ -67,9 +67,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSNumber *motionOnlyEnabled;
 
 /**
+ *  Time in seconds after what beacons should stop broadcasting 
+ *  counting from the last device movement.
+ */
+@property (nonatomic, readonly) NSNumber *motionOnlyDelay;
+
+/**
  *  Designated initializer.
  *
- *  @param data Dictionary provided by the Estimote cloud.
+ *  @param dictionary Dictionary provided by the Estimote cloud.
  *
  *  @return Initialized object.
  */

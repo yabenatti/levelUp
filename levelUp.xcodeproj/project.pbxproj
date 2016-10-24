@@ -36,7 +36,7 @@
 		19EE37201D529AFD009BA896 /* FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE371D1D529AFD009BA896 /* FollowingViewController.m */; };
 		19EE37241D529B45009BA896 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EE37231D529B45009BA896 /* Profile.storyboard */; };
 		19EE37271D529C45009BA896 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE37261D529C45009BA896 /* ProfileViewController.m */; };
-		26CDD9B8080103B55AE86ED9 /* libPods-levelUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A88D21C7EDC29E760E26AF6 /* libPods-levelUp.a */; };
+		8192161CB257FCE7FE705245 /* libPods-levelUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11630ABCF1E8CBEFDA4EAB7 /* libPods-levelUp.a */; };
 		BE1B2F7C1DBB94DB00793015 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B2F7B1DBB94DB00793015 /* CommentViewController.m */; };
 		BE1B2F801DBB961000793015 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B2F7F1DBB961000793015 /* CommentTableViewCell.m */; };
 		BEB8357F1DB9246400132A7A /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB8357E1DB9246400132A7A /* Post.storyboard */; };
@@ -113,9 +113,7 @@
 		19EE37231D529B45009BA896 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		19EE37251D529C45009BA896 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		19EE37261D529C45009BA896 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		4A88D21C7EDC29E760E26AF6 /* libPods-levelUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-levelUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		54C361523AD9FE4D47DBB74C /* Pods-levelUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.debug.xcconfig"; sourceTree = "<group>"; };
-		991C9ED4A346721930D46C95 /* Pods-levelUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.release.xcconfig"; sourceTree = "<group>"; };
+		3D4C4E5A6305E5992E029EAA /* Pods-levelUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.release.xcconfig"; sourceTree = "<group>"; };
 		BE1B2F7A1DBB94DB00793015 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		BE1B2F7B1DBB94DB00793015 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		BE1B2F7E1DBB961000793015 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -124,6 +122,8 @@
 		BEB835801DB934A200132A7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEC3A4D21DA035E000B14C49 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
 		BEC3A4D31DA035E000B14C49 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
+		C11630ABCF1E8CBEFDA4EAB7 /* libPods-levelUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-levelUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C81D33AC84B56DCA41785147 /* Pods-levelUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26CDD9B8080103B55AE86ED9 /* libPods-levelUp.a in Frameworks */,
+				8192161CB257FCE7FE705245 /* libPods-levelUp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,13 +145,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0274A4B20300072F7F0C007F /* Pods */ = {
+		00B80EB8480D70BAE1C867E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				54C361523AD9FE4D47DBB74C /* Pods-levelUp.debug.xcconfig */,
-				991C9ED4A346721930D46C95 /* Pods-levelUp.release.xcconfig */,
+				C11630ABCF1E8CBEFDA4EAB7 /* libPods-levelUp.a */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		191485801D846F87001CA224 /* LoginManager */ = {
@@ -244,8 +243,8 @@
 				19EE37131D529949009BA896 /* PostTableViewCell */,
 				19534E031D49957D00309D28 /* levelUpTests */,
 				19534DE81D49957D00309D28 /* Products */,
-				0274A4B20300072F7F0C007F /* Pods */,
-				85613DAA9AB30DDDA979D9B2 /* Frameworks */,
+				52894763549803C899838C5C /* Pods */,
+				00B80EB8480D70BAE1C867E8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -489,12 +488,13 @@
 			path = ProfileViewController;
 			sourceTree = "<group>";
 		};
-		85613DAA9AB30DDDA979D9B2 /* Frameworks */ = {
+		52894763549803C899838C5C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4A88D21C7EDC29E760E26AF6 /* libPods-levelUp.a */,
+				C81D33AC84B56DCA41785147 /* Pods-levelUp.debug.xcconfig */,
+				3D4C4E5A6305E5992E029EAA /* Pods-levelUp.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		BE1B2F791DBB94C600793015 /* CommentViewController */ = {
@@ -538,7 +538,6 @@
 				19534DE51D49957D00309D28 /* Resources */,
 				E735E6D6261F3584C74A43C0 /* [CP] Embed Pods Frameworks */,
 				CAE3C78234696BE2110E1D45 /* [CP] Copy Pods Resources */,
-				9882D53CCF9897A9767511EC /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -578,7 +577,7 @@
 				TargetAttributes = {
 					19534DE61D49957D00309D28 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 838PHD3FZ3;
+						DevelopmentTeam = A729CUJG9B;
 						ProvisioningStyle = Automatic;
 					};
 					19534DFF1D49957D00309D28 = {
@@ -632,21 +631,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9882D53CCF9897A9767511EC /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-levelUp/Pods-levelUp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A138F8746544F925B1C4639D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -848,11 +832,11 @@
 		};
 		19534E0B1D49957D00309D28 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 54C361523AD9FE4D47DBB74C /* Pods-levelUp.debug.xcconfig */;
+			baseConfigurationReference = C81D33AC84B56DCA41785147 /* Pods-levelUp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 838PHD3FZ3;
+				DEVELOPMENT_TEAM = A729CUJG9B;
 				INFOPLIST_FILE = levelUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -862,11 +846,11 @@
 		};
 		19534E0C1D49957D00309D28 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 991C9ED4A346721930D46C95 /* Pods-levelUp.release.xcconfig */;
+			baseConfigurationReference = 3D4C4E5A6305E5992E029EAA /* Pods-levelUp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 838PHD3FZ3;
+				DEVELOPMENT_TEAM = A729CUJG9B;
 				INFOPLIST_FILE = levelUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

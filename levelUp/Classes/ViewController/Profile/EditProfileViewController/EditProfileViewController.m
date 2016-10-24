@@ -62,8 +62,13 @@
             }
             
             
-            [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person"
-                           andImageView:self.editImageButton.imageView];
+//            [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person"
+//                           andImageView:self.editImageButton.imageView];
+            
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]]];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *img = [[UIImage alloc] initWithData:data];
+            [self.editImageButton setImage:img forState:UIControlStateNormal];
         
         } else {
             [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
