@@ -14,11 +14,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *petImage;
 @property (weak, nonatomic) IBOutlet UILabel *petNameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
-@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
-@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
+
 
 - (IBAction)imageButtonTouched:(id)sender;
-- (IBAction)twitterButtonTouched:(id)sender;
-- (IBAction)facebookButtonTouched:(id)sender;
+
 
 @end

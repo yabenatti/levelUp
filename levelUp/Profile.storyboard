@@ -184,7 +184,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="480"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Znj-gT-33Q" id="oPq-ao-DUc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="479"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="480"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ir-lk-V9K">
@@ -200,14 +200,14 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pxv-DX-n4w">
-                                                    <rect key="frame" x="0.0" y="105" width="375" height="256"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pxv-DX-n4w">
+                                                    <rect key="frame" x="0.0" y="106" width="375" height="256"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="256" id="eY6-h8-eGh"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Picture's caption" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ia1-bY-3Sd">
-                                                    <rect key="frame" x="20" y="381" width="317" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture's caption" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ia1-bY-3Sd">
+                                                    <rect key="frame" x="20" y="382" width="317" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -236,8 +236,8 @@
                                                     <state key="normal" image="ic_question_answer"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="ZeW-dD-ARL"/>
                                                             <exclude reference="2Wt-kd-63d"/>
+                                                            <exclude reference="ZeW-dD-ARL"/>
                                                         </mask>
                                                     </variation>
                                                     <connections>

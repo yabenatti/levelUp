@@ -42,6 +42,7 @@
 		BEB8357F1DB9246400132A7A /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB8357E1DB9246400132A7A /* Post.storyboard */; };
 		BEB835811DB934A200132A7A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB835801DB934A200132A7A /* Images.xcassets */; };
 		BEC3A4D41DA035E000B14C49 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC3A4D31DA035E000B14C49 /* TabBarViewController.m */; };
+		BED2A30E1DCBB4A500AA0B09 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED2A30D1DCBB4A500AA0B09 /* ShareViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,8 @@
 		BEB835801DB934A200132A7A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEC3A4D21DA035E000B14C49 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
 		BEC3A4D31DA035E000B14C49 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
+		BED2A30C1DCBB4A500AA0B09 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		BED2A30D1DCBB4A500AA0B09 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		C11630ABCF1E8CBEFDA4EAB7 /* libPods-levelUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-levelUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C81D33AC84B56DCA41785147 /* Pods-levelUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -375,6 +378,7 @@
 		19A9E9551D4E48BD00588822 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				BED2A30A1DCBB48200AA0B09 /* Post */,
 				BEC3A4D11DA035B900B14C49 /* TabBarController */,
 				19EE37171D529AFD009BA896 /* Profile */,
 				19EE37021D52950A009BA896 /* Home */,
@@ -523,6 +527,23 @@
 				BEC3A4D31DA035E000B14C49 /* TabBarViewController.m */,
 			);
 			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		BED2A30A1DCBB48200AA0B09 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				BED2A30B1DCBB48200AA0B09 /* ShareViewController */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		BED2A30B1DCBB48200AA0B09 /* ShareViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BED2A30C1DCBB4A500AA0B09 /* ShareViewController.h */,
+				BED2A30D1DCBB4A500AA0B09 /* ShareViewController.m */,
+			);
+			path = ShareViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -701,6 +722,7 @@
 				199AA7491D57725B001E3F4A /* NewPostViewController.m in Sources */,
 				19A9E95E1D4E48E900588822 /* SignUpViewController.m in Sources */,
 				191486831D84A60D001CA224 /* PostManager.m in Sources */,
+				BED2A30E1DCBB4A500AA0B09 /* ShareViewController.m in Sources */,
 				191486891D84A629001CA224 /* SignupManager.m in Sources */,
 				199AA74D1D5778AD001E3F4A /* EditProfileViewController.m in Sources */,
 				19A9E95B1D4E48DB00588822 /* LoginViewController.m in Sources */,

@@ -94,68 +94,37 @@
                                     <constraint firstItem="jdF-kg-o22" firstAttribute="leading" secondItem="Ekt-2M-ggi" secondAttribute="leading" constant="5" id="fwz-g6-dhD"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHc-GA-Ypa">
-                                <rect key="frame" x="69" y="413" width="50" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="0mA-2M-QbT"/>
-                                    <constraint firstAttribute="width" secondItem="vHc-GA-Ypa" secondAttribute="height" multiplier="1:1" id="gJy-Bf-VKT"/>
-                                </constraints>
-                                <state key="normal" image="twitter"/>
-                                <connections>
-                                    <action selector="twitterButtonTouched:" destination="R5S-v0-xwa" eventType="touchUpInside" id="lfM-wT-djS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ne9-wR-Gmj">
-                                <rect key="frame" x="257" y="413" width="50" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="R7S-MZ-3HE"/>
-                                    <constraint firstAttribute="width" secondItem="Ne9-wR-Gmj" secondAttribute="height" multiplier="1:1" id="rfz-DA-A4x"/>
-                                </constraints>
-                                <state key="normal" image="fb"/>
-                                <connections>
-                                    <action selector="facebookButtonTouched:" destination="R5S-v0-xwa" eventType="touchUpInside" id="AMZ-uN-Gd3"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Ne9-wR-Gmj" firstAttribute="top" secondItem="vHc-GA-Ypa" secondAttribute="top" id="7uP-2h-4dF"/>
                             <constraint firstItem="YIu-8A-7e1" firstAttribute="top" secondItem="VYv-aq-UqQ" secondAttribute="bottom" constant="20" id="8EU-bs-JgK"/>
                             <constraint firstItem="VYv-aq-UqQ" firstAttribute="top" secondItem="3IM-Cl-9Ph" secondAttribute="top" constant="20" id="Aqp-gN-1AJ"/>
                             <constraint firstItem="YIu-8A-7e1" firstAttribute="leading" secondItem="3IM-Cl-9Ph" secondAttribute="leading" constant="20" id="Lqn-q6-rW7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YIu-8A-7e1" secondAttribute="trailing" constant="20" id="Xjo-fl-5tc"/>
                             <constraint firstItem="Ekt-2M-ggi" firstAttribute="leading" secondItem="3IM-Cl-9Ph" secondAttribute="leading" id="YcW-uL-DZd"/>
-                            <constraint firstItem="Ne9-wR-Gmj" firstAttribute="centerX" secondItem="3IM-Cl-9Ph" secondAttribute="centerX" multiplier="1.5" id="Yvu-Ak-Oos"/>
-                            <constraint firstItem="vHc-GA-Ypa" firstAttribute="top" secondItem="Ekt-2M-ggi" secondAttribute="bottom" constant="50" id="h4T-FL-Wow"/>
-                            <constraint firstItem="Ne9-wR-Gmj" firstAttribute="width" secondItem="Ne9-wR-Gmj" secondAttribute="height" multiplier="1:1" id="jd9-a2-O3i"/>
                             <constraint firstItem="VYv-aq-UqQ" firstAttribute="centerX" secondItem="3IM-Cl-9Ph" secondAttribute="centerX" id="kFg-ff-krl"/>
                             <constraint firstAttribute="trailing" secondItem="Ekt-2M-ggi" secondAttribute="trailing" id="l5N-sY-7hQ"/>
                             <constraint firstItem="Ekt-2M-ggi" firstAttribute="top" secondItem="YIu-8A-7e1" secondAttribute="bottom" constant="20" id="tQJ-eU-0dD"/>
-                            <constraint firstItem="vHc-GA-Ypa" firstAttribute="centerX" secondItem="3IM-Cl-9Ph" secondAttribute="centerX" multiplier="0.5" id="x6a-a5-8Iq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8EK-ju-6sz"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="captionTextView" destination="jdF-kg-o22" id="L1h-of-Sdx"/>
-                        <outlet property="facebookButton" destination="Ne9-wR-Gmj" id="WXZ-TV-geB"/>
                         <outlet property="imageButton" destination="xxz-mC-ULu" id="T3q-DY-ksN"/>
                         <outlet property="petImage" destination="VYv-aq-UqQ" id="SvJ-rS-S94"/>
                         <outlet property="petNameLabel" destination="YIu-8A-7e1" id="boU-oi-oQO"/>
-                        <outlet property="twitterButton" destination="vHc-GA-Ypa" id="R7y-BQ-xTu"/>
-                        <segue destination="TqC-Fb-s9d" kind="show" id="2a0-M4-pKy"/>
+                        <segue destination="TqC-Fb-s9d" kind="show" identifier="shareSegue" id="2a0-M4-pKy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jgU-aa-Sfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7" y="-315"/>
         </scene>
-        <!--View Controller-->
+        <!--Share View Controller-->
         <scene sceneID="Pim-Be-n5o">
             <objects>
-                <viewController id="TqC-Fb-s9d" sceneMemberID="viewController">
+                <viewController id="TqC-Fb-s9d" customClass="ShareViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyy-x7-Kw4"/>
                         <viewControllerLayoutGuide type="bottom" id="p49-oE-xLz"/>
@@ -163,8 +132,64 @@
                     <view key="view" contentMode="scaleToFill" id="84u-7M-Lng">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dIt-T5-MWz">
+                                <rect key="frame" x="0.0" y="20" width="375" height="256"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="M8O-16-PV0"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture's caption" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCd-Fb-9U7">
+                                <rect key="frame" x="29" y="293" width="317" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbX-Wf-aps">
+                                <rect key="frame" x="69" y="359" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="byM-pb-1va"/>
+                                    <constraint firstAttribute="width" secondItem="bbX-Wf-aps" secondAttribute="height" multiplier="1:1" id="y76-CV-3yv"/>
+                                </constraints>
+                                <state key="normal" image="twitter"/>
+                                <connections>
+                                    <action selector="twitterButtonTouched:" destination="TqC-Fb-s9d" eventType="touchUpInside" id="z1V-eG-BhC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cY6-kC-4r9">
+                                <rect key="frame" x="256.5" y="359" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="tQH-JY-DaE"/>
+                                </constraints>
+                                <state key="normal" image="fb"/>
+                                <connections>
+                                    <action selector="facebookButtonTouched:" destination="TqC-Fb-s9d" eventType="touchUpInside" id="DIH-n2-7Ij"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bbX-Wf-aps" firstAttribute="top" secondItem="bCd-Fb-9U7" secondAttribute="bottom" constant="50" id="3Qe-KC-gjC"/>
+                            <constraint firstItem="cY6-kC-4r9" firstAttribute="top" secondItem="bbX-Wf-aps" secondAttribute="top" id="5wd-Lu-E2l"/>
+                            <constraint firstItem="dIt-T5-MWz" firstAttribute="leading" secondItem="84u-7M-Lng" secondAttribute="leading" id="Oc8-CO-ecJ"/>
+                            <constraint firstItem="cY6-kC-4r9" firstAttribute="centerX" secondItem="84u-7M-Lng" secondAttribute="centerX" multiplier="1.5" id="Oi6-ox-n6F"/>
+                            <constraint firstItem="bCd-Fb-9U7" firstAttribute="top" secondItem="dIt-T5-MWz" secondAttribute="bottom" constant="17" id="UUM-rt-IVS"/>
+                            <constraint firstItem="bCd-Fb-9U7" firstAttribute="leading" secondItem="84u-7M-Lng" secondAttribute="leading" constant="29" id="daa-tM-vJx"/>
+                            <constraint firstAttribute="trailing" secondItem="bCd-Fb-9U7" secondAttribute="trailing" constant="29" id="k9M-Sa-eeS"/>
+                            <constraint firstItem="bbX-Wf-aps" firstAttribute="centerX" secondItem="84u-7M-Lng" secondAttribute="centerX" multiplier="0.5" id="kBX-kK-rfe"/>
+                            <constraint firstAttribute="trailing" secondItem="dIt-T5-MWz" secondAttribute="trailing" id="lwi-z3-w6X"/>
+                            <constraint firstItem="dIt-T5-MWz" firstAttribute="top" secondItem="jyy-x7-Kw4" secondAttribute="bottom" constant="20" id="u8w-n5-bOm"/>
+                            <constraint firstItem="cY6-kC-4r9" firstAttribute="width" secondItem="cY6-kC-4r9" secondAttribute="height" multiplier="1:1" id="xX2-2t-5bN"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="facebookButton" destination="cY6-kC-4r9" id="YDT-9B-nAX"/>
+                        <outlet property="postCaptionTextLabel" destination="bCd-Fb-9U7" id="rPO-63-Ce9"/>
+                        <outlet property="postImageView" destination="dIt-T5-MWz" id="9WR-dJ-HEp"/>
+                        <outlet property="twitterButton" destination="bbX-Wf-aps" id="ZRq-c3-h05"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="In4-Fg-xl8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

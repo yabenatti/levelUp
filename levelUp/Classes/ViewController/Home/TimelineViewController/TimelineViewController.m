@@ -171,7 +171,7 @@
                                                                                                    }];
                 
                 [AppUtils startLoadingInView:self.view];
-                [[PostManager sharedInstance]createPostWithParameters:parameters imageData:petImageData withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+                [[PostManager sharedInstance]createPostWithParameters:parameters imageData:petImageData withCompletion:^(BOOL isSuccess, Post *post, NSString *message, NSError *error) {
                     [AppUtils stopLoadingInView:self.view];
                     if(isSuccess) {
                         [self getAllPosts];

@@ -7,18 +7,14 @@
 //
 
 #import "NewPostViewController.h"
+#import "ShareViewController.h"
 #import "AppUtils.h"
 #import "PostManager.h"
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FBSDKShareKit/FBSDKShareDialog.h>
-#import <FBSDKShareKit/FBSDKShareLinkContent.h>
-#import <FBSDKShareKit/FBSDKShareAPI.h>
 
 @interface NewPostViewController ()
 
 @property (strong, nonatomic) NSData *petImageData;
 @property (strong, nonatomic) NSString *captionText;
-@property (strong, nonatomic) FBSDKShareLinkContent *content;
 
 @end
 
@@ -49,15 +45,9 @@
     self.navigationItem.rightBarButtonItem = postItem;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.navigationItem.leftBarButtonItem = cancelItem;
-
-    self.content = [[FBSDKShareLinkContent alloc] init];
     
     [self.imageButton.layer setCornerRadius:25.0f];
     [self.imageButton setBackgroundColor:COLOR_LIGHT_BLUE];
-    [self.twitterButton.layer setCornerRadius:25.0f];
-    [self.twitterButton setBackgroundColor:COLOR_LIGHT_BLUE];
-    [self.facebookButton.layer setCornerRadius:25.0f];
-    [self.facebookButton setBackgroundColor:COLOR_LIGHT_BLUE];
     [self.petImage.layer setCornerRadius:40.0f];
     [self.petImage.layer setBorderColor:[COLOR_LIGHT_BLUE CGColor]];
     [self.petImage.layer setBorderWidth:2.0f];
@@ -108,7 +98,7 @@
         [parameters setValue:self.petImageData forKey:@"post[image]"];
         
         [AppUtils startLoadingInView:self.view];
-        [[PostManager sharedInstance]createPostWithParameters:parameters imageData:self.petImageData withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        [[PostManager sharedInstance]createPostWithParameters:parameters imageData:self.petImageData withCompletion:^(BOOL isSuccess, Post *post, NSString *message, NSError *error) {
             [AppUtils stopLoadingInView:self.view];
             self.navigationItem.rightBarButtonItem.enabled = YES;
             if(isSuccess) {
@@ -116,8 +106,9 @@
                 [self.captionTextView setTextColor:[UIColor lightGrayColor]];
                 self.imageButton = nil;
                 self.petImageData = nil;
-
-                [self.tabBarController setSelectedIndex:0];
+                
+                [self performSegueWithIdentifier:@"shareSegue" sender:[NSString stringWithFormat:@"%d", post.postId]];
+                
             } else {
                 [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
             }
@@ -154,27 +145,20 @@
     [textView resignFirstResponder];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"shareSegue"]) {
+        ShareViewController *vc = [segue destinationViewController];
+        vc.postId = sender;
+    }
 }
-*/
+
 
 - (IBAction)imageButtonTouched:(id)sender {
     [self chooseImageAlert];
-}
-
-- (IBAction)twitterButtonTouched:(id)sender {
-}
-
-- (IBAction)facebookButtonTouched:(id)sender {
-    self.content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
-    
-    [FBSDKShareAPI shareWithContent:self.content delegate:nil];
 }
 
 #pragma mark - Image

@@ -71,7 +71,7 @@ static PostManager *sharedInstance = nil;
     }];
 }
 
--(void)createPostWithParameters:(NSMutableDictionary*)parameters imageData:(NSData*)image withCompletion:(void (^)(BOOL isSuccess, NSString *message, NSError *error))completion {
+-(void)createPostWithParameters:(NSMutableDictionary*)parameters imageData:(NSData*)image withCompletion:(void (^)(BOOL isSuccess, Post *post, NSString *message, NSError *error))completion {
     
     NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
     
@@ -80,9 +80,12 @@ static PostManager *sharedInstance = nil;
         [parameters removeObjectForKey:@"post[image]"];
         [self uploadFileToAPI:parameters atPath:URL_CREATE_POST(uid) requestType:@"MULTIPART-IMAGE" imageData:image withCompletion:^(id response, BOOL isSuccess, NSError *error) {
             if (isSuccess) {
-                completion(YES, nil, nil);
+                Post *post = [Post new];
+                post = [post parseToPost:[response objectForKey:@"data"]];
+                
+                completion(YES, post, nil, nil);
             } else {
-                completion(NO, nil, error);
+                completion(NO, nil, nil, error);
             }
         }];
     }
