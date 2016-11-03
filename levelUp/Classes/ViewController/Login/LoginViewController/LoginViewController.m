@@ -29,7 +29,7 @@
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.navigationBar.translucent = YES;
     
-    self.usernameTextField.text = @"min.benatti@gmail.com";
+    self.usernameTextField.text = @"user@example.com";
     self.userPasswordTextField.text = @"12345";
         
     [self.loginButton.layer setCornerRadius:4.0f];
@@ -80,7 +80,9 @@
     NSDictionary *parameters = @{@"email" : self.usernameTextField.text,
                                  @"password" : self.userPasswordTextField.text};
     
+    [AppUtils startLoadingInView:self.view];
     [[LoginManager sharedInstance]authenticateWithLogin:parameters andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *theError) {
+        [AppUtils stopLoadingInView:self.view];
         if(isSuccess) {
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         } else {

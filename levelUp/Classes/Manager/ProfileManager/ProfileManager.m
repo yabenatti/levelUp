@@ -8,7 +8,7 @@
 
 #import "ProfileManager.h"
 #import "Urls.h"
-
+#import "AppUtils.h"
 
 @implementation ProfileManager
 
@@ -34,7 +34,9 @@ static ProfileManager *sharedInstance = nil;
  */
 - (void)retrieveProfileWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, User * user, NSString *message, NSError *error)) completion {
     
-    [self connectWithParameters:nil atPath:URL_PROFILE(uid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    NSString *currentUserId = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+
+    [self connectWithParameters:nil atPath:URL_PROFILE(uid, currentUserId) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
             NSDictionary *responseDictionary = (NSDictionary *)[response objectForKey:@"data"];
             
@@ -57,7 +59,10 @@ static ProfileManager *sharedInstance = nil;
  */
 - (void)editProfileWithUserId:(NSString *)uid andParameters:(NSDictionary *)parameters andCompletion:(void(^)(BOOL isSuccess, User * user, NSString *message, NSError *error)) completion {
     
-    [self connectWithParameters:parameters atPath:URL_PROFILE(uid) requestType:@"PATCH" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    NSString *currentUserId = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+
+    
+    [self connectWithParameters:parameters atPath:URL_PROFILE(uid,currentUserId) requestType:@"PATCH" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
             NSDictionary *responseDictionary = (NSDictionary *)[response objectForKey:@"data"];
             

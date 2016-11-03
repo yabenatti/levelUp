@@ -20,4 +20,7 @@
 +(void)setupImageWithUrl:(NSString *)imageUrl andPlaceholder:(NSString *)placeholder andImageView:(UIImageView *)imageView;
 + (NSString *)formatDate:(NSString *)date;
 
++(void)startLoadingInView:(UIView*)view;
++(void)stopLoadingInView:(UIView*)view;
+
 @end

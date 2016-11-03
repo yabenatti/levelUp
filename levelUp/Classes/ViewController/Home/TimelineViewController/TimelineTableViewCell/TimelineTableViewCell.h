@@ -12,21 +12,23 @@
 
 -(void)likeButton:(NSIndexPath *)indexPath;
 -(void)commentButton:(NSIndexPath *)indexPath;
+-(void)userImageButton:(NSIndexPath *)indexPath;
 
 @end
 
 @interface TimelineTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
 @property (weak, nonatomic) IBOutlet UILabel *postCaptionLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *userImageButton;
 
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (assign, nonatomic) id<TimelineCellDelegate> delegate;
 
 - (IBAction)likeButtonTouched:(id)sender;
 - (IBAction)commentButtonTouched:(id)sender;
+- (IBAction)userImageTouched:(id)sender;
 
 @end

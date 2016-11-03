@@ -17,5 +17,6 @@
 -(void)createPostWithParameters:(NSMutableDictionary*)parameters imageData:(NSData*)image withCompletion:(void (^)(BOOL isSuccess, NSString *message, NSError *error))completion;
 - (void)createCommentWithPostId:(NSString *)postId andParameters:(NSDictionary *)parameters andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion;
 - (void)getCommentsWithPostId:(NSString *)postId andCompletion:(void(^)(BOOL isSuccess, NSMutableArray *comments, NSString *message, NSError *error)) completion;
+- (void)createLikeWithPostId:(NSString *)postId andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion;
 
 @end

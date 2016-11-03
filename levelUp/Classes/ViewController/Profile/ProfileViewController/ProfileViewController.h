@@ -11,6 +11,8 @@
 
 @interface ProfileViewController : UIViewController <TimelineCellDelegate>
 
+@property (strong, nonatomic) NSString *userId;
+
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *followersButton;
 @property (weak, nonatomic) IBOutlet UIButton *followingButton;

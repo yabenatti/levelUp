@@ -10,6 +10,7 @@
 #import "NewPostViewController.h"
 #import "CommentViewController.h"
 #import "LoginViewController.h"
+#import "ProfileViewController.h"
 #import "PostManager.h"
 #import "AppUtils.h"
 #import "Constants.h"
@@ -110,7 +111,10 @@
 }
 
 - (void)getAllPosts {
+    [AppUtils startLoadingInView:self.view];
+
     [[PostManager sharedInstance]getAllPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
+        [AppUtils stopLoadingInView:self.view];
         if(isSuccess) {
             [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
             [self.beaconManager requestAlwaysAuthorization];
@@ -166,7 +170,9 @@
                                                                                                    @"post[image]" : petImageData
                                                                                                    }];
                 
+                [AppUtils startLoadingInView:self.view];
                 [[PostManager sharedInstance]createPostWithParameters:parameters imageData:petImageData withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+                    [AppUtils stopLoadingInView:self.view];
                     if(isSuccess) {
                         [self getAllPosts];
                     } else {
@@ -202,10 +208,10 @@
     cell.indexPath = indexPath;
     cell.delegate = self;
 
-    [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
-    [cell.userImageView.layer setMasksToBounds:YES];
+    [cell.userImageButton.layer setCornerRadius:cell.userImageButton.frame.size.width/2];
+    [cell.userImageButton.layer setMasksToBounds:YES];
     
-    __weak UIImageView *weakImageView2 = cell.userImageView;
+    __weak UIImageView *weakImageView2 = cell.userImageButton.imageView;
 #warning picture should come in the answer :)
     NSLog(@"%@", [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]);
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]];
@@ -220,6 +226,7 @@
         NSLog(@"%@", error);
     }];
 
+    //botao like
     
     cell.usernameLabel.text = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]];
     cell.postCaptionLabel.text = post.postDescription;
@@ -264,7 +271,24 @@
 }
 
 -(void)likeButton:(NSIndexPath *)indexPath {
-    
+    Post *post = [self.posts objectAtIndex:indexPath.row];
+
+    [[PostManager sharedInstance]createLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        if(isSuccess) {
+            [self.postsTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        } else {
+            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+        }
+    }];
+}
+
+-(void)userImageButton:(NSIndexPath *)indexPath {
+    Post *post = [self.posts objectAtIndex:indexPath.row];
+
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    ProfileViewController *vc = [sb instantiateViewControllerWithIdentifier:@"Profile"];
+    vc.userId = [NSString stringWithFormat:@"%d", post.userId];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Navigation

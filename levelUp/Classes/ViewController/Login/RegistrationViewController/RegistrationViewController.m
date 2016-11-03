@@ -142,14 +142,16 @@
                                                                                       @"beacon[pet_image]" : self.petImage,
                                                                                        }];
     
-  [[SignupManager sharedInstance]registerBeaconWithParameters:parameters imageData:self.petImage withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+    [AppUtils startLoadingInView:self.view];
+    [[SignupManager sharedInstance]registerBeaconWithParameters:parameters imageData:self.petImage withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
       [self.registerButton setUserInteractionEnabled:YES];
+      [AppUtils stopLoadingInView:self.view];
       if(isSuccess) {
           [self.navigationController dismissViewControllerAnimated:YES completion:nil];
       } else {
           [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
       }
-  }];
+    }];
     
 
     

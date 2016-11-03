@@ -50,7 +50,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
+    [AppUtils startLoadingInView:self.view];
     [[ProfileManager sharedInstance]retrieveProfileWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *error) {
+        [AppUtils stopLoadingInView:self.view];
         if(isSuccess) {
             self.currentUser = user;
             self.petNameTextField.text = user.petName;
@@ -99,7 +101,9 @@
                                              }
                                 };
     
+    [AppUtils startLoadingInView:self.view];
     [[ProfileManager sharedInstance]editProfileWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andParameters:parameters andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *error) {
+        [AppUtils stopLoadingInView:self.view];
         if(isSuccess) {
             [self.navigationController popViewControllerAnimated:YES];
         } else {

@@ -79,7 +79,9 @@
 #pragma mark - Helpers 
 
 -(void)getComments {
+    [AppUtils startLoadingInView:self.view];
     [[PostManager sharedInstance]getCommentsWithPostId:self.postId andCompletion:^(BOOL isSuccess, NSMutableArray *comments, NSString *message, NSError *error) {
+        [AppUtils stopLoadingInView:self.view];
         if (isSuccess) {
             self.commentsArray = comments;
             [self.tableView reloadData];
@@ -140,9 +142,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"commentCell" forIndexPath:indexPath];
-    
-    
 }
 
 #pragma mark - IBActions
@@ -150,7 +149,9 @@
 - (IBAction)commentButtonTouched:(id)sender {
     NSDictionary *parameters = @{ @"comment" : @{ @"description" : self.commentTextField.text }};
     
+    [AppUtils startLoadingInView:self.view];
     [[PostManager sharedInstance]createCommentWithPostId:self.postId andParameters:parameters andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        [AppUtils stopLoadingInView:self.view];
         if (isSuccess) {
             [self getComments];
         } else {

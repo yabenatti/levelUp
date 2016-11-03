@@ -25,4 +25,5 @@
 //Cores da tag do perfil
 #define COLOR_WHITE_SMOKE [UIColor colorWithRed:246.0/255.0f green:248.0/255.0f blue:249.0/255.0f alpha:1]
 #define COLOR_LIGHT_BLUE  [UIColor colorWithRed:118.0/255.0f green:178.0/255.0f blue:239.0/255.0f alpha:1]
+#define COLOR_WHITE [UIColor colorWithRed:255.0/255.0f green:255.0/255.0f blue:255.0/255.0f alpha:1]
 

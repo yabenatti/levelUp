@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) NSData *petImageData;
 @property (strong, nonatomic) NSString *captionText;
+@property (strong, nonatomic) FBSDKShareLinkContent *content;
 
 @end
 
@@ -49,10 +50,7 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
     self.navigationItem.leftBarButtonItem = cancelItem;
 
-    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
-   
-//    [FBSDKShareAPI shareWithContent:content delegate:nil];
+    self.content = [[FBSDKShareLinkContent alloc] init];
     
     [self.imageButton.layer setCornerRadius:25.0f];
     [self.imageButton setBackgroundColor:COLOR_LIGHT_BLUE];
@@ -81,9 +79,6 @@
     self.captionTextView.inputAccessoryView = manufacturerPickerToolbar;
     
     self.petImageData = nil;
-
-    [self.loadView stopAnimating];
-    [self.loadView setHidesWhenStopped:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -105,8 +100,6 @@
 
 - (void)postTouched:(id)sender {
     self.navigationItem.rightBarButtonItem.enabled = NO;
-    [self.loadView startAnimating];
-
     NSMutableDictionary *parameters = [NSMutableDictionary new];
 
     if(self.petImageData != nil) {
@@ -114,8 +107,9 @@
         [parameters setValue:self.captionTextView.text forKey:@"post[description]"];
         [parameters setValue:self.petImageData forKey:@"post[image]"];
         
+        [AppUtils startLoadingInView:self.view];
         [[PostManager sharedInstance]createPostWithParameters:parameters imageData:self.petImageData withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
-            [self.loadView stopAnimating];
+            [AppUtils stopLoadingInView:self.view];
             self.navigationItem.rightBarButtonItem.enabled = YES;
             if(isSuccess) {
                 self.captionTextView.text = @"Write your caption :)";
@@ -178,6 +172,9 @@
 }
 
 - (IBAction)facebookButtonTouched:(id)sender {
+    self.content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
+    
+    [FBSDKShareAPI shareWithContent:self.content delegate:nil];
 }
 
 #pragma mark - Image

@@ -29,4 +29,8 @@
 - (IBAction)commentButtonTouched:(id)sender {
     [self.delegate commentButton:self.indexPath];
 }
+
+- (IBAction)userImageTouched:(id)sender {
+    [self.delegate userImageButton:self.indexPath];
+}
 @end

@@ -87,10 +87,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    
-    if([segue.identifier isEqualToString:@"registrationSegue"]) {
-        RegistrationViewController *vc = [segue destinationViewController];
-    }
 }
 
 
@@ -100,7 +96,9 @@
                                              @"pet_name" : self.petNameTextField.text
                                             }
                                 };
+    [AppUtils startLoadingInView:self.view];
     [[SignupManager sharedInstance]signUpWithParameters:parameters andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *theError) {
+        [AppUtils stopLoadingInView:self.view];
         if(isSuccess) {
             [self performSegueWithIdentifier:@"registrationSegue" sender:nil];
         } else {

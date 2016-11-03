@@ -47,12 +47,20 @@
     [label sizeToFit];
     self.navigationItem.titleView = label;
     
-    //Logout Button
-    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log out" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonTouched:)];
-    self.navigationItem.leftBarButtonItem = logoutButton;
-    //Edit Button
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonTouched:)];
-    self.navigationItem.rightBarButtonItem = editButton;
+    NSString *currentUserId = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+    
+    if(self.userId == nil) {
+        //Logout Button
+        UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc]initWithTitle:@"Log out" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonTouched:)];
+        self.navigationItem.leftBarButtonItem = logoutButton;
+        //Edit Button
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonTouched:)];
+        self.navigationItem.rightBarButtonItem = editButton;
+    } else if (self.userId != nil && ![self.userId isEqualToString:currentUserId]){
+        //Follow Button
+        UIBarButtonItem *followButton = [[UIBarButtonItem alloc]initWithTitle:@"Follow" style:UIBarButtonItemStylePlain target:self action:@selector(followButtonTouched:)];
+        self.navigationItem.rightBarButtonItem = followButton;
+    }
     
     //Inicializacoes
     self.myPosts = [NSArray new];
@@ -69,31 +77,66 @@
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
     
+    [AppUtils startLoadingInView:self.view];
     
-    [[ProfileManager sharedInstance]retrieveProfileWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *error) {
+    NSString *uid;
+    NSString *currentUserId = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+    
+    if(self.userId == nil || [self.userId isEqualToString:currentUserId]) {
+        uid = currentUserId;
+    } else {
+        uid = self.userId;
+    }
+    
+    [[ProfileManager sharedInstance]retrieveProfileWithUserId:uid andCompletion:^(BOOL isSuccess, User *user, NSString *message, NSError *error) {
+        [AppUtils stopLoadingInView:self.view];
         if(isSuccess) {
             self.currentUser = user;
             self.usernameLabel.text = user.petName;
             
             [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.profileImageView];
             
-            [[PostManager sharedInstance]getMyPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
-                if(isSuccess) {
-                    
-                    if([posts count] > 0) {
-                        self.myPosts = posts;
+            if(self.userId == nil || [self.userId isEqualToString:currentUserId]) {
+                [AppUtils startLoadingInView:self.view];
+                [[PostManager sharedInstance]getMyPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
+                    [AppUtils stopLoadingInView:self.view];
+                    if(isSuccess) {
                         
-                        [self.postsTableView reloadData];
-                        [self.emptyView setHidden:YES];
-
+                        if([posts count] > 0) {
+                            self.myPosts = posts;
+                            
+                            [self.postsTableView reloadData];
+                            [self.emptyView setHidden:YES];
+                            
+                        } else {
+                            [self.emptyView setHidden:NO];
+                        }
+                        
                     } else {
-                        [self.emptyView setHidden:NO];
+                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
                     }
-                    
-                } else {
-                    [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
-                }
-            }];
+                }];
+
+            } else {
+                [AppUtils startLoadingInView:self.view];
+                [[PostManager sharedInstance]getAllPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
+                    [AppUtils stopLoadingInView:self.view];
+                    if(isSuccess) {
+                        
+                        if([posts count] > 0) {
+                            self.myPosts = posts;
+                            
+                            [self.postsTableView reloadData];
+                            [self.emptyView setHidden:YES];
+                        } else {
+                            [self.emptyView setHidden:NO];
+                        }
+                        
+                    } else {
+                        [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+                    }
+                }];
+            }
             
         } else {
             [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
@@ -109,7 +152,9 @@
 - (void)logoutButtonTouched:(id)sender {
     NSDictionary *parameters = @{@"id" : [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]]};
     
+    [AppUtils startLoadingInView:self.view];
     [[LoginManager sharedInstance]logoutWithApi:parameters andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        [AppUtils stopLoadingInView:self.view];
         if (isSuccess) {
             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             TabBarViewController *vc = [sb instantiateInitialViewController];
@@ -122,6 +167,10 @@
 
 - (void)editButtonTouched:(id)sender {
     [self performSegueWithIdentifier:@"editSegue" sender:self];
+}
+
+- (void)followButtonTouched:(id)sender {
+    
 }
 
 #pragma mark - TableView
@@ -147,10 +196,10 @@
     cell.indexPath = indexPath;
     cell.delegate = self;
     
-    [cell.userImageView.layer setCornerRadius:cell.userImageView.frame.size.width/2];
-    [cell.userImageView.layer setMasksToBounds:YES];
+    [cell.userImageButton.layer setCornerRadius:cell.userImageButton.frame.size.width/2];
+    [cell.userImageButton.layer setMasksToBounds:YES];
     
-    __weak UIImageView *weakImageView2 = cell.userImageView;
+    __weak UIImageView *weakImageView2 = cell.userImageButton.imageView;
     
     NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -207,6 +256,30 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
+}
+
+#pragma mark - Timeline Cell Delegate
+
+-(void)commentButton:(NSIndexPath *)indexPath {
+    Post *post = [self.myPosts objectAtIndex:indexPath.row];
+    
+    [self performSegueWithIdentifier:@"commentSegue" sender:[NSString stringWithFormat:@"%d", post.postId]];
+}
+
+-(void)likeButton:(NSIndexPath *)indexPath {
+    Post *post = [self.myPosts objectAtIndex:indexPath.row];
+    
+    [[PostManager sharedInstance]createLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        if(isSuccess) {
+            [self.postsTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        } else {
+            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+        }
+    }];
+}
+
+-(void)userImageButton:(NSIndexPath *)indexPath {
+
 }
 
 #pragma mark - IBActions
