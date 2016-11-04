@@ -63,13 +63,13 @@
 #pragma mark - IBActions
 
 - (void)doneTouched:(id)sender {
-    [self.tabBarController setSelectedIndex:0];
     self.content = nil;
+    [self.tabBarController setSelectedIndex:0];
 }
 
 - (void)cancelTouched:(id)sender {
-    [self.tabBarController setSelectedIndex:0];
     self.content = nil;
+    [self.tabBarController setSelectedIndex:0];
 }
 
 - (IBAction)twitterButtonTouched:(id)sender {

@@ -13,7 +13,12 @@
 @property (nonatomic) int postId;
 @property (nonatomic) int userId;
 @property (nonatomic) int likesCount;
+
+@property (nonatomic) BOOL iLiked;
+
 @property (strong, nonatomic) NSString *postDescription;
+@property (strong, nonatomic) NSString *postPetName;
+@property (strong, nonatomic) NSString *postPetImage;
 @property (strong, nonatomic) NSString *postDate;
 @property (strong, nonatomic) NSString *postImage;
 

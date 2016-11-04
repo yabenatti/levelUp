@@ -123,6 +123,7 @@
                 self.posts = posts;
                 [self.emptyView setHidden:YES];
                 [self.postsTableView reloadData];
+                [self.postsTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
             } else {
                 [self.emptyView setHidden:NO];
             }
@@ -212,9 +213,7 @@
     [cell.userImageButton.layer setMasksToBounds:YES];
     
     __weak UIImageView *weakImageView2 = cell.userImageButton.imageView;
-#warning picture should come in the answer :)
-    NSLog(@"%@", [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]);
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]];
+    NSURL *url = [NSURL URLWithString: post.postPetImage];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -226,9 +225,13 @@
         NSLog(@"%@", error);
     }];
 
-    //botao like
+    if(post.iLiked) {
+        [cell.likeButton setImage:[UIImage imageNamed:@"ic_favorite"] forState:UIControlStateNormal];
+    } else {
+        [cell.likeButton setImage:[UIImage imageNamed:@"ic_favorite_border"] forState:UIControlStateNormal];
+    }
     
-    cell.usernameLabel.text = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]];
+    cell.usernameLabel.text = post.postPetName;
     cell.postCaptionLabel.text = post.postDescription;
     
     if([post.postImage isEqualToString:@""]) {
@@ -275,7 +278,7 @@
 
     [[PostManager sharedInstance]createLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
-            [self.postsTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self getAllPosts];
         } else {
             [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
         }

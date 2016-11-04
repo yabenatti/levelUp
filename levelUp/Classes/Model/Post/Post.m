@@ -30,6 +30,20 @@
         self.postImage = [NSString stringWithFormat:@"%@%@", BASE_URL, [[postToParse objectForKey:@"image"]objectForKey:@"url"]];
     }
     
+    if(![[postToParse objectForKey:@"pet_image"] isKindOfClass:[NSNull class]]) {
+        self.postPetImage = [NSString stringWithFormat:@"%@%@", BASE_URL, [[postToParse objectForKey:@"pet_image"]objectForKey:@"url"]];
+    }
+    if(![[postToParse objectForKey:@"pet_name"] isKindOfClass:[NSNull class]]) {
+        self.postPetName = [postToParse objectForKey:@"pet_name"];
+    }
+    if(![[postToParse objectForKey:@"liked"] isKindOfClass:[NSNull class]]) {
+        if([[postToParse objectForKey:@"liked"]intValue] == 0) {
+            self.iLiked = NO;
+        } else {
+            self.iLiked = YES;
+        }
+    }
+    
     return self;
 }
 

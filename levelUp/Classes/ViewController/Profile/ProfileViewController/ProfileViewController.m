@@ -28,6 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSString *currentUserId = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+
     [self.profileImageView.layer setCornerRadius:self.profileImageView.frame.size.width/2];
     [self.profileImageView.layer setMasksToBounds:YES];
     
@@ -35,7 +37,11 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     self.navigationController.navigationBar.hidden = NO;
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationItem.hidesBackButton = YES;
+    if (self.tabBarController.selectedIndex == 2){
+        self.navigationItem.hidesBackButton = YES;
+    } else {
+        self.navigationItem.hidesBackButton = NO;
+    }
     
     //Title View
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -47,7 +53,6 @@
     [label sizeToFit];
     self.navigationItem.titleView = label;
     
-    NSString *currentUserId = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
     
     if(self.userId == nil) {
         //Logout Button
@@ -76,7 +81,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
+    [self setUpProfile];
+}
+
+- (void)setUpProfile {
     [AppUtils startLoadingInView:self.view];
     
     NSString *uid;
@@ -93,8 +101,10 @@
         if(isSuccess) {
             self.currentUser = user;
             self.usernameLabel.text = user.petName;
+            [self.followersButton setTitle:@"0" forState:UIControlStateNormal];
+            [self.followingButton setTitle:@"0" forState:UIControlStateNormal];
             
-            [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.profileImageView];
+            [AppUtils setupImageWithUrl:user.petImage andPlaceholder:@"ic_person" andImageView:self.profileImageView];
             
             if(self.userId == nil || [self.userId isEqualToString:currentUserId]) {
                 [AppUtils startLoadingInView:self.view];
@@ -116,10 +126,10 @@
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
                     }
                 }];
-
+                
             } else {
                 [AppUtils startLoadingInView:self.view];
-                [[PostManager sharedInstance]getAllPostsWithUserId:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]] andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
+                [[PostManager sharedInstance]getOtherPeoplesPostsWithUserId:uid andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
                     [AppUtils stopLoadingInView:self.view];
                     if(isSuccess) {
                         
@@ -142,6 +152,7 @@
             [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
         }
     }];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,7 +181,15 @@
 }
 
 - (void)followButtonTouched:(id)sender {
+    NSDictionary *parameters = @{@"user_id" : self.userId};
     
+    [[PostManager sharedInstance]createRelationshipWithUserId:parameters andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        if(isSuccess) {
+            [self setUpProfile];
+        } else {
+            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+        }
+    }];
 }
 
 #pragma mark - TableView
@@ -201,7 +220,7 @@
     
     __weak UIImageView *weakImageView2 = cell.userImageButton.imageView;
     
-    NSURL *url = [NSURL URLWithString: [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE ]]];
+    NSURL *url = [NSURL URLWithString: post.postPetImage];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -213,8 +232,13 @@
         NSLog(@"%@", error);
     }];
     
+    if(post.iLiked) {
+        [cell.likeButton setImage:[UIImage imageNamed:@"ic_favorite"] forState:UIControlStateNormal];
+    } else {
+        [cell.likeButton setImage:[UIImage imageNamed:@"ic_favorite_border"] forState:UIControlStateNormal];
+    }
     
-    cell.usernameLabel.text = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]];
+    cell.usernameLabel.text = post.postPetName;
     cell.postCaptionLabel.text = post.postDescription;
     
     if([post.postImage isEqualToString:@""]) {

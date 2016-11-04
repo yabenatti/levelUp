@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIView *emptyView;
 
 
-- (IBAction)editTouched:(id)sender;
 - (IBAction)followersTouched:(id)sender;
 - (IBAction)followingTouched:(id)sender;
 

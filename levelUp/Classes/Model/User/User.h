@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *petName;
+@property (strong, nonatomic) NSString *petImage;
 @property (strong, nonatomic) NSString *birthDate;
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *beaconId;

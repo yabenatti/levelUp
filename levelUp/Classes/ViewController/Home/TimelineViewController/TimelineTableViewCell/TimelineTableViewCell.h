@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *postCaptionLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *userImageButton;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
 
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (assign, nonatomic) id<TimelineCellDelegate> delegate;

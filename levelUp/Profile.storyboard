@@ -151,31 +151,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HuO-QE-G6E">
-                                <rect key="frame" x="0.0" y="130" width="375" height="488"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_pets_white" translatesAutoresizingMaskIntoConstraints="NO" id="tnH-2c-eWV">
-                                        <rect key="frame" x="128" y="100" width="120" height="120"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="tnH-2c-eWV" secondAttribute="height" multiplier="1:1" id="hFo-gP-eZc"/>
-                                            <constraint firstAttribute="width" constant="120" id="y89-BN-2g6"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There's Nothing Here YET!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJm-Z9-O0W">
-                                        <rect key="frame" x="63" y="240" width="249" height="26"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.46274509800000002" green="0.69803921570000005" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="tnH-2c-eWV" firstAttribute="centerX" secondItem="HuO-QE-G6E" secondAttribute="centerX" id="34m-ea-VYq"/>
-                                    <constraint firstItem="iJm-Z9-O0W" firstAttribute="centerX" secondItem="tnH-2c-eWV" secondAttribute="centerX" id="UtE-lP-Xzi"/>
-                                    <constraint firstItem="iJm-Z9-O0W" firstAttribute="top" secondItem="tnH-2c-eWV" secondAttribute="bottom" constant="20" id="XqS-Fx-1pS"/>
-                                    <constraint firstItem="tnH-2c-eWV" firstAttribute="top" secondItem="HuO-QE-G6E" secondAttribute="top" constant="100" id="Y0W-JA-6Nk"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8H3-fc-zBz">
                                 <rect key="frame" x="0.0" y="130" width="375" height="488"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -273,7 +248,9 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="commentButton" destination="k86-SU-a3P" id="wKm-N2-ysD"/>
                                             <outlet property="imageHeightConstraint" destination="eY6-h8-eGh" id="MZQ-Pv-qkK"/>
+                                            <outlet property="likeButton" destination="FVl-d2-V45" id="eFj-OX-OLa"/>
                                             <outlet property="postCaptionLabel" destination="Ia1-bY-3Sd" id="gld-tD-gUm"/>
                                             <outlet property="postImageView" destination="Pxv-DX-n4w" id="6gP-w5-1dN"/>
                                             <outlet property="userImageButton" destination="9ir-lk-V9K" id="SV9-8N-P3Z"/>
@@ -286,6 +263,31 @@
                                     <outlet property="delegate" destination="bDV-eQ-5h3" id="Dlh-66-eyw"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HuO-QE-G6E">
+                                <rect key="frame" x="0.0" y="130" width="375" height="488"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_pets_white" translatesAutoresizingMaskIntoConstraints="NO" id="tnH-2c-eWV">
+                                        <rect key="frame" x="128" y="100" width="120" height="120"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="tnH-2c-eWV" secondAttribute="height" multiplier="1:1" id="hFo-gP-eZc"/>
+                                            <constraint firstAttribute="width" constant="120" id="y89-BN-2g6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There's Nothing Here YET!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJm-Z9-O0W">
+                                        <rect key="frame" x="63" y="240" width="249" height="26"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.46274509800000002" green="0.69803921570000005" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="tnH-2c-eWV" firstAttribute="centerX" secondItem="HuO-QE-G6E" secondAttribute="centerX" id="34m-ea-VYq"/>
+                                    <constraint firstItem="iJm-Z9-O0W" firstAttribute="centerX" secondItem="tnH-2c-eWV" secondAttribute="centerX" id="UtE-lP-Xzi"/>
+                                    <constraint firstItem="iJm-Z9-O0W" firstAttribute="top" secondItem="tnH-2c-eWV" secondAttribute="bottom" constant="20" id="XqS-Fx-1pS"/>
+                                    <constraint firstItem="tnH-2c-eWV" firstAttribute="top" secondItem="HuO-QE-G6E" secondAttribute="top" constant="100" id="Y0W-JA-6Nk"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>

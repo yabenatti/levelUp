@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSData *petImageData;
 @property (strong, nonatomic) NSString *captionText;
+@property (strong, nonatomic) UIImage *chosenImage;
 
 @end
 
@@ -74,6 +75,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     
     [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.petImage];
+    
     [self.petNameLabel setText:[NSString stringWithFormat:@"What are you doing %@ ?", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]]];
     if ([self.captionTextView.text isEqualToString:@""]) {
         self.captionTextView.text = @"Write your caption :)";
@@ -104,6 +106,7 @@
             if(isSuccess) {
                 self.captionTextView.text = @"Write your caption :)";
                 [self.captionTextView setTextColor:[UIColor lightGrayColor]];
+                [self.imageButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
                 self.imageButton = nil;
                 self.petImageData = nil;
                 
@@ -204,6 +207,8 @@
     [self.imageButton setImage:image forState:UIControlStateNormal];
     [self.imageButton.layer setCornerRadius:25.0f];
     [self.imageButton. layer setMasksToBounds:YES];
+    
+    self.chosenImage = image;
     
     self.navigationItem.rightBarButtonItem.enabled = YES;
     
