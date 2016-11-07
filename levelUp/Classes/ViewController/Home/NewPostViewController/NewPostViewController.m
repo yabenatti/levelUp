@@ -104,13 +104,19 @@
             [AppUtils stopLoadingInView:self.view];
             self.navigationItem.rightBarButtonItem.enabled = YES;
             if(isSuccess) {
+                
+                NSDictionary *postInfo = @{@"image" : post.postImage,
+                                           @"caption" : post.postDescription,
+                                           @"imageData" : self.chosenImage};
+                
                 self.captionTextView.text = @"Write your caption :)";
                 [self.captionTextView setTextColor:[UIColor lightGrayColor]];
                 [self.imageButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
                 self.imageButton = nil;
                 self.petImageData = nil;
                 
-                [self performSegueWithIdentifier:@"shareSegue" sender:[NSString stringWithFormat:@"%d", post.postId]];
+                
+                [self performSegueWithIdentifier:@"shareSegue" sender:postInfo];
                 
             } else {
                 [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
@@ -155,7 +161,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"shareSegue"]) {
         ShareViewController *vc = [segue destinationViewController];
-        vc.postId = sender;
+        vc.postInfo = sender;
     }
 }
 

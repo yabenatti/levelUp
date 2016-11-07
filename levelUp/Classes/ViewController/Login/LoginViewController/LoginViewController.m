@@ -30,7 +30,7 @@
     self.navigationController.navigationBar.translucent = YES;
     
     self.usernameTextField.text = @"user@example.com";
-    self.userPasswordTextField.text = @"12345";
+    self.userPasswordTextField.text = @"123456";
         
     [self.loginButton.layer setCornerRadius:4.0f];
 }

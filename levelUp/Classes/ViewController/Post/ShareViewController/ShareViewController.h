@@ -10,7 +10,7 @@
 
 @interface ShareViewController : UIViewController
 
-@property (strong, nonatomic) NSString *postId;
+@property (strong, nonatomic) NSDictionary *postInfo;
 
 @property (weak, nonatomic) IBOutlet UIImageView *postImageView;
 @property (weak, nonatomic) IBOutlet UILabel *postCaptionTextLabel;

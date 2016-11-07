@@ -8,15 +8,16 @@
 
 #import "ShareViewController.h"
 #import "Constants.h"
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareDialog.h>
 #import <FBSDKShareKit/FBSDKShareLinkContent.h>
 #import <FBSDKShareKit/FBSDKShareAPI.h>
+#import <FBSDKShareKit/FBSDKSharePhoto.h>
+#import <FBSDKShareKit/FBSDKSharePhotoContent.h>
 #import "PostManager.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ShareViewController ()
 
-@property (strong, nonatomic) FBSDKShareLinkContent *content;
 @property (strong, nonatomic) Post *currentPost;
 
 @end
@@ -36,8 +37,23 @@
     
     self.navigationItem.rightBarButtonItem = doneItem;
     self.navigationItem.leftBarButtonItem = cancelItem;
+    
+    self.postCaptionTextLabel.text = [self.postInfo objectForKey:@"caption"];
+    
+    __weak UIImageView *weakImageView = self.postImageView;
+    
+    NSURL *url = [NSURL URLWithString: [self.postInfo objectForKey:@"image"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    [weakImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_pets"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [weakImageView setContentMode:UIViewContentModeScaleAspectFill];
+        weakImageView.image = image;
+        weakImageView.layer.masksToBounds = YES;
+        
+    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 
-    self.content = [[FBSDKShareLinkContent alloc] init];
 
 }
 
@@ -63,12 +79,10 @@
 #pragma mark - IBActions
 
 - (void)doneTouched:(id)sender {
-    self.content = nil;
     [self.tabBarController setSelectedIndex:0];
 }
 
 - (void)cancelTouched:(id)sender {
-    self.content = nil;
     [self.tabBarController setSelectedIndex:0];
 }
 
@@ -76,10 +90,18 @@
 }
 
 - (IBAction)facebookButtonTouched:(id)sender {
-    self.content.imageURL = [NSURL URLWithString:self.currentPost.postImage];
-    self.content.contentDescription = self.currentPost.postDescription;
+   
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.image = [self.postInfo objectForKey:@"imageData"];
+    photo.userGenerated = YES;
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
     
-    [FBSDKShareAPI shareWithContent:self.content delegate:nil];
+    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+    dialog.fromViewController = self;
+    dialog.shareContent = content;
+    dialog.mode = FBSDKShareDialogModeShareSheet;
+    [dialog show];
 }
 
 @end

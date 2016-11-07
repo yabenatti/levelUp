@@ -276,7 +276,9 @@
 -(void)likeButton:(NSIndexPath *)indexPath {
     Post *post = [self.posts objectAtIndex:indexPath.row];
 
+    [AppUtils startLoadingInView:self.view];
     [[PostManager sharedInstance]createLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+        [AppUtils stopLoadingInView:self.view];
         if(isSuccess) {
             [self getAllPosts];
         } else {
