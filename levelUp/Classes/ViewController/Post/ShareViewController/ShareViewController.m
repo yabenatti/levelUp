@@ -79,11 +79,11 @@
 #pragma mark - IBActions
 
 - (void)doneTouched:(id)sender {
-    [self.tabBarController setSelectedIndex:0];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)cancelTouched:(id)sender {
-    [self.tabBarController setSelectedIndex:0];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (IBAction)twitterButtonTouched:(id)sender {

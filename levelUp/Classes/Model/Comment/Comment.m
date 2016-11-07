@@ -15,7 +15,8 @@
     self.userId = [[commentToParse objectForKey:@"user_id"]intValue];
     self.postId = [[commentToParse objectForKey:@"post_id"]intValue];
     self.commentDescription = [commentToParse objectForKey:@"description"];
-    
+    self.petName = [commentToParse objectForKey:@"pet_name"];
+
     return self;
 }
 

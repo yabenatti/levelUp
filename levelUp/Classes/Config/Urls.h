@@ -7,8 +7,8 @@
 //
 
 
-#define BASE_URL @"http://192.168.0.93:3000"
-//#define BASE_URL @"http://dev.ringa.com.br/level-up-api"
+//#define BASE_URL @"http://192.168.0.103:3000"
+#define BASE_URL @"http://dev.ringa.com.br/level-up-api"
 
 
 #define API @"/api"

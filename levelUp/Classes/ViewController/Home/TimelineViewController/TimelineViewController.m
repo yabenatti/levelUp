@@ -212,18 +212,24 @@
     [cell.userImageButton.layer setCornerRadius:cell.userImageButton.frame.size.width/2];
     [cell.userImageButton.layer setMasksToBounds:YES];
     
-    __weak UIImageView *weakImageView2 = cell.userImageButton.imageView;
-    NSURL *url = [NSURL URLWithString: post.postPetImage];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        [weakImageView2 setContentMode:UIViewContentModeScaleAspectFill];
-        weakImageView2.image = image;
-        weakImageView2.layer.masksToBounds = YES;
-        
-    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
+    NSURL *url = [NSURL URLWithString:post.postPetImage];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *img = [[UIImage alloc] initWithData:data];
+    [cell.userImageButton setImage:img forState:UIControlStateNormal];
+
+
+//    __weak UIImageView *weakImageView2 = cell.userImageButton.imageView;
+//    NSURL *url = [NSURL URLWithString: post.postPetImage];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    
+//    [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+//        [weakImageView2 setContentMode:UIViewContentModeScaleAspectFill];
+//        weakImageView2.image = image;
+//        weakImageView2.layer.masksToBounds = YES;
+//        
+//    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+//        NSLog(@"%@", error);
+//    }];
 
     if(post.iLiked) {
         [cell.likeButton setImage:[UIImage imageNamed:@"ic_favorite"] forState:UIControlStateNormal];

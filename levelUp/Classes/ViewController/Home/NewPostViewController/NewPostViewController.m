@@ -74,14 +74,25 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     
-    [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.petImage];
-    
     [self.petNameLabel setText:[NSString stringWithFormat:@"What are you doing %@ ?", [AppUtils retrieveFromUserDefaultWithKey:PET_NAME]]];
-    if ([self.captionTextView.text isEqualToString:@""]) {
+
+    if(self.chosenImage == nil) {
+        self.petImageData = nil;
+        [self.imageButton setImage:[UIImage imageNamed:@"ic_photo_camera"] forState:UIControlStateNormal];
         self.captionTextView.text = @"Write your caption :)";
         [self.captionTextView setTextColor:[UIColor lightGrayColor]];
+    } else {
+        self.petImageData = UIImageJPEGRepresentation(self.chosenImage, 0.5);
+        
+        [self.imageButton setImage:self.chosenImage forState:UIControlStateNormal];
+        [self.imageButton.layer setCornerRadius:25.0f];
+        [self.imageButton. layer setMasksToBounds:YES];
     }
-
+   
+    [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.petImage];
+    
+    
+    
 }
 
 #pragma mark - Extra Buttons
@@ -109,11 +120,12 @@
                                            @"caption" : post.postDescription,
                                            @"imageData" : self.chosenImage};
                 
-                self.captionTextView.text = @"Write your caption :)";
-                [self.captionTextView setTextColor:[UIColor lightGrayColor]];
-                [self.imageButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-                self.imageButton = nil;
-                self.petImageData = nil;
+//                self.captionTextView.text = @"Write your caption :)";
+//                [self.captionTextView setTextColor:[UIColor lightGrayColor]];
+//                [self.imageButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+//                self.imageButton = nil;
+//                self.petImageData = nil;
+                self.chosenImage = nil;
                 
                 
                 [self performSegueWithIdentifier:@"shareSegue" sender:postInfo];

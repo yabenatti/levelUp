@@ -130,8 +130,7 @@
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.indexPath = indexPath;
-//    cell.userNameLabel.text = comment.userName;
-    cell.userNameLabel.text = @"another pet";
+    cell.userNameLabel.text = comment.petName;
     cell.userCommentLabel.text = comment.commentDescription;
     [AppUtils setupImageWithUrl:@"https://s-media-cache-ak0.pinimg.com/originals/c9/77/c1/c977c1ccfc34259fa3811c8839e0f6e3.jpg" andPlaceholder:@"ic_person" andImageView:cell.userImageView];
 
@@ -153,6 +152,7 @@
     [[PostManager sharedInstance]createCommentWithPostId:self.postId andParameters:parameters andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
         [AppUtils stopLoadingInView:self.view];
         if (isSuccess) {
+            self.commentTextField.text = @"";
             [self getComments];
         } else {
             [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
