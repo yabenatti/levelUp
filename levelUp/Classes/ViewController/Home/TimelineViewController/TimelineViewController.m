@@ -212,11 +212,7 @@
     [cell.userImageButton.layer setCornerRadius:cell.userImageButton.frame.size.width/2];
     [cell.userImageButton.layer setMasksToBounds:YES];
     
-    NSURL *url = [NSURL URLWithString:post.postPetImage];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *img = [[UIImage alloc] initWithData:data];
-    [cell.userImageButton setImage:img forState:UIControlStateNormal];
-
+    
 
 //    __weak UIImageView *weakImageView2 = cell.userImageButton.imageView;
 //    NSURL *url = [NSURL URLWithString: post.postPetImage];
@@ -254,6 +250,11 @@
             [weakImageView setContentMode:UIViewContentModeScaleAspectFill];
             weakImageView.image = image;
             weakImageView.layer.masksToBounds = YES;
+            
+            NSURL *url = [NSURL URLWithString:post.postPetImage];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *img = [[UIImage alloc] initWithData:data];
+            [cell.userImageButton setImage:img forState:UIControlStateNormal];
             
         }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
             NSLog(@"%@", error);

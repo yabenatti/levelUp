@@ -237,11 +237,6 @@
 //        NSLog(@"%@", error);
 //    }];
 
-    NSURL *url = [NSURL URLWithString:post.postPetImage];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *img = [[UIImage alloc] initWithData:data];
-    [cell.userImageButton setImage:img forState:UIControlStateNormal];
-    
     if(post.iLiked) {
         [cell.likeButton setImage:[UIImage imageNamed:@"ic_favorite"] forState:UIControlStateNormal];
     } else {
@@ -266,9 +261,16 @@
             weakImageView.image = image;
             weakImageView.layer.masksToBounds = YES;
             
+            NSURL *url = [NSURL URLWithString:post.postPetImage];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *img = [[UIImage alloc] initWithData:data];
+            [cell.userImageButton setImage:img forState:UIControlStateNormal];
+            
         }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
             NSLog(@"%@", error);
         }];
+
+        
         
         
         cell.imageHeightConstraint.constant = 256.0f;
