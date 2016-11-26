@@ -15,7 +15,7 @@
 @property (nonatomic) int postId;
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *petName;
-@property (strong, nonatomic) NSString *userImage;
+@property (strong, nonatomic) NSString *petImage;
 @property (strong, nonatomic) NSString *commentDescription;
 
 -(Comment *)parseToComment:(NSDictionary *)commentToParse;

@@ -26,6 +26,7 @@
 @property (nonatomic) NSDictionary *placesByBeacons;
 @property (nonatomic) BOOL enteredRegion;
 @property (strong, nonatomic) NSTimer *timerBeacons;
+@property (strong, nonatomic) NSTimer *timerNewlyCreatedPost;
 
 @end
 
@@ -56,6 +57,7 @@
     self.beaconManager.delegate = self;
     
     [self.emptyView setHidden:YES];
+    [self.postBeaconView.layer setCornerRadius:5.0f];
     
     //Inicializacoes
     self.posts = [NSArray new];
@@ -65,7 +67,8 @@
 
 }
 
--(void)viewWillAppear:(BOOL)animated {    
+-(void)viewWillAppear:(BOOL)animated {
+    [self.postBeaconView setHidden:YES];
     self.enteredRegion = NO;
 
     NSString *token = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_TOKEN]];
@@ -108,6 +111,11 @@
     if(self.enteredRegion) {
         self.enteredRegion = NO;
     }
+}
+
+- (void)closeNewlyCreatedPostView:(id)sender {
+    [self.postBeaconView setHidden:YES];
+    
 }
 
 - (void)getAllPosts {
@@ -175,6 +183,12 @@
                 [[PostManager sharedInstance]createPostWithParameters:parameters imageData:petImageData withCompletion:^(BOOL isSuccess, Post *post, NSString *message, NSError *error) {
                     [AppUtils stopLoadingInView:self.view];
                     if(isSuccess) {
+                        [self.postBeaconView setHidden:NO];
+                        self.timerNewlyCreatedPost = [NSTimer scheduledTimerWithTimeInterval: 10.0
+                                                                             target: self
+                                                                           selector:@selector(closeNewlyCreatedPostView:)
+                                                                           userInfo: nil repeats:NO];
+
                         [self getAllPosts];
                     } else {
                         [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
@@ -212,21 +226,6 @@
     [cell.userImageButton.layer setCornerRadius:cell.userImageButton.frame.size.width/2];
     [cell.userImageButton.layer setMasksToBounds:YES];
     
-    
-
-//    __weak UIImageView *weakImageView2 = cell.userImageButton.imageView;
-//    NSURL *url = [NSURL URLWithString: post.postPetImage];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    
-//    [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-//        [weakImageView2 setContentMode:UIViewContentModeScaleAspectFill];
-//        weakImageView2.image = image;
-//        weakImageView2.layer.masksToBounds = YES;
-//        
-//    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-//        NSLog(@"%@", error);
-//    }];
-
     if(post.iLiked) {
         [cell.likeButton setImage:[UIImage imageNamed:@"ic_favorite"] forState:UIControlStateNormal];
     } else {
@@ -282,16 +281,28 @@
 
 -(void)likeButton:(NSIndexPath *)indexPath {
     Post *post = [self.posts objectAtIndex:indexPath.row];
-
-    [AppUtils startLoadingInView:self.view];
-    [[PostManager sharedInstance]createLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
-        [AppUtils stopLoadingInView:self.view];
-        if(isSuccess) {
-            [self getAllPosts];
-        } else {
-            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
-        }
-    }];
+    
+    if(post.iLiked) {
+        [AppUtils startLoadingInView:self.view];
+        [[PostManager sharedInstance]deleteLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+            [AppUtils stopLoadingInView:self.view];
+            if(isSuccess) {
+                [self getAllPosts];
+            } else {
+                [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+            }
+        }];
+    } else {
+        [AppUtils startLoadingInView:self.view];
+        [[PostManager sharedInstance]createLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+            [AppUtils stopLoadingInView:self.view];
+            if(isSuccess) {
+                [self getAllPosts];
+            } else {
+                [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+            }
+        }];
+    }
 }
 
 -(void)userImageButton:(NSIndexPath *)indexPath {

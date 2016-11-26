@@ -8,6 +8,14 @@
 
 //user default
 
+//Type verifications
+#define SAFE_STRING(s) ([s isKindOfClass:[NSString class]] ? s : @"")
+#define SAFE_BOOL(x) ([x respondsToSelector:@selector(boolValue)] ? [x boolValue] : false)
+#define SAFE_FLOAT(x) ([x respondsToSelector:@selector(floatValue)] ? [x floatValue] : 0.0)
+#define SAFE_DOUBLE(x) ([x respondsToSelector:@selector(doubleValue)] ? [x doubleValue] : 0.0)
+#define SAFE_INTEGER(x) ([x respondsToSelector:@selector(intValue)] ? [x intValue] : 0)
+#define SAFE_LONG_LONG(x) ([x respondsToSelector:@selector(longLongValue)] ? [x longLongValue] : 0)
+
 #define USER_ID @"user_id"
 #define USER_NAME @"user_name"
 #define USER_TOKEN @"authentication_token"

@@ -7,6 +7,7 @@
 //
 
 #import "Comment.h"
+#import "Urls.h"
 
 @implementation Comment
 
@@ -16,6 +17,10 @@
     self.postId = [[commentToParse objectForKey:@"post_id"]intValue];
     self.commentDescription = [commentToParse objectForKey:@"description"];
     self.petName = [commentToParse objectForKey:@"pet_name"];
+    
+    if(![[commentToParse objectForKey:@"pet_image"] isKindOfClass:[NSNull class]]) {
+        self.petImage = [NSString stringWithFormat:@"%@%@", BASE_URL, [[commentToParse objectForKey:@"pet_image"]objectForKey:@"url"]];
+    }
 
     return self;
 }

@@ -37,6 +37,7 @@
 		19EE37241D529B45009BA896 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EE37231D529B45009BA896 /* Profile.storyboard */; };
 		19EE37271D529C45009BA896 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE37261D529C45009BA896 /* ProfileViewController.m */; };
 		8192161CB257FCE7FE705245 /* libPods-levelUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11630ABCF1E8CBEFDA4EAB7 /* libPods-levelUp.a */; };
+		BE1857531DE9FD8900F7ED8B /* EditBeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1857521DE9FD8900F7ED8B /* EditBeaconViewController.m */; };
 		BE1B2F7C1DBB94DB00793015 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B2F7B1DBB94DB00793015 /* CommentViewController.m */; };
 		BE1B2F801DBB961000793015 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B2F7F1DBB961000793015 /* CommentTableViewCell.m */; };
 		BEB8357F1DB9246400132A7A /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB8357E1DB9246400132A7A /* Post.storyboard */; };
@@ -115,6 +116,8 @@
 		19EE37251D529C45009BA896 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		19EE37261D529C45009BA896 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		3D4C4E5A6305E5992E029EAA /* Pods-levelUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.release.xcconfig"; sourceTree = "<group>"; };
+		BE1857511DE9FD8900F7ED8B /* EditBeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBeaconViewController.h; sourceTree = "<group>"; };
+		BE1857521DE9FD8900F7ED8B /* EditBeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditBeaconViewController.m; sourceTree = "<group>"; };
 		BE1B2F7A1DBB94DB00793015 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		BE1B2F7B1DBB94DB00793015 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		BE1B2F7E1DBB961000793015 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -457,6 +460,7 @@
 		19EE37171D529AFD009BA896 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				BE1857501DE9FD7B00F7ED8B /* EditBeaconViewController */,
 				199AA74A1D577894001E3F4A /* EditProfileViewController */,
 				19EE37181D529AFD009BA896 /* FollowingViewController */,
 				19EE371E1D529AFD009BA896 /* ProfileViewController */,
@@ -499,6 +503,15 @@
 				3D4C4E5A6305E5992E029EAA /* Pods-levelUp.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		BE1857501DE9FD7B00F7ED8B /* EditBeaconViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BE1857511DE9FD8900F7ED8B /* EditBeaconViewController.h */,
+				BE1857521DE9FD8900F7ED8B /* EditBeaconViewController.m */,
+			);
+			path = EditBeaconViewController;
 			sourceTree = "<group>";
 		};
 		BE1B2F791DBB94C600793015 /* CommentViewController */ = {
@@ -732,6 +745,7 @@
 				19EE371F1D529AFD009BA896 /* FollowingTableViewCell.m in Sources */,
 				1974B8951D593E8E00777CF3 /* RegistrationViewController.m in Sources */,
 				191486861D84A61A001CA224 /* ProfileManager.m in Sources */,
+				BE1857531DE9FD8900F7ED8B /* EditBeaconViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -181,22 +182,54 @@
                                     <constraint firstItem="wA1-Xe-3IU" firstAttribute="centerX" secondItem="HF0-3k-nrB" secondAttribute="centerX" id="ema-U3-9uY"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ydA-Du-XWI">
+                                <rect key="frame" x="38" y="166" width="300" height="222"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_pets" translatesAutoresizingMaskIntoConstraints="NO" id="rUM-ij-Dah">
+                                        <rect key="frame" x="138" y="77" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="Ch5-Hv-6z1"/>
+                                            <constraint firstAttribute="width" constant="24" id="DVa-fM-jRB"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A new post was created through a beacon :D" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnM-bd-bI8">
+                                        <rect key="frame" x="16" y="121" width="268" height="81"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.81176470588235294" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="pnM-bd-bI8" firstAttribute="leading" secondItem="ydA-Du-XWI" secondAttribute="leading" constant="16" id="LjL-CJ-31P"/>
+                                    <constraint firstAttribute="trailing" secondItem="pnM-bd-bI8" secondAttribute="trailing" constant="16" id="liN-fS-dJ0"/>
+                                    <constraint firstItem="pnM-bd-bI8" firstAttribute="top" secondItem="rUM-ij-Dah" secondAttribute="bottom" constant="20" id="t2F-Cn-NxD"/>
+                                    <constraint firstAttribute="bottom" secondItem="pnM-bd-bI8" secondAttribute="bottom" constant="20" id="tfT-wl-TIJ"/>
+                                    <constraint firstItem="rUM-ij-Dah" firstAttribute="centerY" secondItem="ydA-Du-XWI" secondAttribute="centerY" multiplier="0.8" id="tjj-KR-AN1"/>
+                                    <constraint firstItem="rUM-ij-Dah" firstAttribute="centerX" secondItem="ydA-Du-XWI" secondAttribute="centerX" id="yjo-pQ-Gk9"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0zI-VB-LcZ" firstAttribute="leading" secondItem="5RN-cN-ynN" secondAttribute="leading" id="5Fo-fs-qgm"/>
+                            <constraint firstItem="ydA-Du-XWI" firstAttribute="height" secondItem="5RN-cN-ynN" secondAttribute="height" multiplier="0.4" id="CMi-7W-HJp"/>
                             <constraint firstAttribute="trailing" secondItem="0zI-VB-LcZ" secondAttribute="trailing" id="LlJ-7x-i2t"/>
                             <constraint firstAttribute="trailing" secondItem="HF0-3k-nrB" secondAttribute="trailing" id="NCz-kn-HyQ"/>
+                            <constraint firstItem="ydA-Du-XWI" firstAttribute="centerX" secondItem="5RN-cN-ynN" secondAttribute="centerX" id="OOc-U2-KIl"/>
                             <constraint firstItem="HF0-3k-nrB" firstAttribute="leading" secondItem="5RN-cN-ynN" secondAttribute="leading" id="X2R-uG-oyA"/>
                             <constraint firstItem="4z8-Wi-Uzx" firstAttribute="top" secondItem="HF0-3k-nrB" secondAttribute="bottom" id="Z5J-YY-Mtn"/>
                             <constraint firstItem="4z8-Wi-Uzx" firstAttribute="top" secondItem="0zI-VB-LcZ" secondAttribute="bottom" id="h1C-tI-Ydr"/>
+                            <constraint firstItem="ydA-Du-XWI" firstAttribute="width" secondItem="5RN-cN-ynN" secondAttribute="width" multiplier="0.8" id="nSN-CP-HpU"/>
                             <constraint firstItem="HF0-3k-nrB" firstAttribute="top" secondItem="A6Z-JI-evP" secondAttribute="bottom" id="pU8-bC-601"/>
+                            <constraint firstItem="ydA-Du-XWI" firstAttribute="centerY" secondItem="5RN-cN-ynN" secondAttribute="centerY" id="xLb-Q7-cwG"/>
                             <constraint firstItem="0zI-VB-LcZ" firstAttribute="top" secondItem="A6Z-JI-evP" secondAttribute="bottom" id="ymI-uU-ABI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="q4g-vi-eHR"/>
                     <connections>
                         <outlet property="emptyView" destination="HF0-3k-nrB" id="yUU-e6-K1T"/>
+                        <outlet property="postBeaconView" destination="ydA-Du-XWI" id="qzj-2b-6TO"/>
                         <outlet property="postsTableView" destination="0zI-VB-LcZ" id="vbw-62-7OU"/>
                         <segue destination="Bdl-2T-k8u" kind="show" identifier="commentSegue" id="Gc1-qQ-yTt"/>
                     </connections>
@@ -208,7 +241,7 @@
         <!--Comment View Controller-->
         <scene sceneID="T3Y-a4-vp8">
             <objects>
-                <viewController id="Bdl-2T-k8u" customClass="CommentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="commentVC" id="Bdl-2T-k8u" customClass="CommentViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EF4-Jk-Gto"/>
                         <viewControllerLayoutGuide type="bottom" id="HP4-Br-t6z"/>
@@ -360,6 +393,7 @@
     <resources>
         <image name="ic_favorite_border" width="24" height="24"/>
         <image name="ic_home" width="24" height="24"/>
+        <image name="ic_pets" width="24" height="24"/>
         <image name="ic_pets_white" width="24" height="24"/>
         <image name="ic_question_answer" width="24" height="24"/>
     </resources>

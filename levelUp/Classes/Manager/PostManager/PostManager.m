@@ -189,6 +189,19 @@ static PostManager *sharedInstance = nil;
     }];
 }
 
+- (void)deleteLikeWithPostId:(NSString *)postId andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion {
+    
+    NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+    
+    [self connectWithParameters:nil atPath:URL_LIKES(postId, uid) requestType:@"DELETE" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+        if(isSuccess) {
+            completion(YES, nil,nil);
+        } else {
+            completion(NO, message, error);
+        }
+    }];
+}
+
 - (void)createRelationshipWithUserId:(NSDictionary *)parameters andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion {
     
     NSString *currentUid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];

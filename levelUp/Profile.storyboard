@@ -168,6 +168,9 @@
                                                         <constraint firstAttribute="width" secondItem="9ir-lk-V9K" secondAttribute="height" multiplier="1:1" id="Kam-ZF-5Wh"/>
                                                         <constraint firstAttribute="width" constant="56" id="KwH-n6-AHF"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="userImageTouched:" destination="Znj-gT-33Q" eventType="touchUpInside" id="Vye-Uq-3Xw"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Person's Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDM-A3-kdD">
                                                     <rect key="frame" x="105" y="38" width="232" height="20"/>

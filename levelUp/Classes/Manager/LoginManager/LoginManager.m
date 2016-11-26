@@ -100,7 +100,9 @@ static LoginManager *sharedInstance = nil;
  */
 - (void)logoutWithApi:(NSDictionary *)parameters andCompletion:(void(^)(BOOL isSuccess, NSString *message, NSError *error)) completion {
     
-    [self connectWithParameters:parameters atPath:URL_LOGOUT([parameters objectForKey:@"id"]) requestType:@"DELETE" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+    NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
+
+    [self connectWithParameters:parameters atPath:URL_LOGOUT(uid) requestType:@"DELETE" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
             completion(YES, nil, nil);
         } else {

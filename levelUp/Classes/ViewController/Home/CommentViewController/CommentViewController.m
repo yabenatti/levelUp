@@ -12,6 +12,8 @@
 #import "PostManager.h"
 #import "AppUtils.h"
 #import "Constants.h"
+#import "UIImageView+AFNetworking.h"
+
 
 @interface CommentViewController ()
 
@@ -132,7 +134,20 @@
     cell.indexPath = indexPath;
     cell.userNameLabel.text = comment.petName;
     cell.userCommentLabel.text = comment.commentDescription;
-    [AppUtils setupImageWithUrl:@"https://s-media-cache-ak0.pinimg.com/originals/c9/77/c1/c977c1ccfc34259fa3811c8839e0f6e3.jpg" andPlaceholder:@"ic_person" andImageView:cell.userImageView];
+    
+    __weak UIImageView *weakImageView = cell.userImageView;
+    
+    NSURL *url = [NSURL URLWithString: comment.petImage];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    [weakImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [weakImageView setContentMode:UIViewContentModeScaleAspectFill];
+        weakImageView.image = image;
+        weakImageView.layer.masksToBounds = YES;
+        
+    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
 
     return cell;
     

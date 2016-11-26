@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "CommentViewController.h"
 #import "TabBarViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "ProfileManager.h"
@@ -61,12 +62,13 @@
         //Edit Button
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonTouched:)];
         self.navigationItem.rightBarButtonItem = editButton;
-    } else if (self.userId != nil && ![self.userId isEqualToString:currentUserId]){
-        //Follow Button
-        UIBarButtonItem *followButton = [[UIBarButtonItem alloc]initWithTitle:@"Follow" style:UIBarButtonItemStylePlain target:self action:@selector(followButtonTouched:)];
-        self.navigationItem.rightBarButtonItem = followButton;
     }
-    
+//    else if (self.userId != nil && ![self.userId isEqualToString:currentUserId]){
+//        //Follow Button
+//        UIBarButtonItem *followButton = [[UIBarButtonItem alloc]initWithTitle:@"Follow" style:UIBarButtonItemStylePlain target:self action:@selector(followButtonTouched:)];
+//        self.navigationItem.rightBarButtonItem = followButton;
+//    }
+//    
     //Inicializacoes
     self.myPosts = [NSArray new];
     [self.emptyView setHidden:YES];
@@ -101,10 +103,8 @@
         if(isSuccess) {
             self.currentUser = user;
             self.usernameLabel.text = user.petName;
-            [self.followersButton setTitle:@"0" forState:UIControlStateNormal];
-            [self.followingButton setTitle:@"0" forState:UIControlStateNormal];
-            
-//            [AppUtils setupImageWithUrl:user.petImage andPlaceholder:@"ic_person" andImageView:self.profileImageView];
+            [self.followersButton setTitle:[NSString stringWithFormat:@"%d", user.passiveRelationships] forState:UIControlStateNormal];
+            [self.followingButton setTitle:[NSString stringWithFormat:@"%d", user.activeRelationships] forState:UIControlStateNormal];
             
             NSURL *url = [NSURL URLWithString:user.petImage];
             NSData *data = [NSData dataWithContentsOfURL:url];
@@ -133,6 +133,17 @@
                 }];
                 
             } else {
+                //follow button status
+                if(!user.amIFollowing) {
+                    //Follow Button
+                    UIBarButtonItem *followButton = [[UIBarButtonItem alloc]initWithTitle:@"Follow" style:UIBarButtonItemStylePlain target:self action:@selector(followButtonTouched:)];
+                    self.navigationItem.rightBarButtonItem = followButton;
+                } else {
+                    UIBarButtonItem *emptyButton = [[UIBarButtonItem alloc]init];
+                    self.navigationItem.rightBarButtonItem = emptyButton;
+                }
+                
+                
                 [AppUtils startLoadingInView:self.view];
                 [[PostManager sharedInstance]getOtherPeoplesPostsWithUserId:uid andCompletion:^(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error) {
                     [AppUtils stopLoadingInView:self.view];
@@ -172,6 +183,7 @@
     [[LoginManager sharedInstance]logoutWithApi:parameters andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
         [AppUtils stopLoadingInView:self.view];
         if (isSuccess) {
+            [AppUtils clearUserDefault];
             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             TabBarViewController *vc = [sb instantiateInitialViewController];
             [self.navigationController presentViewController:vc animated:NO completion:nil];
@@ -182,7 +194,22 @@
 }
 
 - (void)editButtonTouched:(id)sender {
-    [self performSegueWithIdentifier:@"editSegue" sender:self];
+    UIAlertController *actionSheet = [UIAlertController new];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Edit Profile" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self performSegueWithIdentifier:@"editSegue" sender:self];
+        
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Edit Beacon" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSLog(@"LOG! ");
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self.navigationController presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void)followButtonTouched:(id)sender {
@@ -222,20 +249,6 @@
     
     [cell.userImageButton.layer setCornerRadius:cell.userImageButton.frame.size.width/2];
     [cell.userImageButton.layer setMasksToBounds:YES];
-    
-//    __weak UIImageView *weakImageView2 = cell.userImageButton.imageView;
-//    
-//    NSURL *url = [NSURL URLWithString: post.postPetImage];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    
-//    [weakImageView2 setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_person"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-//        [weakImageView2 setContentMode:UIViewContentModeScaleAspectFill];
-//        weakImageView2.image = image;
-//        weakImageView2.layer.masksToBounds = YES;
-//        
-//    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-//        NSLog(@"%@", error);
-//    }];
 
     if(post.iLiked) {
         [cell.likeButton setImage:[UIImage imageNamed:@"ic_favorite"] forState:UIControlStateNormal];
@@ -269,9 +282,6 @@
         }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
             NSLog(@"%@", error);
         }];
-
-        
-        
         
         cell.imageHeightConstraint.constant = 256.0f;
     }
@@ -299,23 +309,38 @@
 -(void)commentButton:(NSIndexPath *)indexPath {
     Post *post = [self.myPosts objectAtIndex:indexPath.row];
     
-    [self performSegueWithIdentifier:@"commentSegue" sender:[NSString stringWithFormat:@"%d", post.postId]];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    CommentViewController *vc = [sb instantiateViewControllerWithIdentifier:@"commentVC"];
+    vc.postId = [NSString stringWithFormat:@"%d", post.postId];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)likeButton:(NSIndexPath *)indexPath {
     Post *post = [self.myPosts objectAtIndex:indexPath.row];
     
-    [[PostManager sharedInstance]createLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
-        if(isSuccess) {
-            [self.postsTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        } else {
-            [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
-        }
-    }];
+    if(post.iLiked) {
+        [AppUtils startLoadingInView:self.view];
+        [[PostManager sharedInstance]deleteLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+            [AppUtils stopLoadingInView:self.view];
+            if(isSuccess) {
+                [self setUpProfile];
+            } else {
+                [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+            }
+        }];
+    } else {
+        [[PostManager sharedInstance]createLikeWithPostId:[NSString stringWithFormat:@"%d",post.postId] andCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
+            if(isSuccess) {
+                [self setUpProfile];
+            } else {
+                [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
+            }
+        }];
+    }
 }
 
 -(void)userImageButton:(NSIndexPath *)indexPath {
-
+    NSLog(@"Do nothing");
 }
 
 #pragma mark - IBActions

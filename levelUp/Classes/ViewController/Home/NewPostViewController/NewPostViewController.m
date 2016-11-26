@@ -81,12 +81,14 @@
         [self.imageButton setImage:[UIImage imageNamed:@"ic_photo_camera"] forState:UIControlStateNormal];
         self.captionTextView.text = @"Write your caption :)";
         [self.captionTextView setTextColor:[UIColor lightGrayColor]];
+        self.navigationItem.rightBarButtonItem.enabled = NO;
     } else {
         self.petImageData = UIImageJPEGRepresentation(self.chosenImage, 0.5);
         
         [self.imageButton setImage:self.chosenImage forState:UIControlStateNormal];
         [self.imageButton.layer setCornerRadius:25.0f];
         [self.imageButton. layer setMasksToBounds:YES];
+        self.navigationItem.rightBarButtonItem.enabled = YES;
     }
    
     [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person" andImageView:self.petImage];
@@ -120,11 +122,6 @@
                                            @"caption" : post.postDescription,
                                            @"imageData" : self.chosenImage};
                 
-//                self.captionTextView.text = @"Write your caption :)";
-//                [self.captionTextView setTextColor:[UIColor lightGrayColor]];
-//                [self.imageButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-//                self.imageButton = nil;
-//                self.petImageData = nil;
                 self.chosenImage = nil;
                 
                 
@@ -161,7 +158,7 @@
     if ([textView.text isEqualToString:@""]) {
         textView.text = @"Write your caption :)";
         textView.textColor = [UIColor lightGrayColor];
-    }
+    } 
     
     [textView resignFirstResponder];
 }

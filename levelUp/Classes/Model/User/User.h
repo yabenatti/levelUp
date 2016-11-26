@@ -16,7 +16,9 @@
 @property (strong, nonatomic) NSString *birthDate;
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *beaconId;
-
+@property (nonatomic) BOOL amIFollowing;
+@property (nonatomic) int passiveRelationships;
+@property (nonatomic) int activeRelationships;
 @property (nonatomic) int userId;
 
 
