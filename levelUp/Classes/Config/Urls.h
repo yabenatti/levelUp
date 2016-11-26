@@ -27,4 +27,5 @@
 #define URL_COMMENT(postId, uid)            [NSString stringWithFormat:@"%@%@/posts/%@/comments?uid=%@", BASE_URL, API, postId, uid]
 #define URL_LIKES(postId, uid)              [NSString stringWithFormat:@"%@%@/posts/%@/likes?uid=%@", BASE_URL, API, postId, uid]
 #define URL_RELATIONSHIP(uid)               [NSString stringWithFormat:@"%@%@/relationships?uid=%@", BASE_URL, API, uid]
+#define URL_BEACON(uid)                     [NSString stringWithFormat:@"%@%@/my_beacons?uid=%@", BASE_URL, API, uid]
 

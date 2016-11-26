@@ -286,6 +286,18 @@ static NetworkManager *sharedInstance = nil;
             completion(nil, NO, error);
         }];
         
+    } else if([type isEqualToString:@"MULTIPART-UPDATE_BEACON"]) {
+        
+        [manager POST:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
+            [formData appendPartWithFileData:image name:@"beacon[pet_image]" fileName:@"imagem.jpg" mimeType:@"image/JPEG"];
+        } progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSLog(@"%@", responseObject);
+            completion(responseObject, YES, nil);
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            completion(nil, NO, error);
+        }];
+        
     } else if([type isEqualToString:@"PATCH"]) {
         
         NSMutableURLRequest *request = [manager.requestSerializer multipartFormRequestWithMethod:@"PATCH" URLString:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

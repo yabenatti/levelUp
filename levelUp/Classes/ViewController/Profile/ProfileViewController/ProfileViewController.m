@@ -202,7 +202,8 @@
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Edit Beacon" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSLog(@"LOG! ");
+        [self performSegueWithIdentifier:@"editBeaconSegue" sender:self];
+        
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {

@@ -47,6 +47,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [self.editImageButton setUserInteractionEnabled:NO];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
@@ -62,10 +64,6 @@
             if(![user.userName isKindOfClass:[NSNull class]]) {
                 self.ownerNameTextField.text = user.userName;
             }
-            
-            
-//            [AppUtils setupImageWithUrl:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]] andPlaceholder:@"ic_person"
-//                           andImageView:self.editImageButton.imageView];
             
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:PET_IMAGE]]];
             NSData *data = [NSData dataWithContentsOfURL:url];

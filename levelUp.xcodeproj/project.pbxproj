@@ -38,6 +38,7 @@
 		19EE37271D529C45009BA896 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EE37261D529C45009BA896 /* ProfileViewController.m */; };
 		8192161CB257FCE7FE705245 /* libPods-levelUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C11630ABCF1E8CBEFDA4EAB7 /* libPods-levelUp.a */; };
 		BE1857531DE9FD8900F7ED8B /* EditBeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1857521DE9FD8900F7ED8B /* EditBeaconViewController.m */; };
+		BE1857571DEA10E100F7ED8B /* BeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1857561DEA10E100F7ED8B /* BeaconManager.m */; };
 		BE1B2F7C1DBB94DB00793015 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B2F7B1DBB94DB00793015 /* CommentViewController.m */; };
 		BE1B2F801DBB961000793015 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1B2F7F1DBB961000793015 /* CommentTableViewCell.m */; };
 		BEB8357F1DB9246400132A7A /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB8357E1DB9246400132A7A /* Post.storyboard */; };
@@ -118,6 +119,8 @@
 		3D4C4E5A6305E5992E029EAA /* Pods-levelUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-levelUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-levelUp/Pods-levelUp.release.xcconfig"; sourceTree = "<group>"; };
 		BE1857511DE9FD8900F7ED8B /* EditBeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBeaconViewController.h; sourceTree = "<group>"; };
 		BE1857521DE9FD8900F7ED8B /* EditBeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditBeaconViewController.m; sourceTree = "<group>"; };
+		BE1857551DEA10E100F7ED8B /* BeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconManager.h; sourceTree = "<group>"; };
+		BE1857561DEA10E100F7ED8B /* BeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconManager.m; sourceTree = "<group>"; };
 		BE1B2F7A1DBB94DB00793015 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
 		BE1B2F7B1DBB94DB00793015 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		BE1B2F7E1DBB961000793015 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -358,6 +361,7 @@
 		19A9E9531D4E48BD00588822 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				BE1857541DEA10D000F7ED8B /* BeaconManager */,
 				191486711D847E3A001CA224 /* NetworkManager */,
 				191485801D846F87001CA224 /* LoginManager */,
 				1914866D1D846F88001CA224 /* PostManager */,
@@ -512,6 +516,15 @@
 				BE1857521DE9FD8900F7ED8B /* EditBeaconViewController.m */,
 			);
 			path = EditBeaconViewController;
+			sourceTree = "<group>";
+		};
+		BE1857541DEA10D000F7ED8B /* BeaconManager */ = {
+			isa = PBXGroup;
+			children = (
+				BE1857551DEA10E100F7ED8B /* BeaconManager.h */,
+				BE1857561DEA10E100F7ED8B /* BeaconManager.m */,
+			);
+			path = BeaconManager;
 			sourceTree = "<group>";
 		};
 		BE1B2F791DBB94C600793015 /* CommentViewController */ = {
@@ -726,6 +739,7 @@
 				1974B8911D59365300777CF3 /* AppUtils.m in Sources */,
 				191486921D85935A001CA224 /* Comment.m in Sources */,
 				191486951D85936C001CA224 /* Post.m in Sources */,
+				BE1857571DEA10E100F7ED8B /* BeaconManager.m in Sources */,
 				19EE37161D52995E009BA896 /* PostTableViewCell.m in Sources */,
 				BE1B2F801DBB961000793015 /* CommentTableViewCell.m in Sources */,
 				19534DED1D49957D00309D28 /* main.m in Sources */,
