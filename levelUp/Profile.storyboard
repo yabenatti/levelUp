@@ -392,7 +392,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W1m-hg-C54" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="510" y="1178"/>
+            <point key="canvasLocation" x="100" y="1216"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="rYb-Ux-31C">
@@ -519,7 +519,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q9g-0P-f9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1314" y="1179"/>
+            <point key="canvasLocation" x="903" y="1217"/>
         </scene>
         <!--Edit Beacon View Controller-->
         <scene sceneID="kKc-Y4-fRV">
@@ -640,7 +640,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pmT-By-PwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2194" y="1178"/>
+            <point key="canvasLocation" x="1783" y="1216"/>
         </scene>
     </scenes>
     <resources>
