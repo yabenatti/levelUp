@@ -155,7 +155,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
 }
 
 #pragma mark - IBActions
@@ -193,7 +192,7 @@
     NSLog(@"%f",self.view.frame.origin.x);
     NSLog(@"%f",self.view.frame.origin.y);
     
-    self.view.frame = CGRectMake(0, (-kbSize.height) + 50, self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = CGRectMake(0, (-kbSize.height) + 65, self.view.frame.size.width, self.view.frame.size.height);
     
     [UIView commitAnimations];
     

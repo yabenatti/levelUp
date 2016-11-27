@@ -106,11 +106,6 @@
             [self.followersButton setTitle:[NSString stringWithFormat:@"%d", user.passiveRelationships] forState:UIControlStateNormal];
             [self.followingButton setTitle:[NSString stringWithFormat:@"%d", user.activeRelationships] forState:UIControlStateNormal];
             
-//            NSURL *url = [NSURL URLWithString:user.petImage];
-//            NSData *data = [NSData dataWithContentsOfURL:url];
-//            UIImage *img = [[UIImage alloc] initWithData:data];
-//            [self.profileImageView setImage:img];
-            
             __weak UIImageView *weakImageView = self.profileImageView;
             
             NSURL *url = [NSURL URLWithString: user.petImage];

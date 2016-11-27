@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
 
 @interface AppDelegate ()
 
@@ -31,6 +33,9 @@
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+    
+    [Fabric with:@[[Twitter class]]];
+    
     return YES;
 }
 

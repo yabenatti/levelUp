@@ -21,28 +21,38 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
   - EstimoteSDK (4.11.0)
+  - Fabric (1.6.10)
   - FBSDKCoreKit (4.16.1):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.16.1):
     - FBSDKCoreKit
   - FBSDKShareKit (4.16.1):
     - FBSDKCoreKit
+  - TwitterCore (2.5.0):
+    - Fabric
+  - TwitterKit (2.5.0):
+    - TwitterCore (= 2.5.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - EstimoteSDK
+  - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - TwitterKit
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   EstimoteSDK: b75d26004d401a335f43851d6369a69a8ce1c2ff
+  Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
   FBSDKCoreKit: 6feac4e8921ccd7afa83fb1df6291dc6eec42c7c
   FBSDKLoginKit: 469a56cebe2e1ed62b1621d0b155970fd6aac2d8
   FBSDKShareKit: 53af0239b5bd2ebf191f32f75991245a208cc982
+  TwitterCore: 95c46af93112768a7983bd370d66023553601d01
+  TwitterKit: dd8042698b0ff5bd3066fa919b3b2b50d8eed829
 
-PODFILE CHECKSUM: e92ff9aa0b1c31651bff41af74b421bb4d8045a6
+PODFILE CHECKSUM: 4519aa121fd1314e9834e634c9b3941dcdd83b0b
 
 COCOAPODS: 1.0.1

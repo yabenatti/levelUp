@@ -71,46 +71,22 @@ static PostManager *sharedInstance = nil;
     }];
 }
 
-//- (void)getOtherPeoplesPostsWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error)) completion {
-//    
-//    NSString *currentUid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
-//
-//    
-//    [self connectWithParameters:nil atPath:URL_OTHER_POSTS(uid, currentUid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
-//        if(isSuccess) {
-//            NSArray *posts = (NSArray *)[response objectForKey:@"data"];
-//            NSMutableArray *postsArray = [NSMutableArray new];
-//            
-//            for (NSDictionary *postDictionary in posts) {
-//                Post *post = [Post new];
-//                post = [post parseToPost:postDictionary];
-//                
-//                [postsArray addObject:post];
-//            }
-//            
-//            completion(YES, postsArray, nil,nil);
-//        } else {
-//            completion(NO, nil, message, error);
-//        }
-//    }];
-//}
-
 - (void)getOtherPeoplesPostsWithUserId:(NSString *)uid andCompletion:(void(^)(BOOL isSuccess, NSArray *posts, NSString *message, NSError *error)) completion {
     
     NSString *currentUid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
-    
+
     
     [self connectWithParameters:nil atPath:URL_OTHER_POSTS(uid, currentUid) requestType:@"GET" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
         if(isSuccess) {
-            NSDictionary *posts = (NSDictionary *)[response objectForKey:@"data"];
+            NSArray *posts = (NSArray *)[response objectForKey:@"data"];
             NSMutableArray *postsArray = [NSMutableArray new];
             
-//            for (NSDictionary *postDictionary in posts) {
+            for (NSDictionary *postDictionary in posts) {
                 Post *post = [Post new];
-                post = [post parseToPost:posts];
+                post = [post parseToPost:postDictionary];
                 
                 [postsArray addObject:post];
-//            }
+            }
             
             completion(YES, postsArray, nil,nil);
         } else {

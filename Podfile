@@ -6,4 +6,6 @@ target 'levelUp' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
+  pod 'Fabric'
+  pod 'TwitterKit'
 end

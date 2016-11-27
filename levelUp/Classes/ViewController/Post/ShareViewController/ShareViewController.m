@@ -15,6 +15,8 @@
 #import <FBSDKShareKit/FBSDKSharePhotoContent.h>
 #import "PostManager.h"
 #import "UIImageView+AFNetworking.h"
+#import <TwitterKit/TwitterKit.h>
+
 
 @interface ShareViewController ()
 
@@ -87,6 +89,25 @@
 }
 
 - (IBAction)twitterButtonTouched:(id)sender {
+    // Objective-C
+    TWTRComposer *composer = [[TWTRComposer alloc] init];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", [self.postInfo objectForKey:@"image"]]];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *img = [[UIImage alloc] initWithData:data];
+
+    [composer setText:[self.postInfo objectForKey:@"caption"]];
+    [composer setImage:img];
+    
+    // Called from a UIViewController
+    [composer showFromViewController:self completion:^(TWTRComposerResult result) {
+        if (result == TWTRComposerResultCancelled) {
+            NSLog(@"Tweet composition cancelled");
+        }
+        else {
+            NSLog(@"Sending Tweet!");
+        }
+    }];
 }
 
 - (IBAction)facebookButtonTouched:(id)sender {
