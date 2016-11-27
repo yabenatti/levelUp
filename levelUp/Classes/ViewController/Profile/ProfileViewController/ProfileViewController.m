@@ -106,10 +106,25 @@
             [self.followersButton setTitle:[NSString stringWithFormat:@"%d", user.passiveRelationships] forState:UIControlStateNormal];
             [self.followingButton setTitle:[NSString stringWithFormat:@"%d", user.activeRelationships] forState:UIControlStateNormal];
             
-            NSURL *url = [NSURL URLWithString:user.petImage];
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            UIImage *img = [[UIImage alloc] initWithData:data];
-            [self.profileImageView setImage:img];
+//            NSURL *url = [NSURL URLWithString:user.petImage];
+//            NSData *data = [NSData dataWithContentsOfURL:url];
+//            UIImage *img = [[UIImage alloc] initWithData:data];
+//            [self.profileImageView setImage:img];
+            
+            __weak UIImageView *weakImageView = self.profileImageView;
+            
+            NSURL *url = [NSURL URLWithString: user.petImage];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            
+            [weakImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_pets"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                [weakImageView setContentMode:UIViewContentModeScaleAspectFill];
+                weakImageView.image = image;
+                weakImageView.layer.masksToBounds = YES;
+                
+            }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+                NSLog(@"%@", error);
+            }];
+
             
             if(self.userId == nil || [self.userId isEqualToString:currentUserId]) {
                 [AppUtils startLoadingInView:self.view];
@@ -294,7 +309,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
 
 #pragma mark - Navigation
 

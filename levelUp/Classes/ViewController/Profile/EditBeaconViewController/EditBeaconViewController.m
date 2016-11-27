@@ -78,18 +78,11 @@
     
     __weak UIImageView *weakImageView = self.petImageButton.imageView;
     
-    NSURL *url = [NSURL URLWithString: self.currentBeacon.petImage];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    [weakImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_pets"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        [weakImageView setContentMode:UIViewContentModeScaleAspectFill];
-        weakImageView.image = image;
-        weakImageView.layer.masksToBounds = YES;
-        
-    }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
-
+    NSURL *url = [NSURL URLWithString:self.currentBeacon.petImage];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *img = [[UIImage alloc] initWithData:data];
+    [self.petImageButton setImage:img forState:UIControlStateNormal];
+    self.petImage = UIImageJPEGRepresentation(img, 0.5);
 }
 
 /*
@@ -114,10 +107,10 @@
 
 - (void)saveTouched:(id)sender {
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc]initWithDictionary:@{@"beacon[unique_id]" : self.uniqueIDTextField.text,
-                                                                                       @"beacon[major]" : self.majorTextField.text,
-                                                                                       @"beacon[minor]" : self.minorTextField.text,
-                                                                                       @"beacon[pet_image]" : self.petImage,
-                                                                                       }];
+                                                                                      @"beacon[major]" : self.majorTextField.text,
+                                                                                      @"beacon[minor]" : self.minorTextField.text,
+                                                                                       @"beacon[pet_image]" : self.petImage}];
+    
     [AppUtils startLoadingInView:self.view];
     [[BeaconManager sharedInstance]updateBeaconWithParameters:parameters imageData:self.petImage withCompletion:^(BOOL isSuccess, NSString *message, NSError *error) {
         [AppUtils stopLoadingInView:self.view];
@@ -127,6 +120,8 @@
             [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];
         }
     }];
+
+    
 
     
 }

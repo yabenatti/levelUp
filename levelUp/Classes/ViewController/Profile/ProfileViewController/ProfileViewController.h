@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TimeLineTableViewCell.h"
 
-@interface ProfileViewController : UIViewController <TimelineCellDelegate>
+@interface ProfileViewController : UIViewController <TimelineCellDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSString *userId;
 

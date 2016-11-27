@@ -301,7 +301,7 @@ static NetworkManager *sharedInstance = nil;
     } else if([type isEqualToString:@"PATCH"]) {
         
         NSMutableURLRequest *request = [manager.requestSerializer multipartFormRequestWithMethod:@"PATCH" URLString:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            [formData appendPartWithFileData:image name:@"beacon[pet_image]" fileName:@"profile.jpg" mimeType:@"image/jpeg"];
+            [formData appendPartWithFileData:image name:@"beacon[pet_image]" fileName:@"imagem.jpg" mimeType:@"image/jpeg"];
         } error:nil];
         
         NSURLSessionUploadTask *task = [manager uploadTaskWithStreamedRequest:request progress:nil completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {

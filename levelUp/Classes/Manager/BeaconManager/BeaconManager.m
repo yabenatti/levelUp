@@ -54,11 +54,12 @@ static BeaconManager *sharedInstance = nil;
 -(void)updateBeaconWithParameters:(NSMutableDictionary*)parameters imageData:(NSData*)image withCompletion:(void (^)(BOOL isSuccess, NSString *message, NSError *error))completion {
     
     NSString *uid = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:USER_ID]];
-    
+    NSString *beaconId = [NSString stringWithFormat:@"%@", [AppUtils retrieveFromUserDefaultWithKey:BEACON_ID]];
+
     if([parameters objectForKey:@"beacon[pet_image]"]) {
         NSData *image = [parameters objectForKey:@"beacon[pet_image]"];
         [parameters removeObjectForKey:@"beacon[pet_image]"];
-        [self uploadFileToAPI:parameters atPath:URL_REGISTER_BEACON(uid) requestType:@"MULTIPART-UPDATE_BEACON" imageData:image withCompletion:^(id response, BOOL isSuccess, NSError *error) {
+        [self uploadFileToAPI:parameters atPath:URL_UPDATE_BEACON(beaconId, uid) requestType:@"PATCH" imageData:image withCompletion:^(id response, BOOL isSuccess, NSError *error) {
             if (isSuccess) {
                 
                 NSDictionary *responseDictionary = (NSDictionary*)[response objectForKey:@"data"];
@@ -78,7 +79,7 @@ static BeaconManager *sharedInstance = nil;
             }
         }];
     }  else {
-        [self connectWithParameters:parameters atPath:URL_REGISTER_BEACON(uid) requestType:@"POST" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
+        [self connectWithParameters:parameters atPath:URL_REGISTER_BEACON(uid) requestType:@"PATCH" withCompletion:^(id response, BOOL isSuccess, NSString *message, NSError *error) {
             if (isSuccess) {
                 NSDictionary *responseDictionary = (NSDictionary*)response;
                 

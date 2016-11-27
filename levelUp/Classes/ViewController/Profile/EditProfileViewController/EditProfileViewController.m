@@ -69,6 +69,7 @@
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *img = [[UIImage alloc] initWithData:data];
             [self.editImageButton setImage:img forState:UIControlStateNormal];
+            [self.editImageButton setContentMode:UIViewContentModeScaleAspectFit];
         
         } else {
             [self.navigationController presentViewController:[AppUtils setupAlertWithMessage:message] animated:YES completion:nil];

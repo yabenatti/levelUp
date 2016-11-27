@@ -7,7 +7,7 @@
 //
 
 
-#define BASE_URL @"http://192.168.0.103:3000"
+#define BASE_URL @"http://192.168.0.71:3000"
 //#define BASE_URL @"http://dev.ringa.com.br/level-up-api"
 
 
@@ -28,4 +28,5 @@
 #define URL_LIKES(postId, uid)              [NSString stringWithFormat:@"%@%@/posts/%@/likes?uid=%@", BASE_URL, API, postId, uid]
 #define URL_RELATIONSHIP(uid)               [NSString stringWithFormat:@"%@%@/relationships?uid=%@", BASE_URL, API, uid]
 #define URL_BEACON(uid)                     [NSString stringWithFormat:@"%@%@/my_beacons?uid=%@", BASE_URL, API, uid]
+#define URL_UPDATE_BEACON(beaconId, uid)    [NSString stringWithFormat:@"%@%@/beacons/%@?uid=%@", BASE_URL, API, beaconId, uid]
 
