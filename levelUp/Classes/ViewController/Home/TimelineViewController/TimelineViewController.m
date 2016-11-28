@@ -239,25 +239,29 @@
         cell.imageHeightConstraint.constant = 0;
     } else {
         
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            //Run UI Updates
+            __weak UIImageView *weakImageView = cell.postImageView;
+            
+            NSURL *url = [NSURL URLWithString: post.postImage];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            
+            [weakImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_pets"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                [weakImageView setContentMode:UIViewContentModeScaleAspectFill];
+                weakImageView.image = image;
+                weakImageView.layer.masksToBounds = YES;
+                
+                NSURL *url = [NSURL URLWithString:post.postPetImage];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                UIImage *img = [[UIImage alloc] initWithData:data];
+                [cell.userImageButton setImage:img forState:UIControlStateNormal];
+                
+            }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+                NSLog(@"%@", error);
+            }];
 
-        __weak UIImageView *weakImageView = cell.postImageView;
-        
-        NSURL *url = [NSURL URLWithString: post.postImage];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        
-        [weakImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"ic_pets"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            [weakImageView setContentMode:UIViewContentModeScaleAspectFill];
-            weakImageView.image = image;
-            weakImageView.layer.masksToBounds = YES;
-            
-            NSURL *url = [NSURL URLWithString:post.postPetImage];
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            UIImage *img = [[UIImage alloc] initWithData:data];
-            [cell.userImageButton setImage:img forState:UIControlStateNormal];
-            
-        }failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-            NSLog(@"%@", error);
-        }];
+        });
+
         
 
         cell.imageHeightConstraint.constant = 256.0f;
