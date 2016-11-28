@@ -625,7 +625,7 @@
 				TargetAttributes = {
 					19534DE61D49957D00309D28 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 838PHD3FZ3;
+						DevelopmentTeam = A729CUJG9B;
 						ProvisioningStyle = Automatic;
 					};
 					19534DFF1D49957D00309D28 = {
@@ -691,7 +691,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		BE2369F71DEB4A8B00C18B94 /* ShellScript */ = {
@@ -898,9 +898,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C81D33AC84B56DCA41785147 /* Pods-levelUp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 838PHD3FZ3;
+				DEVELOPMENT_TEAM = A729CUJG9B;
 				INFOPLIST_FILE = levelUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -912,9 +913,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3D4C4E5A6305E5992E029EAA /* Pods-levelUp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 838PHD3FZ3;
+				DEVELOPMENT_TEAM = A729CUJG9B;
 				INFOPLIST_FILE = levelUp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

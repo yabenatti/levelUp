@@ -173,7 +173,7 @@
                 
                 self.enteredRegion = YES;
                 
-                 NSData *petImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"catEating"], 0.5);
+                 NSData *petImageData = UIImageJPEGRepresentation([UIImage imageNamed:@"levelUp"], 0.5);
                 
                 NSMutableDictionary *parameters = [[NSMutableDictionary alloc]initWithDictionary:@{@"post[description]" : @"Food YUM!",
                                                                                                    @"post[image]" : petImageData
