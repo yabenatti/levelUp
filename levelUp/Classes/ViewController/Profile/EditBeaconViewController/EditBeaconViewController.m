@@ -75,14 +75,14 @@
     [self.majorTextField setText:[NSString stringWithFormat:@"%d", self.currentBeacon.major]];
     [self.minorTextField setText:[NSString stringWithFormat:@"%d", self.currentBeacon.minor]];
     
-    
-    __weak UIImageView *weakImageView = self.petImageButton.imageView;
-    
-    NSURL *url = [NSURL URLWithString:self.currentBeacon.petImage];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *img = [[UIImage alloc] initWithData:data];
-    [self.petImageButton setImage:img forState:UIControlStateNormal];
-    self.petImage = UIImageJPEGRepresentation(img, 0.5);
+    if(self.petImage == nil) {
+        NSURL *url = [NSURL URLWithString:self.currentBeacon.petImage];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [[UIImage alloc] initWithData:data];
+        [self.petImageButton setImage:img forState:UIControlStateNormal];
+        self.petImage = UIImageJPEGRepresentation(img, 0.5);
+
+    }
 }
 
 /*
